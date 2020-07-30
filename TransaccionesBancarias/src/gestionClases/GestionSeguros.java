@@ -3,6 +3,12 @@ package gestionClases;
 import java.util.LinkedList;
 import clases.Seguros;
 
+/**
+ * CLASE: SEGUROS
+ * @author GLENY NIHIMAYA
+ * DESCRIPCION: GESTIONES Y METODOS CORRESPONDIENTE A DICHA CLASE.
+ * FECHA: 18/07/2020
+ */
 
 public class GestionSeguros {
 	//COLECCIÓN
@@ -75,8 +81,8 @@ public class GestionSeguros {
 	}
 	
 	/**
-	 * METODO UTILIZADO PARA ELIMINAR EL DEPOSITO
-	 * @param MONTO 
+	 * METODO UTILIZADO PARA ELIMINAR EL SEGURO
+	 * @param seguroEliminado 
 	 * @return true - SI TODO SE REALIZO CORRECTAMENTE , CASO CONTRARIO RETORNA FALSE
 	 */
 	
@@ -99,7 +105,7 @@ public class GestionSeguros {
 	}
 	
 	/**
-	 * MÉTODO PARA OBTENER POSICIÓN DE LA COLECCIÓN DEPOSITAR
+	 * MÉTODO PARA OBTENER POSICIÓN DE LA COLECCIÓN SEGUROS
 	 * @param posicion
 	 * @return POSICIÓN O INDICE DE LA COLECIÓN
 	 */

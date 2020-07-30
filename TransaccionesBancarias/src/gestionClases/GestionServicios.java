@@ -66,7 +66,7 @@ public class GestionServicios {
 	 * @param posicion
 	 * @return true - SI SE MODIFICA CORRECTAMENTE, CASO CONTRARIO return false
 	 */
-	public boolean ModificarTipoCuenta(Servicios servicioModificar, int posicion) {
+	public boolean ModificarServicio(Servicios servicioModificar, int posicion) {
 		if(posicion<0 || posicion>listaServicios.size()) {
 			return false;
 		}else {
@@ -98,7 +98,7 @@ public class GestionServicios {
 	}
 	
 	/**
-	 * MÉTODO PARA OBTENER POSICIÓN DE LA COLECCIÓN TIPO DE CUENTA
+	 * MÉTODO PARA OBTENER POSICIÓN DE LA COLECCIÓN SERVICIOS
 	 * @param posicion
 	 * @return POSICIÓN O INDICE DE LA COLECIÓN
 	 */

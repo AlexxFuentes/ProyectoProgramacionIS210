@@ -4,7 +4,7 @@ package clases;
  * autor: Gleny Nihimaya
  * Fecha: 13/07/20
  * 
- * clase: TransferenciasEntreCuentas
+ * clase: TransferenciasCuentasPropias
  * Descripcion: Los requisitos que se necesitan
  *            para realizar una transferencia entre cuentas.
  * */
