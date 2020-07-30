@@ -26,12 +26,12 @@ public class CuentaAhorro extends CuentaBancaria{
 		this._interesremunerado = _interesremunerado;
 	}
 	*/
-	public CuentaAhorro(Date _fechaDeApertura, String _nombreTipoCuenta, String _numeroCuenta, double _saldo, double _interesremunerado) {
-		super(_fechaDeApertura, _nombreTipoCuenta, _numeroCuenta);
+	public CuentaAhorro(Usuario _titular, Date _fechaDeApertura, String _nombreTipoCuenta,
+			String _numeroCuenta, double _saldo, double _interesremunerado) {
+		super(_titular, _fechaDeApertura, _nombreTipoCuenta, _numeroCuenta);
 		this._saldo = _saldo;
 		this._interesremunerado = _interesremunerado;
 	}
-
 	public double get_saldo() {
 		return _saldo;
 	}
@@ -44,17 +44,13 @@ public class CuentaAhorro extends CuentaBancaria{
 	public void set_interesremunerado(double _interesremunerado) {
 		this._interesremunerado = _interesremunerado;
 	}
-	
 	@Override
 	public String toString() {
-		/*
-		return "CuentaAhorro [_interesremunerado=" + _interesremunerado + "]";
-		*/
+		//return "CuentaAhorro [_saldo=" + _saldo + ", _interesremunerado=" + _interesremunerado + "]";
 		String _infoCuentaAhorro = String.format("Saldo: %f\n"
-		                                       + "Intereses remunerados: %f\n", this._saldo, this._interesremunerado);
+                + "Intereses remunerados: %f\n", this._saldo, this._interesremunerado);
 		return super.toString() + _infoCuentaAhorro;
 	}
-	
 	@Override
 	public boolean depositar(double cantidad) {
 		if(cantidad <= 0) {
@@ -77,4 +73,7 @@ public class CuentaAhorro extends CuentaBancaria{
 	public double consultarSaldo() {
 		return this._saldo;
 	}
+	
+	
+	
 }

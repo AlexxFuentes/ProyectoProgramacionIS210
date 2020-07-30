@@ -2,18 +2,12 @@ package clases;
 
 import java.util.Date;
 
-/**
- * CLASE DE CUENTA DE CHEQUES:  PARA APERTURAR CUENTA DE CHEQUES
- * @author alexm
- *
- */
-
 public class CuentaCheques extends CuentaBancaria{
 	
 	//ATRIBUTOS
 	private double _saldo;
 	private double _interesremunerado;
-	
+		
 	//CONSTRUCTOR POR DEFECTO
 	public CuentaCheques() {
 		super();
@@ -25,21 +19,38 @@ public class CuentaCheques extends CuentaBancaria{
 		this._interesremunerado = _interesremunerado;
 	}
 	*/
-	public CuentaCheques(Date _fechaDeApertura, String _nombreTipoCuenta, String _numeroCuenta, double _saldo, double _interesremunerado) {
-		super(_fechaDeApertura, _nombreTipoCuenta, _numeroCuenta);
+
+	public CuentaCheques(Usuario _titular, Date _fechaDeApertura, String _nombreTipoCuenta,
+			String _numeroCuenta, double _saldo, double _interesremunerado) {
+		super(_titular, _fechaDeApertura, _nombreTipoCuenta, _numeroCuenta);
 		this._saldo = _saldo;
 		this._interesremunerado = _interesremunerado;
 	}
+	
+	public double get_saldo() {
+		return _saldo;
+	}
 
-	@Override
-	public String toString() {
-		//return "CuentaCheques [_interesremunerado=" + _interesremunerado + "]";
-		String _infoCuentaCheques = String.format("Saldo: %f\n"
-		                                        + "Intereses Remunerados: %f\n", this._saldo, this._interesremunerado);
-		return super.toString() + _infoCuentaCheques;
+	public void set_saldo(double _saldo) {
+		this._saldo = _saldo;
+	}
+
+	public double get_interesremunerado() {
+		return _interesremunerado;
+	}
+
+	public void set_interesremunerado(double _interesremunerado) {
+		this._interesremunerado = _interesremunerado;
 	}
 	
-	
+	@Override
+	public String toString() {
+		//return "CuentaCheques [_saldo=" + _saldo + ", _interesremunerado=" + _interesremunerado + "]";
+		String _infoCuentaCheques = String.format("Saldo: %f\n"
+                + "Intereses Remunerados: %f\n", this._saldo, this._interesremunerado);
+		return super.toString() + _infoCuentaCheques;
+	}
+
 	@Override
 	public boolean depositar(double cantidad) {
 		if(cantidad <= 0) {
@@ -49,6 +60,7 @@ public class CuentaCheques extends CuentaBancaria{
 			return true;
 		}
 	}
+
 	@Override
 	public boolean retirar(double cantidadRetirar) {
 		if(cantidadRetirar <= this._saldo) {
@@ -58,6 +70,7 @@ public class CuentaCheques extends CuentaBancaria{
 			return false;
 		}
 	}
+
 	@Override
 	public double consultarSaldo() {
 		return this._saldo;

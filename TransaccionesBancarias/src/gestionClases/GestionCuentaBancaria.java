@@ -39,14 +39,15 @@ public class GestionCuentaBancaria {
 	 * @param tipocuenta
 	 * @return null, SI NO SE AGREGA TIPO DE CUENTA, CASO CONTRARIO return OBJETO TIPO DE CUENTA
 	 */
-	public CuentaBancaria BucarTipoCuenta(CuentaBancaria tipocuenta) {
-		 CuentaBancaria tipocuentaBuscada = null;
+	
+	public CuentaBancaria bucarTipoCuenta(String numeroCuenta) {
+		CuentaBancaria cuentaBuscada = null;
 		for(int i = 0; i < listaTipoCuenta.size(); i++) {
-			if( listaTipoCuenta.get(i).equals(tipocuenta)) {
-				tipocuentaBuscada = listaTipoCuenta.get(i);
+			if( listaTipoCuenta.get(i).get_numeroCuenta().equals(numeroCuenta)) {
+				cuentaBuscada = listaTipoCuenta.get(i);
 			}
 		}
-		return tipocuentaBuscada;
+		return cuentaBuscada;
 	}
 	
 	/**
@@ -55,7 +56,7 @@ public class GestionCuentaBancaria {
 	 * @return true - SI SE AGREGA CORRECTAMENTE, CASO CONTRARIO return false
 	 */
 	public boolean AgregarTipoCuenta(CuentaBancaria tipocuenta) {
-		if(BucarTipoCuenta(tipocuenta) == null) {//Si la cuenta no esta agregada
+		if(bucarTipoCuenta(tipocuenta.get_numeroCuenta()) == null) {//Si la cuenta no esta agregada
 			listaTipoCuenta.add(tipocuenta);
 			return true;
 		}else {
@@ -69,12 +70,13 @@ public class GestionCuentaBancaria {
 	 * @param posicion
 	 * @return true - SI SE MODIFICA CORRECTAMENTE, CASO CONTRARIO return false
 	 */
+	
 	public boolean ModificarTipoCuenta(CuentaBancaria tipoCuentaModificar, int posicion) {
 		if(posicion<0 || posicion>listaTipoCuenta.size()) {
 			return false;
 		}else {
 	
-			if(BucarTipoCuenta(tipoCuentaModificar) != null) {
+			if(bucarTipoCuenta(tipoCuentaModificar.get_numeroCuenta()) != null) {
 				listaTipoCuenta.set(posicion, tipoCuentaModificar);
 				return true;
 			}else {
@@ -83,6 +85,7 @@ public class GestionCuentaBancaria {
 		
 		}
 	}
+	
 
 	/**
 	 * MÉTODO PARA OBTENER POSICIÓN DE LA COLECCIÓN TIPO DE CUENTA

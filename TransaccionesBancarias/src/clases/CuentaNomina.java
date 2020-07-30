@@ -26,8 +26,9 @@ public class CuentaNomina extends CuentaBancaria{
 		this._empresaDepositante = _empresaDepositante;
 	}
 	*/
-	public CuentaNomina(Date _fechaDeApertura, String _nombreTipoCuenta, String _numeroCuenta, double _saldo, String _empresaDepositante) {
-		super(_fechaDeApertura, _nombreTipoCuenta, _numeroCuenta);
+	public CuentaNomina(Usuario _titular, Date _fechaDeApertura, String _nombreTipoCuenta,
+			String _numeroCuenta, double _saldo, String _empresaDepositante) {
+		super(_titular, _fechaDeApertura, _nombreTipoCuenta, _numeroCuenta);
 		this._saldo = _saldo;
 		this._empresaDepositante = _empresaDepositante;
 	}
@@ -35,7 +36,6 @@ public class CuentaNomina extends CuentaBancaria{
 	public double get_saldo() {
 		return _saldo;
 	}
-
 
 	public void set_saldo(double _saldo) {
 		this._saldo = _saldo;
@@ -50,16 +50,14 @@ public class CuentaNomina extends CuentaBancaria{
 	public void set_empresaDepositante(String _empresaDepositante) {
 		this._empresaDepositante = _empresaDepositante;
 	}
-
-
+	
 	@Override
 	public String toString() {
-		//return "CuentaNomina [_empresaDepositante=" + _empresaDepositante + "]";
+		//return "CuentaNomina [_saldo=" + _saldo + ", _empresaDepositante=" + _empresaDepositante + "]";
 		String _infoCuentaCheques = String.format("Empresa depositante: %s\n"
-				                                + "Saldo: %f\n", this._empresaDepositante, this._saldo);
+                + "Saldo: %f\n", this._empresaDepositante, this._saldo);
 		return super.toString() + _infoCuentaCheques;
 	}
-
 	@Override
 	public boolean depositar(double cantidad) {
 		if(cantidad <= 0) {

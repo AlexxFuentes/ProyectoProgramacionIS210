@@ -1,7 +1,6 @@
 package clases;
 
 import java.util.Date;
-import java.util.LinkedList;
 
 /**
  * CLASE USUARIO: ADMINISTRA LOS DATOS DEL USUARIO O
@@ -18,36 +17,35 @@ public class Usuario extends Persona{
 	private Date _fechaRegistro;
 	private String _nombreUsuario;
 	private String _contrasena;
-	private String _referencia;
-	private LinkedList<CuentaBancaria> _listaCuentasBancarias = new LinkedList<>();
+	private Referencia _referencia;
+	//private LinkedList<CuentaBancaria> _listaCuentasBancarias = new LinkedList<>();
 	
 	public Usuario() {
 		super();
 	}
 	/*
 	public Usuario(String _codigoUsuario, Date _fechaRegistro, String _nombreUsuario, String _contrasena,
-			String _referencia, LinkedList<CuentaBancaria> _listaCuentasBancarias) {
+			Referencia _referencia) {
 		super();
 		this._codigoUsuario = _codigoUsuario;
 		this._fechaRegistro = _fechaRegistro;
 		this._nombreUsuario = _nombreUsuario;
 		this._contrasena = _contrasena;
 		this._referencia = _referencia;
-		this._listaCuentasBancarias = _listaCuentasBancarias;
 	}
 	*/
-	public Usuario(String _codigoUsuario,Date _fechaRegistro, String _nombre, String _apellido, Date _fechaNacimiento, String _direccion,
-			String _telefono, String _rtn, String _correoelectronico, String _nombreUsuario, String _contrasena, LinkedList<CuentaBancaria> _listaCuentasBancarias) {
+	public Usuario(String _codigoUsuario, Date _fechaRegistro, String _nombre, String _apellido,
+			Date _fechaNacimiento, String _direccion, String _telefono, String _rtn, 
+			String _correoelectronico, String _nombreUsuario, String _contrasena,
+			Referencia _referencia) {
 		super(_nombre, _apellido, _fechaNacimiento, _direccion, _telefono, _rtn, _correoelectronico);
 		this._codigoUsuario = _codigoUsuario;
 		this._fechaRegistro = _fechaRegistro;
 		this._nombreUsuario = _nombreUsuario;
 		this._contrasena = _contrasena;
-		this._listaCuentasBancarias = _listaCuentasBancarias;
+		this._referencia = _referencia;
 	}
-	
-	
-	
+
 	public String get_codigoUsuario() {
 		return _codigoUsuario;
 	}
@@ -72,17 +70,11 @@ public class Usuario extends Persona{
 	public void set_contrasena(String _contrasena) {
 		this._contrasena = _contrasena;
 	}
-	public String get_referencia() {
+	public Referencia get_referencia() {
 		return _referencia;
 	}
-	public void set_referencia(String _referencia) {
+	public void set_referencia(Referencia _referencia) {
 		this._referencia = _referencia;
-	}
-	public LinkedList<CuentaBancaria> get_listaCuentasBancarias() {
-		return _listaCuentasBancarias;
-	}
-	public void set_listaCuentasBancarias(LinkedList<CuentaBancaria> _listaCuentasBancarias) {
-		this._listaCuentasBancarias = _listaCuentasBancarias;
 	}
 	@Override
 	public String toString() {
@@ -97,14 +89,10 @@ public class Usuario extends Persona{
 				                          + super.toString()
 				                          + "Nombre de Usuario: %s\n"
 				                          + "Contraseña: %s\n"
-				                          + "Cuentas bancarias: %s\n", this._codigoUsuario, this._fechaRegistro.toString(),
-				                          this._nombreUsuario, this._contrasena,this._listaCuentasBancarias.toString());
+				                          + "Referencia: %s\n", this._codigoUsuario, this._fechaRegistro.toString(),
+				                          this._nombreUsuario, this._contrasena, this._referencia.toString());
 		
 		return _infoUsuario ;
 	}
 	
-	public boolean AgregarCuentaBancaria(CuentaBancaria cuentaBancaria) {
-		_listaCuentasBancarias.add(cuentaBancaria);
-			return true;
-	}
 }

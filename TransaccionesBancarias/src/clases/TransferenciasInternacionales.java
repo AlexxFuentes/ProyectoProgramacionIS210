@@ -13,6 +13,7 @@ public class TransferenciasInternacionales extends Transferencias{
 	//ATRIBUTOS
 	private String _codigotransferencias;
 	private String _bancoDestino;
+	
 	public TransferenciasInternacionales() {
 		super();
 	}
@@ -46,7 +47,7 @@ public class TransferenciasInternacionales extends Transferencias{
 	public String toString() {
 		/*return "TransferenciasInternacionales [_codigotransferencias=" + _codigotransferencias + ", _bancoDestino="
 				+ _bancoDestino + "]";*/
-		String _infoTransaccionInternacional = String.format("TRANSACCIONES INTERNACIONALES:/n--------------------------------------/n"
+		String _infoTransaccionInternacional = String.format("TRANSACCIONES INTERNACIONALES:\n--------------------------------------\n"
 														   + "Codigo de transferencias: %s\n"
 														   + "Banco destino: %s\n"
 														   + super.toString(), this._codigotransferencias, this._bancoDestino);

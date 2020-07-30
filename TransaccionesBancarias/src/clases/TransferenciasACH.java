@@ -38,7 +38,7 @@ public class TransferenciasACH extends Transferencias{
 	public String toString() {
 		/*return "TransferenciasACH [_codigoTransferencias=" + _codigoTransferencias + ", _bancoDestino=" + _bancoDestino
 				+ "]";*/
-		String _infoTrasferenciasACH = String.format("TRANSFERENCIAS ACH:/n--------------------------------------/n"
+		String _infoTrasferenciasACH = String.format("TRANSFERENCIAS ACH:\n--------------------------------------\n"
 												   + "Codigo de transferencia: %s\n"
 												   + "Banco destino: %s\n"
 												   + super.toString(), this._codigoTransferencias, this._bancoDestino);

@@ -11,11 +11,11 @@ package gestionClases;
 
 import java.util.LinkedList;
 
-import clases.TransferenciasInternacionales;
+import clases.TransferenciasACH;
 
 public class GestionTransferenciasACH {
 	//COLECCION
-		private LinkedList<TransferenciasInternacionales> listaTransCuentas = new LinkedList<>();
+		private LinkedList<TransferenciasACH> _listaTransaccionesACH = new LinkedList<>();
 
 	      /**
 	       * METODO PARA BUSCAR LA TRASNFERENCIA ENTRE CUENTA
@@ -24,11 +24,11 @@ public class GestionTransferenciasACH {
 	       */
 		
 
-		public TransferenciasInternacionales BuscarTI(TransferenciasInternacionales transEncontrado) {
-			transEncontrado = null;
-			for(int j=0; j<listaTransCuentas.size();j++) {
-				if(listaTransCuentas.get(j).equals(transEncontrado)) {
-					transEncontrado = listaTransCuentas.get(j);
+		public TransferenciasACH buscarTACH(TransferenciasACH transferenciaach) {
+			TransferenciasACH transEncontrado = null;
+			for(int j=0; j<_listaTransaccionesACH.size();j++) {
+				if(_listaTransaccionesACH.get(j).equals(transEncontrado)) {
+					transEncontrado = _listaTransaccionesACH.get(j);
 				}
 			}
 			return transEncontrado;
@@ -40,9 +40,9 @@ public class GestionTransferenciasACH {
 	     * return
 	     */
 		
-		public boolean agregarTEC(TransferenciasInternacionales transferncia) {
-			if(BuscarTI(transferncia) == null){
-				listaTransCuentas.add(transferncia);
+		public boolean agregarTACH(TransferenciasACH transferncia) {
+			if(buscarTACH(transferncia) == null){
+				_listaTransaccionesACH.add(transferncia);
 				return true;
 			}else {
 				return false;
@@ -56,13 +56,13 @@ public class GestionTransferenciasACH {
 	     * return
 	     */
 		
-		public boolean ModificarTEC(TransferenciasInternacionales tecModificado, int posicion ) {
-			if(posicion<0 || posicion>listaTransCuentas.size()) {
+		public boolean ModificarTEC(TransferenciasACH tecModificado, int posicion ) {
+			if(posicion<0 || posicion>_listaTransaccionesACH.size()) {
 				return false;
 			}else {
 				
-				if(BuscarTI(tecModificado) != null) {
-					listaTransCuentas.set(posicion, tecModificado);
+				if(buscarTACH(tecModificado) != null) {
+					_listaTransaccionesACH.set(posicion, tecModificado);
 					return true;
 				}else {
 					return false;
@@ -76,11 +76,11 @@ public class GestionTransferenciasACH {
 	     * return
 	     */
 
-		public boolean EliminarTI(TransferenciasInternacionales transEliminar) {
-			if(BuscarTI(transEliminar) == null) {
+		public boolean EliminarTI(TransferenciasACH transEliminar) {
+			if(buscarTACH(transEliminar) == null) {
 				return false;
 			}else {
-				listaTransCuentas.remove(BuscarTI(transEliminar));
+				_listaTransaccionesACH.remove(buscarTACH(transEliminar));
 		     	return true;
 		    }
 		}
@@ -89,8 +89,8 @@ public class GestionTransferenciasACH {
 		 * METODO PARA IMPRIMIR TODO
 		 */
 		public void imprimirTodos() {
-			for(int i=0;i<listaTransCuentas.size();i++) {
-				System.out.println(listaTransCuentas.get(i));
+			for(int i=0;i<_listaTransaccionesACH.size();i++) {
+				System.out.println(_listaTransaccionesACH.get(i));
 			}
 		}
 		
@@ -99,7 +99,14 @@ public class GestionTransferenciasACH {
 		 * @param posicion
 		 * @return POSICIÓN O INDICE DE LA COLECIÓN
 		 */
-		public TransferenciasInternacionales getPosicion(int posicion) {
-			return listaTransCuentas.get(posicion);
+		public TransferenciasACH getPosicion(int posicion) {
+			return _listaTransaccionesACH.get(posicion);
 		}
+		
+		public String getCodigoTACH() {
+			String _codigoTACH =  "TACH_" + _listaTransaccionesACH.size() + 1;
+			
+			return _codigoTACH;
+		}
+		
 }

@@ -88,7 +88,7 @@ public abstract class Transferencias {
 		/*return "Transferencias [_beneficiario=" + _beneficiario + ", _tipoMoneda=" + _tipoMoneda + ", _cuentaDebitar="
 				+ _cuentaDebitar + ", _cuentaAcreditar=" + _cuentaAcreditar + ", _montoTransferir=" + _montoTransferir
 				+ ", _concepto=" + _concepto + ", _enviarConfirmacion=" + _enviarConfirmacion + "]";
-				*/
+		*/
 		String _infoTransferencia = String.format("Tipo de moneda: %s\n"
 												+ "Cuenta a debitar: %s\n"
 												+ "Cuenta a acreditar: %s\n"

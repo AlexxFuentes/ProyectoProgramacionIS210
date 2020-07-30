@@ -16,7 +16,7 @@ import clases.TransferenciasCuentasPropias;
 
 public class GestionTransferenciasCuentasPropias {
       //COLECCION
-	private LinkedList<TransferenciasCuentasPropias> listaTransCuentas=new LinkedList<>();
+	private LinkedList<TransferenciasCuentasPropias> _listaTransCuentas=new LinkedList<>();
 
 	 //CONSTRUCTOR POR DEFECTO
 	public GestionTransferenciasCuentasPropias() {
@@ -25,11 +25,11 @@ public class GestionTransferenciasCuentasPropias {
 
 	//GENERAR LOS SET Y GET
 	public LinkedList<TransferenciasCuentasPropias> getListaTransCuentas() {
-		return listaTransCuentas;
+		return _listaTransCuentas;
 	}
 
 	public void setListaTransCuentas(LinkedList<TransferenciasCuentasPropias> listaTransCuentas) {
-		this.listaTransCuentas = listaTransCuentas;
+		this._listaTransCuentas = listaTransCuentas;
 	}
 	
      /**
@@ -40,9 +40,9 @@ public class GestionTransferenciasCuentasPropias {
 
 	public TransferenciasCuentasPropias BuscarTrasnEntreCuentas(TransferenciasCuentasPropias trasn_entre_cuentas) {
 		trasn_entre_cuentas = null;
-		for(int j=0; j<listaTransCuentas.size();j++) {
-			if( listaTransCuentas.get(j).equals(trasn_entre_cuentas) ) {
-				trasn_entre_cuentas = listaTransCuentas.get(j);
+		for(int j=0; j<_listaTransCuentas.size();j++) {
+			if( _listaTransCuentas.get(j).equals(trasn_entre_cuentas) ) {
+				trasn_entre_cuentas = _listaTransCuentas.get(j);
 			}
 		}
 		return trasn_entre_cuentas;
@@ -55,7 +55,7 @@ public class GestionTransferenciasCuentasPropias {
      */
 	public boolean agregarTrasEntreCuentas(TransferenciasCuentasPropias trasn_entre_cuentas) {
 		if(BuscarTrasnEntreCuentas(trasn_entre_cuentas) == null){
-			listaTransCuentas.add(trasn_entre_cuentas);
+			_listaTransCuentas.add(trasn_entre_cuentas);
 			return true;
 		} else {
 			return false;
@@ -69,12 +69,12 @@ public class GestionTransferenciasCuentasPropias {
      */
 	
 	public boolean ModificarTransEntreCuentas(TransferenciasCuentasPropias tecModificado, int posicion ) {
-		if(posicion<0 || posicion>listaTransCuentas.size()) {
+		if(posicion<0 || posicion>_listaTransCuentas.size()) {
 			return false;
 		}else {
 			
 			if(BuscarTrasnEntreCuentas(tecModificado) != null) {
-				listaTransCuentas.set(posicion, tecModificado);
+				_listaTransCuentas.set(posicion, tecModificado);
 				return true;
 			}else {
 				return false;
@@ -93,7 +93,7 @@ public class GestionTransferenciasCuentasPropias {
 		if(tecEliminado == null) {
 			return false;
 		}else {
-			listaTransCuentas.remove(BuscarTrasnEntreCuentas(tecEliminado));
+			_listaTransCuentas.remove(BuscarTrasnEntreCuentas(tecEliminado));
 			return true;
 		}
 	}
@@ -102,8 +102,8 @@ public class GestionTransferenciasCuentasPropias {
 	 * METODO PARA IMPRIMIR TODOS
 	 */
 	public void imprimirTodos() {
-		for(int i=0;i<listaTransCuentas.size();i++) {
-			System.out.println(listaTransCuentas.get(i));
+		for(int i=0;i<_listaTransCuentas.size();i++) {
+			System.out.println(_listaTransCuentas.get(i));
 		}
 	}
 	
@@ -113,6 +113,13 @@ public class GestionTransferenciasCuentasPropias {
 	 * @return POSICIÓN O INDICE DE LA COLECIÓN
 	 */
 	public TransferenciasCuentasPropias getPosicion(int posicion) {
-		return listaTransCuentas.get(posicion);
+		return _listaTransCuentas.get(posicion);
+	}
+	
+	
+	public String getCodigoTECP() {
+		String _codigoTECP =  "TECP_" + _listaTransCuentas.size() + 1;
+		
+		return _codigoTECP;
 	}
 }
