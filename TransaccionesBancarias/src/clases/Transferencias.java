@@ -13,8 +13,8 @@ public abstract class Transferencias {
 	
 	//ATRIBUTOS
 	private String _tipoMoneda;
-	private String _cuentaDebitar;
-	private String _cuentaAcreditar;
+	private int _cuentaDebitar;
+	private int _cuentaAcreditar;
 	private double _montoTransferir;
 	private String _concepto;
 	private String _enviarConfirmacion;//correo
@@ -24,7 +24,7 @@ public abstract class Transferencias {
 		super();
 	}
 
-	public Transferencias(String _tipoMoneda, String _cuentaDebitar, String _cuentaAcreditar, double _montoTransferir,
+	public Transferencias(String _tipoMoneda, int _cuentaDebitar, int _cuentaAcreditar, double _montoTransferir,
 			String _concepto, String _enviarConfirmacion) {
 		super();
 		this._tipoMoneda = _tipoMoneda;
@@ -43,19 +43,19 @@ public abstract class Transferencias {
 		this._tipoMoneda = _tipoMoneda;
 	}
 
-	public String get_cuentaDebitar() {
+	public int get_cuentaDebitar() {
 		return _cuentaDebitar;
 	}
 
-	public void set_cuentaDebitar(String _cuentaDebitar) {
+	public void set_cuentaDebitar(int _cuentaDebitar) {
 		this._cuentaDebitar = _cuentaDebitar;
 	}
 
-	public String get_cuentaAcreditar() {
+	public int get_cuentaAcreditar() {
 		return _cuentaAcreditar;
 	}
 
-	public void set_cuentaAcreditar(String _cuentaAcreditar) {
+	public void set_cuentaAcreditar(int _cuentaAcreditar) {
 		this._cuentaAcreditar = _cuentaAcreditar;
 	}
 

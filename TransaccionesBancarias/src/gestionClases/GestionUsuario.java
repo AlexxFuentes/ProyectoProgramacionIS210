@@ -84,7 +84,7 @@ public class GestionUsuario {
 	 * @param usuario
 	 * @return true - SI SE ELIMINO CORRECTAMENTE, CASO CONTRARIO return false
 	 */
-	public boolean EliminarUsuario(Usuario usuario) {
+	public boolean eliminarUsuario(Usuario usuario) {
 		if(buscarUsuarioPosicion(usuario.get_rtn()) == -1) {
 			return false;
 		}else {
@@ -143,13 +143,6 @@ public class GestionUsuario {
 		return _numUsuario;
 	}
 	
-	public String GeneraNumeroCuenta() {
-		String [] Cuenta1 = {"10","20","30","40","50","60","70","80","90","00"};
-		
-		String numCuenta = "2020" + (int)(Math.random() * Cuenta1.length) + (int)(Math.random() * Cuenta1.length) 
-				                  + (int)(Math.random() * Cuenta1.length)+(int)(Math.random() * Cuenta1.length);
-		return numCuenta;
-	}
 	
 	public boolean buscarNombreUsuario(String usuario) {
 		for(int i = 0; i < listaUsuario.size();) {

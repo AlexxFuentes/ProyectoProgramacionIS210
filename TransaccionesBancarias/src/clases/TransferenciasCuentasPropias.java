@@ -21,7 +21,7 @@ public class TransferenciasCuentasPropias extends Transferencias {
 		this._codigoTransferencia = _codigoTransferencia;
 	}
 	*/
-	public TransferenciasCuentasPropias(String _codigoTransferencia, String _tipoMoneda, String _cuentaDebitar, String _cuentaAcreditar,
+	public TransferenciasCuentasPropias(String _codigoTransferencia, String _tipoMoneda, int _cuentaDebitar, int _cuentaAcreditar,
 			double _montoTransferir, String _concepto, String _enviarConfirmacion) {
 		super(_tipoMoneda, _cuentaDebitar, _cuentaAcreditar, _montoTransferir, _concepto, _enviarConfirmacion);
 		this._codigoTransferencia = _codigoTransferencia;

@@ -40,10 +40,20 @@ public class GestionCuentaBancaria {
 	 * @return null, SI NO SE AGREGA TIPO DE CUENTA, CASO CONTRARIO return OBJETO TIPO DE CUENTA
 	 */
 	
-	public CuentaBancaria bucarTipoCuenta(String numeroCuenta) {
+	public CuentaBancaria bucarTipoCuenta(int numeroCuenta) {
 		CuentaBancaria cuentaBuscada = null;
 		for(int i = 0; i < listaTipoCuenta.size(); i++) {
-			if( listaTipoCuenta.get(i).get_numeroCuenta().equals(numeroCuenta)) {
+			if( listaTipoCuenta.get(i).get_numeroCuenta() == numeroCuenta) {
+				cuentaBuscada = listaTipoCuenta.get(i);
+			}
+		}
+		return cuentaBuscada;
+	}
+	
+	public CuentaBancaria bucarTipoCuenta(String RTN) {
+		CuentaBancaria cuentaBuscada = null;
+		for(int i = 0; i < listaTipoCuenta.size(); i++) {
+			if( listaTipoCuenta.get(i).get_titular().get_rtn().equals(RTN)) {
 				cuentaBuscada = listaTipoCuenta.get(i);
 			}
 		}
@@ -86,6 +96,15 @@ public class GestionCuentaBancaria {
 		}
 	}
 	
+	public boolean eliminarTipoCuenta(CuentaBancaria tipocuenta) {
+		if(bucarTipoCuenta(tipocuenta.get_numeroCuenta()) == null) {
+			return false;
+		}else {
+			listaTipoCuenta.remove(tipocuenta);
+			return true;
+		}
+	}
+	
 
 	/**
 	 * MÉTODO PARA OBTENER POSICIÓN DE LA COLECCIÓN TIPO DE CUENTA
@@ -104,4 +123,14 @@ public class GestionCuentaBancaria {
 			System.out.println(listaTipoCuenta.get(i));
 		}
 	} 
+	
+	
+	public int generaNumeroCuenta() {
+		int [] Cuenta1 = {10,20,30,40,50,60,70,80,90,00};
+		
+		int numCuenta = 2020 + (int)(Math.random() * Cuenta1.length) + (int)(Math.random() * Cuenta1.length) 
+				                  + (int)(Math.random() * Cuenta1.length)+(int)(Math.random() * Cuenta1.length)
+				                  + (int)(Math.random() * Cuenta1.length);
+		return numCuenta;
+	}
 }

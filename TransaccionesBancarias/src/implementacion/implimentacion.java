@@ -6,6 +6,7 @@ import clases.*;
 import gestionClases.*;
 import utileria.AdminFechas;
 import java.util.Date;
+import java.util.LinkedList;
 
 public class implimentacion {
 
@@ -16,10 +17,9 @@ public class implimentacion {
 		Scanner scnum = new Scanner(System.in);
 		
 		//variables
-		String nombre, apellido, direccion, telefono, rtn, correoElectronico;
+		String nombre, apellido, direccion, telefono, rtn, correoElectronico, empresa, usuario = null, usuarioConfir, constrasena = null, constrasenaconfirm;
 		String codigoReferencia, nombreReferencia, apellidoreferencia, fechaNacimiento, 
 		direccionreferencia, telefonoreferencia, rtnreferencia, correorefencia;
-		
 		byte opcionprincipal;
 		
 		boolean centinelaPrincipal = true;
@@ -41,20 +41,30 @@ public class implimentacion {
 		GestionTransferenciasTerceros gestionTT = new GestionTransferenciasTerceros();
 		GestionTransferenciasInternacionales gestionTI = new GestionTransferenciasInternacionales();
 		
+		//COMPORTAMIENTO POLIMORFICO
+		LinkedList<Persona> _listaClasePersona = new LinkedList<>();
+		LinkedList<CuentaBancaria> _listaCuentasBancarias = new LinkedList<>();
+		LinkedList<Transferencias> _listaTransferencias = new  LinkedList<>();
+		LinkedList<Pagos> _listaPagos = new LinkedList<>();
+		
 		
 		//INSTANCIA PARA REALIZAR IMPLEMETACION
 		Referencia ref1 = new Referencia(gestionRefencia.getCodigoReferencia(),"Ana","Fuentes", AdminFechas.getFechaActual(),"TGU","98123412","1702200500123","AA@");
 		Usuario titular = new Usuario(gestionUsuario.getCodigoUsuario(),AdminFechas.getFechaActual(),"Alex","Fuentes",
-				AdminFechas.stringToDate("25-11-1999"),"TGU","98123412", "1702199900192","aaf@unah.hn","AAFM","1234", ref1);
+				                      AdminFechas.stringToDate("25-11-1999"),"TGU","98123412", "1702199900192","aaf@unah.hn","AAFM","1234", ref1);
 		
-		CuentaAhorro CuentaAhorros = new CuentaAhorro(titular, AdminFechas.getFechaActual(),"CUENTA DE AHORROS", "202012345", 20000 + gestionCuentaAhorro.InteresRemunerado(20000),gestionCuentaAhorro.InteresRemunerado(20000));
-		CuentaCheques Cuentacheques = new CuentaCheques(titular, AdminFechas.getFechaActual(),"CUENTA DE Cheques", "202067890", 1000000 + gestionCuentaCheques.InteresRemunerados(1000000), gestionCuentaCheques.InteresRemunerados(1000000));
+		CuentaAhorro CuentaAhorros = new CuentaAhorro(titular, AdminFechas.getFechaActual(),"CUENTA DE AHORROS", 202012345, 20000 + gestionCuentaAhorro.interesRemunerados(20000) ,gestionCuentaAhorro.interesRemunerados(20000));
+		CuentaCheques Cuentacheques = new CuentaCheques(titular, AdminFechas.getFechaActual(),"CUENTA DE Cheques", 202067890, 1000000 + gestionCuentaCheques.interesRemunerados(1000000), gestionCuentaCheques.interesRemunerados(1000000));
 		
+
+		_listaClasePersona.add(titular);
+		_listaClasePersona.add(ref1);
 		gestionCuentaBancaria.AgregarTipoCuenta(CuentaAhorros);		
 		gestionCuentaBancaria.AgregarTipoCuenta(Cuentacheques);
 		gestionCuentaAhorro.AgregarCuentaAhorro(CuentaAhorros);
 		gestionCuentaCheques.AgregarCuentaCheques(Cuentacheques);
 		gestionUsuario.AgregarUsuario(titular);
+		
 		/*-----------------------------------------------------------------------------------------------------------*/
 		/*-------------------------------------------------INICIO---------------------------------------------------*/
 		/*---------------------------------------------------------------------------------------------------------*/
@@ -63,11 +73,12 @@ public class implimentacion {
 			System.out.println("MENU PRINCIPAL");
 			System.out.println("1. REGISTRARSE.");
 			System.out.println("2. INICIAR SESIÓN.");
-			System.out.println("3. CAMBIAR NOMBRE DE USUARIO O CONTRASEÑA.");
-			System.out.println("4. ELIMINAR TIPO DE CUENTA.");
-			System.out.println("5. ELIMINAR USUARIO.");
-			System.out.println("6. MODIFICAR USUARIO.");
-			System.out.println("7. SALIR.");
+			System.out.println("3. ELIMINAR TIPO DE CUENTA.");
+			System.out.println("4. ELIMINAR USUARIO.");
+			System.out.println("5. MODIFICAR USUARIO.");
+			System.out.println("6. INFORMACIÓN PERSONAL."); // POLIMORFISMOS
+			System.out.println("7. RECUPERAR NOMBRE DE USUARIO Y CONTRASEÑA");
+			System.out.println("8. SALIR.");
 			opcionprincipal = scnum.nextByte();
 			
 			switch(opcionprincipal) {
@@ -86,32 +97,32 @@ public class implimentacion {
 					
 						switch(opcionRegistro) {
 						case 1: //INGRESE DATOS PERSONALES
-							String CodUsuario = gestionUsuario.getCodigoUsuario();
-							System.out.println("INGRESE DATOS PERSONALES.\n");
-							System.out.printf("Codigo de Usuario: %s", CodUsuario + "\n");
-							System.out.print("Nombres: ");
-							nombre = sc.nextLine();
-							System.out.print("Apellidos: ");
-							apellido = sc.nextLine();
-							System.out.print("Fecha de nacimiento (dd-MM-yyyy): ");
-							fechaNacimiento = sc.nextLine();
-							Date FechaNacimientoUsuario = AdminFechas.stringToDate(fechaNacimiento);
-							System.out.print("Dirección: ");
-							direccion = sc.nextLine();
-							System.out.print("Telefono: ");
-							telefono = sc.nextLine();
-							System.out.print("RTN: ");
-							rtn = sc.nextLine();
-							System.out.print("Correo electronico: ");
-							correoElectronico = sc.nextLine();
 							
-							//NOMBRE DE USUARIO Y CONSTRASEÑA
-							boolean centinelaUsuario = true, centinelaContraseña = true;
-							String usuario = "", usuarioConfir = "",constrasena = "", constrasenaconfirm = "";
+								String CodUsuario = gestionUsuario.getCodigoUsuario();
+								System.out.println("INGRESE DATOS PERSONALES.\n");
+								System.out.printf("Codigo de Usuario: %s", CodUsuario + "\n");
+								System.out.print("Nombres: ");
+								nombre = sc.nextLine();
+								System.out.print("Apellidos: ");
+								apellido = sc.nextLine();
+								System.out.print("Fecha de nacimiento (dd-MM-yyyy): ");
+								fechaNacimiento = sc.nextLine();
+								Date FechaNacimientoUsuario = AdminFechas.stringToDate(fechaNacimiento);
+								System.out.print("Dirección: ");
+								direccion = sc.nextLine();
+								System.out.print("Telefono: ");
+								telefono = sc.nextLine();
+								System.out.print("RTN: ");
+								rtn = sc.nextLine();
+								System.out.print("Correo electronico: ");
+								correoElectronico = sc.nextLine();
 							
-							//CREAR NOMBRE DE USUARIO
-							System.out.println("\nCREE NOMBRE DE USUARIO Y CONTRASEÑA.\n");
-							while(centinelaUsuario) {
+								//NOMBRE DE USUARIO Y CONSTRASEÑA
+								boolean centinelaUsuario = true, centinelaContraseña = true;
+							
+								//CREAR NOMBRE DE USUARIO
+								System.out.println("\nCREE NOMBRE DE USUARIO Y CONTRASEÑA.\n");
+								while(centinelaUsuario) {
 								System.out.print("Usuario: ");
 								usuario = sc.nextLine();
 								
@@ -124,11 +135,11 @@ public class implimentacion {
 								}else {
 									System.out.println("Los nombres de usuario no coinciden.");
 								}
-							}//FIN DE CODIGO PARA CREAR NOMBRE DE USUARIO
+								}//FIN DE CODIGO PARA CREAR NOMBRE DE USUARIO
 							
-							//CREAR CONTRASEÑA
-							System.out.println("\nCree una contraseña. \n");
-							while(centinelaContraseña) {
+								//CREAR CONTRASEÑA
+								System.out.println("\nCree una contraseña. \n");
+								while(centinelaContraseña) {
 								System.out.print("Contraseña: ");
 								constrasena = sc.nextLine();
 								
@@ -141,33 +152,29 @@ public class implimentacion {
 								}else {
 									System.out.println("Las constraseñas no coinciden.\n");
 								}
-							}//FIN DE CODIGO PARA CREAR CONTRASEÑA
+								}//FIN DE CODIGO PARA CREAR CONTRASEÑA
 							
-							Titular1.set_codigoUsuario(CodUsuario);
-							Titular1.set_fechaRegistro(AdminFechas.getFechaActual());
-							Titular1.set_apellido(apellido);
-							Titular1.set_nombre(nombre);
-							Titular1.set_fechaNacimiento(FechaNacimientoUsuario);
-							Titular1.set_direccion(direccion);
-							Titular1.set_telefono(telefono);
-							Titular1.set_rtn(rtn);
-							Titular1.set_correoelectronico(correoElectronico);
-							Titular1.set_nombreUsuario(usuario);
-							Titular1.set_contrasena(constrasena);
+								Titular1.set_codigoUsuario(CodUsuario);
+								Titular1.set_fechaRegistro(AdminFechas.getFechaActual());
+								Titular1.set_apellido(apellido);
+								Titular1.set_nombre(nombre);
+								Titular1.set_fechaNacimiento(FechaNacimientoUsuario);
+								Titular1.set_direccion(direccion);
+								Titular1.set_telefono(telefono);
+								Titular1.set_rtn(rtn);
+								Titular1.set_correoelectronico(correoElectronico);
+								Titular1.set_nombreUsuario(usuario);
+								Titular1.set_contrasena(constrasena);
 							
-							if(gestionUsuario.AgregarUsuario(Titular1)) {
-								System.out.println("DATOS DEL USUARIO AGREGADO CORRECTAMENTE.\n");
-							} else {
-								System.out.println("EL USUARIO YA EXISTE.\n");
-							}
+								if(gestionUsuario.AgregarUsuario(Titular1)) {
+									System.out.println("DATOS DEL USUARIO AGREGADO CORRECTAMENTE.\n");
+								} else {
+									System.out.println("EL USUARIO YA EXISTE.\n");
+								}
 							
-							break;
+							break;//FIN DE CODIGO PARA AGREGAR USUARIO O TITULAR
 						case 2: //INGRESE REFERENCIA.
 							
-							//boolean ceninelaRefencia = true;
-							//byte opcionReferencia;
-							
-							//while(ceninelaRefencia){
 								codigoReferencia = gestionRefencia.getCodigoReferencia();
 								System.out.println("INGRESE REFERENCIA.");
 								System.out.printf("Codigo de refererencia: %s", codigoReferencia +"\n");
@@ -193,28 +200,21 @@ public class implimentacion {
 								
 								if(gestionRefencia.AgregarReferencia(referencia1)) {
 									Titular1.set_referencia(referencia1);
+									_listaClasePersona.add(Titular1);
 									System.out.println("REFERENCIA AGREGADA CON EXITO.\n");
 									//System.out.println(referencia1);
 								}else {
 									System.out.println("ERROR AL AGREGAR REFERENCIA.\n");
-								}
+								 }
 								
-								/*
-								System.out.println("Desea agregar otra referencia. 1. SI 2. NO");
-								opcionReferencia = scnum.nextByte();
-								if(opcionReferencia == 2) {
-									ceninelaRefencia = false;
-								}
-							}*/
+							break;//FIN DE CODIGO PARA AGREGAR REFERENCIA
 							
-							break;
 						case 3: //CREE UN TIPO DE CUENTA BANCARIA.
-							boolean centinelatipocuenta = true;
-							byte opciontipoCuenta, opcion1;
-							double montoInicial = 0, interesRemunerado; 
-							String NumCuenta;
 							
-							//CuentaBancaria tipoCuenta1 = new CuentaBancaria();
+								boolean centinelatipocuenta = true;
+								byte opciontipoCuenta, opcion1;
+								double montoInicial = 0, interesRemunerado; 
+								int NumCuenta;
 							
 								while(centinelatipocuenta) {
 									System.out.println("CREE UN TIPO DE CUENTA BANCARIA.");
@@ -232,29 +232,29 @@ public class implimentacion {
 												System.out.println("APERTURA DE CUENTA DE AHORRO\n");
 												System.out.print("Monto inicial: ");
 												montoInicial = scnum.nextDouble();
-												interesRemunerado = gestionCuentaAhorro.InteresRemunerado(montoInicial);
-												NumCuenta = gestionUsuario.GeneraNumeroCuenta();
+												interesRemunerado = gestionCuentaAhorro.interesRemunerados(montoInicial);
+												NumCuenta = gestionCuentaBancaria.generaNumeroCuenta();
 												System.out.println("Su número de cuenta es:" + NumCuenta + "\n");
 											
 												CuentaAhorro cuentaAhorro1 = new CuentaAhorro(Titular1, AdminFechas.getFechaActual(),"CUENTA DE AHORRO", NumCuenta,
 														montoInicial + interesRemunerado, interesRemunerado);
 												
-												if(gestionCuentaAhorro.AgregarCuentaAhorro(cuentaAhorro1)) {
-													//if(Titular1.AgregarCuentaBancaria(cuentaAhorro1)) {
-														System.out.println("CUENTA DE AHORRO CREADA EXITOSAMENTE.\n");
-														System.out.println(cuentaAhorro1);
-													//}
-													}else {
-														System.out.println("ERROR AL CREAR CUENTA DE AHORRO.\n");
-														break;
-													}
+												if(gestionCuentaAhorro.AgregarCuentaAhorro(cuentaAhorro1) && gestionCuentaBancaria.AgregarTipoCuenta(cuentaAhorro1)) {
+													System.out.println("CUENTA DE AHORRO CREADA EXITOSAMENTE.\n");
+													System.out.println(cuentaAhorro1);
+													
+												 }else {
+													System.out.println("ERROR AL CREAR CUENTA DE AHORRO.\n");
+													break;
+												 }
 												
 												} else {
 													System.out.println("USUARIO NO ENCONTRADO PARA ASIGNARLE CUENTA DE AHORRO.");
 													System.out.println("DEBE INGRESAR SUS DATOS PERSONALES ANTES DE CREAR UNA CUENTA BANCARIA.");
 												}
 											
-											break;
+											break;//CODIGO PARA AGREGAR CUENTA DE CHEQUES
+											
 										case 2: //CUENTA DE CHEQUES
 											
 											if(gestionUsuario.buscarUsuarioPosicion(Titular1.get_rtn()) != -1 ) {
@@ -262,18 +262,16 @@ public class implimentacion {
 												System.out.println("APERTURA DE CUENTA DE CHEQUES\n");
 												System.out.print("Monto inicial: ");
 												montoInicial = scnum.nextDouble();
-												interesRemunerado = gestionCuentaCheques.InteresRemunerados(montoInicial);
-												NumCuenta = gestionUsuario.GeneraNumeroCuenta();
+												interesRemunerado = gestionCuentaCheques.interesRemunerados(montoInicial);
+												NumCuenta = gestionCuentaBancaria.generaNumeroCuenta();
 												System.out.println("Su número de cuenta es:" + NumCuenta + "\n");
 											
 												CuentaCheques cuentachques1 = new CuentaCheques(Titular1, AdminFechas.getFechaActual(),"CUENTA DE CHEQUES", 
 														NumCuenta, montoInicial + interesRemunerado, interesRemunerado);
 												
-												if(gestionCuentaCheques.AgregarCuentaCheques(cuentachques1)) {
-													//if(usuario1.AgregarCuentaBancaria(cuentachques1)) {
+												if(gestionCuentaCheques.AgregarCuentaCheques(cuentachques1) && gestionCuentaBancaria.AgregarTipoCuenta(cuentachques1)) {
 														System.out.println("CUENTA DE CHEQUES CREADA EXITOSAMENTE.\n");
 														System.out.println(cuentachques1);
-													//}
 													}else {
 														System.out.println("ERROR AL CREAR CUENTA DE CHEQUES.\n");
 														break;
@@ -284,25 +282,25 @@ public class implimentacion {
 													System.out.println("DEBE INGRESAR SUS DATOS PERSONALES ANTES DE CREAR UNA CUENTA BANCARIA.");
 												}
 											
-											break;
+											break; //FIN DE CODIGO PARA CREAR CUENTA DE DE CHEQUES
+											
 										case 3: // CUENTA CORRIENTE PERSONAL
+											
 											if(gestionUsuario.buscarUsuarioPosicion(Titular1.get_rtn()) != -1) {
 												
 												System.out.println("APERTURA DE CUENTA CORRIENTE PERSONAL\n");
 												System.out.print("Monto inicial: ");
 												montoInicial = scnum.nextDouble();
 												
-												NumCuenta = gestionUsuario.GeneraNumeroCuenta();
+												NumCuenta = gestionCuentaBancaria.generaNumeroCuenta();
 												System.out.println("Su número de cuenta es:" + NumCuenta + "\n");
 											
 												CuentaCorrientePersonal cuentaCorrientepers1 = new CuentaCorrientePersonal(Titular1, AdminFechas.getFechaActual(),
 														"CUENTA CORRIENTE PERSONALA", NumCuenta, montoInicial);
 												
-												if(gestionCuenCorrienteper.AgregarCuentaCorrientePersonal(cuentaCorrientepers1)) {
-													//if(usuario1.AgregarCuentaBancaria(cuentaCorrientepers1)) {
+												if(gestionCuenCorrienteper.AgregarCuentaCorrientePersonal(cuentaCorrientepers1) && gestionCuentaBancaria.AgregarTipoCuenta(cuentaCorrientepers1)) {
 														System.out.println("CUENTA CORRIENTE PERSONAL CREADA EXITOSAMENTE.\n");
 														System.out.println(cuentaCorrientepers1);
-													//}
 													}else {
 														System.out.println("ERROR AL CREAR CUENTA CORRIENTE PERSONAL.\n");
 														break;
@@ -314,31 +312,30 @@ public class implimentacion {
 												}
 											
 											
-											break;
+											break; //FIN CODIGO PARA AGREGAR CUENTA CORRIENTE PERSONAL
+											
 										case 4: //CUENTA DE NOMINA
-											String empresa;
+											
 											if(gestionUsuario.buscarUsuarioPosicion(Titular1.get_rtn()) != -1) {
 												
 												System.out.println("APERTURA DE CUENTA DE NOMINA\n");
 												System.out.print("Ingrese la empresa depositante:");
 												empresa = sc.nextLine();
-												NumCuenta = gestionUsuario.GeneraNumeroCuenta();
+												NumCuenta = gestionCuentaBancaria.generaNumeroCuenta();
 												System.out.println("Su número de cuenta es:" + NumCuenta + "\n");
 											
 												CuentaNomina cuentaNomina1 = new CuentaNomina(Titular1, AdminFechas.getFechaActual(), "CUENTA DE NOMINA", 
 														NumCuenta, 0, empresa);
 												
-												if(gestionCuentaNomina.AgregarCuentaNomina(cuentaNomina1)) {
-													//if(usuario1.AgregarCuentaBancaria(cuentaNomina1)){
+												if(gestionCuentaNomina.AgregarCuentaNomina(cuentaNomina1) && gestionCuentaBancaria.AgregarTipoCuenta(cuentaNomina1)) {
 														System.out.println("CUENTA DE NOMINA CREADA EXITOSAMENTE.\n");
 														System.out.println(cuentaNomina1);
-													//}
 													}else {
 														System.out.println("ERROR AL CREAR CUENTA DE NOMINA.\n");
 														break;
 													}
 
-												} else {
+												 } else {
 													System.out.println("USUARIO NO ENCONTRADO PARA ASIGNARLE CUENTA DE CHEQUES.");
 													System.out.println("DEBE INGRESAR SUS DATOS PERSONALES ANTES DE CREAR UNA CUENTA BANCARIA.");
 												}
@@ -365,9 +362,6 @@ public class implimentacion {
 							break;
 						}
 				}//fin de registro Usuario
-				
-				//aqui agregar codigo de detalle usuario
-				
 				/*
 				if(gestionUsuario.AgregarUsuario(usuario1)) {
 					System.out.println("ERROR AL REGISTRAR USUARIO\n");
@@ -377,7 +371,6 @@ public class implimentacion {
 				
 				//gestionUsuario.imprimirTodos();
 				System.out.println(Titular1);
-				
 				
 				break;
 			case 2: //INICIAR SESIÓN
@@ -393,7 +386,7 @@ public class implimentacion {
 						switch(opcionmenuIS) {
 						case 1:
 							boolean centinelaIS = true;
-							String usuario, contrasena;
+							String contrasena;
 							
 							
 							while(centinelaIS) {
@@ -412,7 +405,7 @@ public class implimentacion {
 								byte opcionTransferencias, opcionmenuTrans;
 								boolean centinenlamenutrasn = true;
 								double monto, interesRemunerado;
-								String numCuenta;
+								int numCuenta;
 								byte opcion;
 								
 								while(centinenlamenutrasn) {
@@ -438,14 +431,14 @@ public class implimentacion {
 										switch(opcion) {
 										case 1: //Deposito en cuenta de ahorro
 											System.out.print("Ingrese Su numero de cuenta: ");
-											numCuenta = sc.nextLine();
+											numCuenta = scnum.nextInt();
 											
 											CuentaAhorro CtaAhorroBuscada = gestionCuentaAhorro.BuscarCuentaAhorro(numCuenta);
 											
 											if(CtaAhorroBuscada != null) {
 												System.out.print("Ingrese el monto a depositar:");
 												monto = scnum.nextDouble();
-												interesRemunerado = gestionCuentaAhorro.InteresRemunerado(monto);
+												interesRemunerado = gestionCuentaAhorro.interesRemunerados(monto);
 												CtaAhorroBuscada.set_interesremunerado(CtaAhorroBuscada.get_interesremunerado() + interesRemunerado);
 												
 												if(CtaAhorroBuscada.depositar(monto + interesRemunerado)) {
@@ -464,14 +457,14 @@ public class implimentacion {
 											
 											
 											System.out.print("Ingrese Su numero de cuenta: ");
-											numCuenta = sc.nextLine();
+											numCuenta = scnum.nextInt();
 											
 											CuentaCheques CtaChequesBuscada = gestionCuentaCheques.BuscarCuentaCheques(numCuenta);
 											
 											if(CtaChequesBuscada != null) {
 												System.out.print("Ingrese el monto a depositar:");
 												monto = scnum.nextDouble();
-												interesRemunerado = gestionCuentaCheques.InteresRemunerados(monto);
+												interesRemunerado = gestionCuentaCheques.interesRemunerados(monto);
 												CtaChequesBuscada.set_interesremunerado(CtaChequesBuscada.get_interesremunerado() + interesRemunerado);
 												
 												if(CtaChequesBuscada.depositar(monto + interesRemunerado)) {
@@ -490,7 +483,7 @@ public class implimentacion {
 										case 3: //Deposito en cuenta corriente personal
 											
 											System.out.print("Ingrese Su numero de cuenta: ");
-											numCuenta = sc.nextLine();
+											numCuenta = scnum.nextInt();
 											
 											CuentaCorrientePersonal CtsCorrientePersonalBuscada = gestionCuenCorrienteper.BuscarCuentaCorrientePersonal(numCuenta);
 											
@@ -529,7 +522,7 @@ public class implimentacion {
 										case 1: //Retirar de cuenta de ahorro
 											
 											System.out.print("Ingrese Su numero de cuenta: ");
-											numCuenta = sc.nextLine();
+											numCuenta = scnum.nextInt();
 											
 											CuentaAhorro CtaAhorroBuscada = gestionCuentaAhorro.BuscarCuentaAhorro(numCuenta);
 											
@@ -553,7 +546,7 @@ public class implimentacion {
 										case 2: //Retirar de cuenta de cheques
 											
 											System.out.print("Ingrese Su numero de cuenta: ");
-											numCuenta = sc.nextLine();
+											numCuenta = scnum.nextInt();
 											
 											CuentaCheques CtaChequesBuscada = gestionCuentaCheques.BuscarCuentaCheques(numCuenta);
 											
@@ -577,7 +570,7 @@ public class implimentacion {
 										case 3: //Retirar de cuenta corriente personal
 											
 											System.out.print("Ingrese Su numero de cuenta: ");
-											numCuenta = sc.nextLine();
+											numCuenta = scnum.nextInt();
 											
 											CuentaCorrientePersonal CtsCorrientePersonalBuscada = gestionCuenCorrienteper.BuscarCuentaCorrientePersonal(numCuenta);
 											
@@ -599,7 +592,7 @@ public class implimentacion {
 										case 4: //Retirar de cuenta de nomina
 											
 											System.out.print("Ingrese Su numero de cuenta: ");
-											numCuenta = sc.nextLine();
+											numCuenta = scnum.nextInt();
 											
 											CuentaNomina CtaNominaBuscada = gestionCuentaNomina.BuscarCuentaNomina(numCuenta);
 											
@@ -641,7 +634,7 @@ public class implimentacion {
 										
 										case 1: //Consulta de saldo de cuenta de ahorro
 											System.out.print("Ingrese Su numero de cuenta: ");
-											numCuenta = sc.nextLine();
+											numCuenta = scnum.nextInt();
 											
 											CuentaAhorro CtaAhorroBuscada = gestionCuentaAhorro.BuscarCuentaAhorro(numCuenta);
 											
@@ -655,7 +648,7 @@ public class implimentacion {
 										case 2: //consulta de saldo de cuenta de cheques
 											
 											System.out.print("Ingrese Su numero de cuenta: ");
-											numCuenta = sc.nextLine();
+											numCuenta = scnum.nextInt();
 											
 											CuentaCheques CtaChequesBuscada = gestionCuentaCheques.BuscarCuentaCheques(numCuenta);
 											
@@ -669,7 +662,7 @@ public class implimentacion {
 										case 3://Consulta de saldo de cuenta corriente personal
 											
 											System.out.print("Ingrese Su numero de cuenta: ");
-											numCuenta = sc.nextLine();
+											numCuenta = scnum.nextInt();
 											
 											CuentaCorrientePersonal CtsCorrientePersonalBuscada = gestionCuenCorrienteper.BuscarCuentaCorrientePersonal(numCuenta);
 											
@@ -683,7 +676,7 @@ public class implimentacion {
 										case 4://Consulta de saldo de cuenta de nomina
 											
 											System.out.print("Ingrese Su numero de cuenta: ");
-											numCuenta = sc.nextLine();
+											numCuenta = scnum.nextInt();
 											
 											CuentaNomina CtaNominaBuscada = gestionCuentaNomina.BuscarCuentaNomina(numCuenta);
 											
@@ -706,8 +699,9 @@ public class implimentacion {
 										break;
 									case 4: //TRANSFERENCIAS
 										
-										String codtransferencia, tipomoneda = "", cuentaDebitar = "", cuentaCreditar, concepto,
+										String codtransferencia, tipomoneda = "", concepto,
 										enviarConfirmacion, bancodestino;
+										int cuentaDebitar, cuentaCreditar;
 										double montoTransferir = 0;
 										byte opcmoneda;
 										
@@ -728,7 +722,7 @@ public class implimentacion {
 											System.out.println("Codigo: " + codtransferencia);
 											
 											System.out.print("Ingrese el numero de cuenta a acreditar: ");
-											cuentaCreditar = sc.nextLine();
+											cuentaCreditar = scnum.nextInt();
 											System.out.println("Seleccione el tipo de moneda: ");
 											System.out.println("1. Lempiras.");
 											System.out.println("2. Dolares");
@@ -748,11 +742,11 @@ public class implimentacion {
 											}
 											
 											System.out.print("Ingrese el número de cuenta a debitar: ");
-											cuentaDebitar = sc.nextLine();
+											cuentaDebitar = scnum.nextInt();
 													
 											CuentaBancaria tipoCuenta7 = gestionCuentaBancaria.bucarTipoCuenta(cuentaDebitar);
 											
-											if(tipoCuenta7.get_numeroCuenta().equals(cuentaDebitar)) {
+											if(tipoCuenta7.get_numeroCuenta() == cuentaDebitar) {
 												System.out.println("Ingrese el monto a transferir.");
 												montoTransferir = scnum.nextDouble();
 												
@@ -760,17 +754,6 @@ public class implimentacion {
 											}else {
 												System.out.println("Cuenta no encontrada.");
 											}
-											/*
-											System.out.print("Ingrese el numero de cuenta a acreditar.");
-											cuentaCreditar = sc.nextLine();
-											CuentaBancaria tipoCuenta6 = gestionCuentaBancaria.bucarTipoCuenta(cuentaCreditar);
-											
-											if(tipoCuenta6.get_numeroCuenta().equals(cuentaCreditar)) {										
-												tipoCuenta6.depositar(montoTransferir);
-											}else {
-												System.out.println("Cuenta no encontrada.");
-											}
-											*/
 											
 											System.out.print("Banco destino: ");
 											bancodestino = sc.nextLine();
@@ -778,7 +761,6 @@ public class implimentacion {
 											concepto = sc.nextLine();
 											System.out.print("Enviar confirmación a: ");
 											enviarConfirmacion = sc.nextLine();
-											
 											
 											TransferenciasACH trasnferenciasACH = new TransferenciasACH(codtransferencia, tipomoneda,
 													cuentaDebitar, cuentaCreditar, montoTransferir, bancodestino, concepto, enviarConfirmacion);
@@ -817,11 +799,11 @@ public class implimentacion {
 											}
 											
 											System.out.print("Ingrese el número de cuenta a debitar: ");
-											cuentaDebitar = sc.nextLine();
+											cuentaDebitar = scnum.nextInt();
 													
 											CuentaBancaria tipoCuenta5 = gestionCuentaBancaria.bucarTipoCuenta(cuentaDebitar);
 											
-											if(tipoCuenta5.get_numeroCuenta().equals(cuentaDebitar)) {
+											if(tipoCuenta5.get_numeroCuenta() == cuentaDebitar) {
 												System.out.print("Ingrese el monto a transferir: ");
 												montoTransferir = scnum.nextDouble();
 												
@@ -831,16 +813,15 @@ public class implimentacion {
 											}
 											
 											System.out.print("Ingrese el numero de cuenta a acreditar: ");
-											cuentaCreditar = sc.nextLine();
+											cuentaCreditar = scnum.nextInt();
 											CuentaBancaria tipoCuenta6 = gestionCuentaBancaria.bucarTipoCuenta(cuentaCreditar);
 											
-											if(tipoCuenta6.get_numeroCuenta().equals(cuentaCreditar)) {										
+											if(tipoCuenta6.get_numeroCuenta() == cuentaCreditar) {										
 												tipoCuenta6.depositar(montoTransferir);
 											}else {
 												System.out.println("Cuenta no encontrada.\n");
 											}
-																																
-																																
+																																																															
 											System.out.print("Concepto de transferencia: ");
 											concepto = sc.nextLine();
 											System.out.print("Enviar confirmación a: ");
@@ -856,8 +837,6 @@ public class implimentacion {
 											}else {
 												System.out.println("Error al realizar transferencia.");
 											}
-											
-											
 											
 											break;//fin de transferencias entre cuentas propias
 											
@@ -885,11 +864,11 @@ public class implimentacion {
 											}//fin selecccion tipo de moneda
 											
 											System.out.print("Ingrese el número de cuenta a debitar: ");
-											cuentaDebitar = sc.nextLine();
+											cuentaDebitar = scnum.nextInt();
 													
 											CuentaBancaria tipoCuenta1 = gestionCuentaBancaria.bucarTipoCuenta(cuentaDebitar);
 											
-											if(tipoCuenta1.get_numeroCuenta().equals(cuentaDebitar)) {
+											if(tipoCuenta1.get_numeroCuenta() == cuentaDebitar) {
 												System.out.print("Ingrese el monto a transferir: ");
 												montoTransferir = scnum.nextDouble();
 												
@@ -899,10 +878,10 @@ public class implimentacion {
 											}
 											
 											System.out.print("Ingrese el numero de cuenta a acreditar: ");
-											cuentaCreditar = sc.nextLine();
+											cuentaCreditar = scnum.nextInt();
 											CuentaBancaria tipoCuenta2 = gestionCuentaBancaria.bucarTipoCuenta(cuentaCreditar);
 											
-											if(tipoCuenta2.get_numeroCuenta().equals(cuentaCreditar)) {										
+											if(tipoCuenta2.get_numeroCuenta() == cuentaCreditar) {										
 												tipoCuenta2.depositar(montoTransferir);
 											}else {
 												System.out.println("Cuenta no encontrada.\n");
@@ -913,7 +892,6 @@ public class implimentacion {
 											System.out.print("Enviar confirmación a: ");
 											enviarConfirmacion = sc.nextLine();
 											
-											
 											TransferenciasTerceros trasnTerceros = new TransferenciasTerceros(codtransferencia, tipomoneda,
 													cuentaDebitar, cuentaCreditar, montoTransferir, concepto, enviarConfirmacion);
 											
@@ -923,7 +901,6 @@ public class implimentacion {
 											}else {
 												System.out.println("Error al realizar transferencia.\n");
 											}
-											
 											
 											break;// fin de Transferencias a terceros. (en el mismo banco)
 											
@@ -952,11 +929,11 @@ public class implimentacion {
 											}//Fin de seleccion de tipo de moneda
 				
 											System.out.print("Ingrese el número de cuenta a debitar: ");
-											cuentaDebitar = sc.nextLine();
+											cuentaDebitar = scnum.nextInt();
 													
 											CuentaBancaria tipoCuenta3 = gestionCuentaBancaria.bucarTipoCuenta(cuentaDebitar);
 											
-											if(tipoCuenta3.get_numeroCuenta().equals(cuentaDebitar)) {
+											if(tipoCuenta3.get_numeroCuenta() == cuentaDebitar) {
 												System.out.print("Ingrese el monto a transferir: ");
 												montoTransferir = scnum.nextDouble();
 												
@@ -966,10 +943,10 @@ public class implimentacion {
 											}
 											
 											System.out.print("Ingrese el numero de cuenta a acreditar: ");
-											cuentaCreditar = sc.nextLine();
+											cuentaCreditar = scnum.nextInt();
 											CuentaBancaria tipoCuenta4 = gestionCuentaBancaria.bucarTipoCuenta(cuentaCreditar);
 											
-											if(tipoCuenta4.get_numeroCuenta().equals(cuentaCreditar)) {										
+											if(tipoCuenta4.get_numeroCuenta() == cuentaCreditar) {										
 												tipoCuenta4.depositar(montoTransferir);
 											}else {
 												System.out.println("Cuenta no encontrada.\n");
@@ -981,7 +958,6 @@ public class implimentacion {
 											concepto = sc.nextLine();
 											System.out.print("Enviar confirmación a: ");
 											enviarConfirmacion = sc.nextLine();
-											
 											
 											TransferenciasInternacionales trasnferenciasInternacionales1 = new TransferenciasInternacionales(codtransferencia, tipomoneda,
 													cuentaDebitar, cuentaCreditar, montoTransferir, bancodestino, concepto, enviarConfirmacion);
@@ -1049,114 +1025,461 @@ public class implimentacion {
 				}//FIN DE MENU INICIO SESION
 				
 				
+				break;//FIN DE CODIGO PARA TRANSFERENCIAS
+			
+			case 3: //ELIMINAR TIPO DE CUENTA.
+				
+				/*
+				 * 
+				 * 
+				 * FALTA 
+				 * 
+				 * 
+				 * 
+				 */
+				
+				
 				break;
-			case 3: //CAMBIAR NOMBRE DE USUARIO O CONTRASEÑA
+			case 4: //ELIMINAR USUARIO.
+				System.out.println("ELIMINAR USUARIO.");
 				
-				byte opcionmenuCC;
-				String rtn1, nomUsuario, contrasena1; 
+				System.out.print("Ingrese su nombre de usuario: ");
+				usuario = sc.nextLine();
+				System.out.print("Ingrese su contraseña: ");
+				constrasena = sc.nextLine();
 				
-				System.out.println("MENU CAMBIO DE USUARIO Y CONTRASEÑA");
-					System.out.println("1. INGRESAR USUARIO Y CONSTRASEÑA.");
-					System.out.println("2. SALIR.");
-					opcionmenuCC = scnum.nextByte();
-						switch(opcionmenuCC) {
-						case 1: //INGRESAR USUARIO Y CONSTRASEÑA.
+				if(gestionUsuario.buscarNombreUsuario(usuario) && gestionUsuario.buscarcontrasena(constrasena)) {
+					
+					System.out.print("Ingrese su RTN: ");
+					rtn = sc.nextLine();
+					
+					Usuario usuarioBuscado = gestionUsuario.buscarUsuario(rtn);
+					
+					if (usuarioBuscado == null) {
+						System.out.println("Usuario no encontrado.\n");
+					}else {
+						
+						if(gestionUsuario.eliminarUsuario(usuarioBuscado)){
+							System.out.println("Usuario Eliminado correctamente.\n");
+			
+						}else {
+							System.out.println("Error al eliminar usuario.\n");
+						}
+						
+					}//FIN DE CODIGO DE CAMBIO DE USUARIO Y CONTRASEÑA
+					
+				}else {
+					System.out.println("Usuario y contraseña incorrecto o Usuario no registrado.");
+					break;
+				}//FIN DE COMPROBACION DE USUARIO Y CONTRASEÑA
+				
+				break;// FIN PARA ELIMIMAR USUARIO
+				
+			case 5: //MODIFICAR USUARIO.
+				
+				System.out.println("MODIFICAR DATOS DE TITULAR");
+				
+				System.out.print("Ingrese su nombre de usuario: ");
+				usuario = sc.nextLine();
+				System.out.print("Ingrese su contraseña: ");
+				constrasena = sc.nextLine();
+				
+				if(gestionUsuario.buscarNombreUsuario(usuario) && gestionUsuario.buscarcontrasena(constrasena)) {
+					
+					System.out.print("Ingrese su RTN: ");
+					rtn = sc.nextLine();
+					
+					int posicionusuarioBuscado = gestionUsuario.buscarUsuarioPosicion(rtn);
+					
+					if (posicionusuarioBuscado == -1) {
+						System.out.println("Usuario no encontrado.\n");
+					}else {
+						boolean centinelamodificacionUsuario = true;
+						byte opcCentinela, opcModificacion;
+						Usuario UsuarioEncontrado = gestionUsuario.getUsuarioPorPosicion(posicionusuarioBuscado);
+						
+						while(centinelamodificacionUsuario) {
 							
-								System.out.print("INGRESE SU NOMBRE DE USUARIO: ");
-								nomUsuario = sc.nextLine();
-								System.out.print("INGRESE SU CONTRASEÑA: ");
-								contrasena1 = sc.nextLine();
+							System.out.println("\nMENU MODIDICACION DE USUARIO");
+							System.out.println("1. Modificar nombre y apellido.");
+							System.out.println("2. Modificar fecha de nacimiento.");
+							System.out.println("3. Modificar RTN.");
+							System.out.println("4. Modificar telefono.");
+							System.out.println("5. Modificar correo electronico.");
+							System.out.println("6. Modificar nombre de usuario y contraseña.");
+							System.out.println("7. Modificar referencia.");
+							System.out.println("8. Salir.");
+							opcModificacion = scnum.nextByte();
+							
+							switch(opcModificacion) {
+							
+							case 1: //Modificar nombre y apellido.
+								//nombre, apellido, direccion, telefono, rtn, correoElectronico,
+								System.out.println("Modificar nombre y apellido.");
+								System.out.println("Su nombre completo actual es: " + UsuarioEncontrado.get_nombre() + " " +UsuarioEncontrado.get_apellido());
+								System.out.println("Ingrese la modificación de sus nombres:");
+								nombre = sc.nextLine();
+								System.out.println("Ingrese la modificacion de sus apellidos:");
+								apellido = sc.nextLine();
 								
-								
-								if(gestionUsuario.buscarNombreUsuario(nomUsuario) && gestionUsuario.buscarcontrasena(contrasena1)) {
-									
-									System.out.print("Ingrese su RTN:");
-									rtn1 = sc.nextLine();
-									
-									int posicionusuarioBuscado = gestionUsuario.buscarUsuarioPosicion(rtn1);
-									
-									if (posicionusuarioBuscado == -1) {
-										System.out.println("Usuario no encontrado.\n");
-									}else {
-										
-										Usuario UsuarioEncontrado = gestionUsuario.getUsuarioPorPosicion(posicionusuarioBuscado);
-										System.out.println("Nombre de usuario actual: " + UsuarioEncontrado.get_nombreUsuario());
-										System.out.println("Contraseña actual: " + UsuarioEncontrado.get_contrasena());
-
-										//NOMBRE DE USUARIO Y CONSTRASEÑA
-										boolean centinelaUsuario = true, centinelaContraseña = true;
-										String usuario = "", usuarioConfir = "",constrasena = "", constrasenaconfirm = "";
-										
-										//CREAR NOMBRE DE USUARIO
-										while(centinelaUsuario) {
-											System.out.print("NUEVO NOMBRE DE USUARIO: ");
-											usuario = sc.nextLine();
-											
-											System.out.println("CONFORMAR NUEVO NOMBRE DE USUARIO: ");
-											usuarioConfir = sc.nextLine();
-											
-											if(gestionUsuario.confirmar(usuario, usuarioConfir)) {
-												System.out.println("Nuevo nombre de usuario creado correctamente.\n");
-												centinelaUsuario = false;
-											}else {
-												System.out.println("Los nombres de usuario no coinciden.");
-											}
-										}//FIN DE CODIGO PARA CREAR NOMBRE DE USUARIO
-										
-										//CREAR CONTRASEÑA
-										System.out.println("Cree nueva contraseña. \n");
-										while(centinelaContraseña) {
-											System.out.println("Nueva Contraseña: ");
-											constrasena = sc.nextLine();
-											
-											System.out.println("Confirmar nueva contraseña: ");
-											constrasenaconfirm = sc.nextLine();
-											
-											if(gestionUsuario.confirmar(constrasena, constrasenaconfirm)) {
-												System.out.println("Nueva contraseña creada con exito");
-												centinelaContraseña = false;
-											}else {
-												System.out.println("Las constraseñas no coinciden.");
-											}
-										}//FIN DE CODIGO PARA CREAR CONTRASEÑA
-										
-										Usuario UsuarioModificado = new Usuario(UsuarioEncontrado.get_codigoUsuario(),UsuarioEncontrado.get_fechaRegistro(),
-												UsuarioEncontrado.get_nombre(),UsuarioEncontrado.get_apellido(),UsuarioEncontrado.get_fechaNacimiento(),
-												UsuarioEncontrado.get_direccion(),UsuarioEncontrado.get_telefono(),UsuarioEncontrado.get_rtn(),
-												UsuarioEncontrado.get_correoelectronico(), usuario, constrasena, UsuarioEncontrado.get_referencia());
-										
-										if(gestionUsuario.ModificarUsuario(UsuarioModificado, posicionusuarioBuscado)) {
-											System.out.println("Usuario modificado con exito.\n");
-											System.out.println(UsuarioModificado);
-										}else {
-											System.out.println("Error al modificar Usuario.\n");
-										}
-										
-									}
+								Usuario UsuarioModificado1 = new Usuario(UsuarioEncontrado.get_codigoUsuario(),UsuarioEncontrado.get_fechaRegistro(),
+										nombre,apellido,UsuarioEncontrado.get_fechaNacimiento(), UsuarioEncontrado.get_direccion(),UsuarioEncontrado.get_telefono(),
+										UsuarioEncontrado.get_rtn(), UsuarioEncontrado.get_correoelectronico(), UsuarioEncontrado.get_nombreUsuario(), 
+										UsuarioEncontrado.get_contrasena() , UsuarioEncontrado.get_referencia());
+							
+								if(gestionUsuario.ModificarUsuario(UsuarioModificado1, posicionusuarioBuscado)) {
+									System.out.println("\nNombres y apellidos modificados con exito.\n");
+									System.out.println(UsuarioModificado1);
 								}else {
-									System.out.println("Usuario y contraseña incorrecto o Usuario no registrado.");
-									break;
+									System.out.println("\nError al modificar nombres y apellidos.\n");
 								}
 								
-							break;
-						case 2: //SALIR.
+								
+								break; //FIN DE MOFICACION DE NOMBRES Y APELLIDOS
+								
+							case 2: //Modificar fecha de nacimiento.
+								
+								System.out.println("Modificar fecha de nacimiento");
+								System.out.println("Su fecha de nacimiento actual es: " + UsuarioEncontrado.get_fechaNacimiento());
+								System.out.print("Ingrese la modificación de su fecha de nacimiento (dd-MM-yyyy): ");
+								fechaNacimiento = sc.nextLine();
+								Date FechaNacimiento = AdminFechas.stringToDate(fechaNacimiento);
+								
+								Usuario UsuarioModificado2 = new Usuario(UsuarioEncontrado.get_codigoUsuario(),UsuarioEncontrado.get_fechaRegistro(),
+										UsuarioEncontrado.get_nombre(), UsuarioEncontrado.get_apellido(), FechaNacimiento, 
+										UsuarioEncontrado.get_direccion(),UsuarioEncontrado.get_telefono(), UsuarioEncontrado.get_rtn(), 
+										UsuarioEncontrado.get_correoelectronico(), UsuarioEncontrado.get_nombreUsuario(), 
+										UsuarioEncontrado.get_contrasena() , UsuarioEncontrado.get_referencia());
 							
+								if(gestionUsuario.ModificarUsuario(UsuarioModificado2, posicionusuarioBuscado)) {
+									System.out.println("\nFecha de nacimiento modificada con exito.\n");
+									System.out.println(UsuarioModificado2);
+								}else {
+									System.out.println("\nError al modificar fecha de nacimiento.\n");
+								}
+								
+								break;//FIN DE MODIFICACION DE FECHA DE NACIMIENTO
+								
+							case 3: //Modificar RTN.
+								
+								System.out.println("Modificar RTN");
+								System.out.println("Su RTN actual es: " + UsuarioEncontrado.get_rtn());
+								System.out.println("Ingrese la modificación de su fecha de nacimiento:");
+								rtn = sc.nextLine();
+								
+								Usuario UsuarioModificado3 = new Usuario(UsuarioEncontrado.get_codigoUsuario(),UsuarioEncontrado.get_fechaRegistro(),
+										UsuarioEncontrado.get_nombre(), UsuarioEncontrado.get_apellido(), UsuarioEncontrado.get_fechaNacimiento(), 
+										UsuarioEncontrado.get_direccion(),UsuarioEncontrado.get_telefono(), rtn, 
+										UsuarioEncontrado.get_correoelectronico(), UsuarioEncontrado.get_nombreUsuario(), 
+										UsuarioEncontrado.get_contrasena() , UsuarioEncontrado.get_referencia());
 							
-							break;
-							default:
-								System.out.println("OPCIÓN NO VALIDA.");
+								if(gestionUsuario.ModificarUsuario(UsuarioModificado3, posicionusuarioBuscado)) {
+									System.out.println("\nRTN modificada con exito.\n");
+									System.out.println(UsuarioModificado3);
+								}else {
+									System.out.println("\nError al modificar RTN.\n");
+								}
+								
+								break; // FIN DE MODIFICACION DE RTN
+								
+							case 4: //Modificar telefono.
+								
+								System.out.println("Modifcar telefono");
+								System.out.println("Su número de telefono actual es: " + UsuarioEncontrado.get_telefono());
+								System.out.println("Ingrese la modificación de su nuevo telefono:");
+								telefono = sc.nextLine();
+								
+								Usuario UsuarioModificado4 = new Usuario(UsuarioEncontrado.get_codigoUsuario(),UsuarioEncontrado.get_fechaRegistro(),
+										UsuarioEncontrado.get_nombre(), UsuarioEncontrado.get_apellido(), UsuarioEncontrado.get_fechaNacimiento(), 
+										UsuarioEncontrado.get_direccion(),telefono, UsuarioEncontrado.get_rtn(), 
+										UsuarioEncontrado.get_correoelectronico(), UsuarioEncontrado.get_nombreUsuario(), 
+										UsuarioEncontrado.get_contrasena() , UsuarioEncontrado.get_referencia());
+							
+								if(gestionUsuario.ModificarUsuario(UsuarioModificado4, posicionusuarioBuscado)) {
+									System.out.println("\ntelefono modificada con exito.\n");
+									System.out.println(UsuarioModificado4);
+								}else {
+									System.out.println("\nError al modificar telefono.\n");
+								}
+								
+								break; //FIN DE MODIFICACION DE TELEFONO 
+								
+							case 5: //Modificar correo electronico."
+								
+								System.out.println("Modificar correo electronico");
+								System.out.println("Su correo electronico actual es: " + UsuarioEncontrado.get_correoelectronico());
+								System.out.println("Ingrese la modificación de su correo electronico:");
+								correoElectronico = sc.nextLine();
+								
+								Usuario UsuarioModificado5 = new Usuario(UsuarioEncontrado.get_codigoUsuario(),UsuarioEncontrado.get_fechaRegistro(),
+										UsuarioEncontrado.get_nombre(), UsuarioEncontrado.get_apellido(), UsuarioEncontrado.get_fechaNacimiento(), 
+										UsuarioEncontrado.get_direccion(),UsuarioEncontrado.get_telefono(), UsuarioEncontrado.get_rtn(), 
+										correoElectronico, UsuarioEncontrado.get_nombreUsuario(), 
+										UsuarioEncontrado.get_contrasena() , UsuarioEncontrado.get_referencia());
+							
+								if(gestionUsuario.ModificarUsuario(UsuarioModificado5, posicionusuarioBuscado)) {
+									System.out.println("\nCorreo electronico modificada con exito.\n");
+									System.out.println(UsuarioModificado5);
+								}else {
+									System.out.println("\nError al modificar correo electronico.\n");
+								}
+								
 								break;
-						}
-				
+								
+							case 6: // Modificar nombre de usuario y contraseña.
+								
+								System.out.println("Modificar Nombre de usuario y contraseña");
+								System.out.println("Su nombre de usuario actual es: " + UsuarioEncontrado.get_nombreUsuario());
+								System.out.println("Su contraseña actual es: " + UsuarioEncontrado.get_contrasena());
+								
+								//NOMBRE DE USUARIO Y CONSTRASEÑA
+								boolean centinelaUsuario = true, centinelaContraseña = true;
+								
+								//CREAR NOMBRE DE USUARIO
+								while(centinelaUsuario) {
+									System.out.print("NUEVO NOMBRE DE USUARIO: ");
+									usuario = sc.nextLine();
+									
+									System.out.println("CONFIRMAR NUEVO NOMBRE DE USUARIO: ");
+									usuarioConfir = sc.nextLine();
+									
+									if(gestionUsuario.confirmar(usuario, usuarioConfir)) {
+										System.out.println("Nuevo nombre de usuario creado correctamente.\n");
+										centinelaUsuario = false;
+									}else {
+										System.out.println("Los nombres de usuario no coinciden.");
+									}
+								}//FIN DE CODIGO PARA CREAR NOMBRE DE USUARIO
+								
+								//CREAR CONTRASEÑA
+								System.out.println("Cree nueva contraseña. \n");
+								while(centinelaContraseña) {
+									System.out.println("Nueva Contraseña: ");
+									constrasena = sc.nextLine();
+									
+									System.out.println("Confirmar nueva contraseña: ");
+									constrasenaconfirm = sc.nextLine();
+									
+									if(gestionUsuario.confirmar(constrasena, constrasenaconfirm)) {
+										System.out.println("Nueva contraseña creada con exito");
+										centinelaContraseña = false;
+									}else {
+										System.out.println("Las constraseñas no coinciden.");
+									}
+								}//FIN DE CODIGO PARA CREAR CONTRASEÑA
+								
+								Usuario UsuarioModificado6 = new Usuario(UsuarioEncontrado.get_codigoUsuario(),UsuarioEncontrado.get_fechaRegistro(),
+										UsuarioEncontrado.get_nombre(),UsuarioEncontrado.get_apellido(),UsuarioEncontrado.get_fechaNacimiento(),
+										UsuarioEncontrado.get_direccion(),UsuarioEncontrado.get_telefono(),UsuarioEncontrado.get_rtn(),
+										UsuarioEncontrado.get_correoelectronico(), usuario, constrasena, UsuarioEncontrado.get_referencia());
+							
+							if(gestionUsuario.ModificarUsuario(UsuarioModificado6, posicionusuarioBuscado)) {
+								System.out.println("\nNombre de usuario y contraseña modificado con exito.\n");
+								System.out.println(UsuarioModificado6);
+							}else {
+								System.out.println("\nError al modificar nombre de usuario y contraseña.\n");
+							}
+								
+								break;// FIN DE MODIFICAR USUARIO Y CONTRASEÑA
+								
+							case 7: // Modificar referencia.
+								
+								System.out.println("Modificar referencia");
+								System.out.println("Su referencia actual es: " + UsuarioEncontrado.get_referencia());
+								
+								System.out.print("Ingrese nuevos nombres: ");
+								nombreReferencia = sc.nextLine();
+								System.out.print("Ingrese nuevos apellidos: ");
+								apellidoreferencia = sc.nextLine();
+								System.out.print("Ingrese nueva fecha de nacimiento (dd-MM-yyyy): ");
+								fechaNacimiento = sc.nextLine();
+								Date FechaNacimientoReferencia = AdminFechas.stringToDate(fechaNacimiento);
+								System.out.print("Ingrese nueva dirección: ");
+								direccionreferencia = sc.nextLine();
+								System.out.print("Ingrese nuevo telefono: ");
+								telefonoreferencia = sc.nextLine();
+								System.out.print("Ingrese nuevo RTN: ");
+								rtnreferencia = sc.nextLine();
+								System.out.print("Ingrese nuevo correo electronico: ");
+								correorefencia = sc.nextLine();
+								
+								int posicionReferencia = gestionRefencia.buscarReferenciaPosicion(UsuarioEncontrado.get_referencia().get_rtn());
+								
+								Referencia referenciaModificar = new Referencia(UsuarioEncontrado.get_referencia().get_codigoReferencia(), nombreReferencia, apellidoreferencia,
+										FechaNacimientoReferencia, direccionreferencia, telefonoreferencia, rtnreferencia, correorefencia);
+								
+								Usuario UsuarioModificado7 = new Usuario(UsuarioEncontrado.get_codigoUsuario(),UsuarioEncontrado.get_fechaRegistro(),
+										UsuarioEncontrado.get_nombre(),UsuarioEncontrado.get_apellido(),UsuarioEncontrado.get_fechaNacimiento(),
+										UsuarioEncontrado.get_direccion(),UsuarioEncontrado.get_telefono(),UsuarioEncontrado.get_rtn(),
+										UsuarioEncontrado.get_correoelectronico(), UsuarioEncontrado.get_nombreUsuario(), UsuarioEncontrado.get_contrasena(), referenciaModificar);
+								
+								if(gestionRefencia.ModificarReferencia(referenciaModificar, posicionReferencia) && gestionUsuario.ModificarUsuario(UsuarioModificado7, posicionusuarioBuscado)){
+									System.out.println("\nReferencia modificada con exito.\n");
+									System.out.println(UsuarioModificado7);
+									
+								}else {
+									System.out.println("Error al modifcar referencia.");
+								}
+								
+								break;//Fin de modificacion de referencia del usuario.
+								
+							case 8: // SALIR
+								
+								break;//Salir
+								
+								default:
+									System.out.println("Opción no valida:\n");
+									break;
+									
+							}//FIN DE IMPLEMENTACION DE MODIFICACION DE USUARIO
+							
+							System.out.println("¿Desea realizar otra modifcacion al usuario?\n1. SI\n2. NO");
+							opcCentinela = scnum.nextByte();
+							if(opcCentinela == 2) {
+								centinelamodificacionUsuario = false;
+							}
+							
+						} //fin del while del menu de modificacion de usuario
+						
+					} // Fin de codigo para comprobar usuario
 					
-				break;
-			case 4: //ELIMINAR TIPO DE CUENTA.
-				break;
-			case 5: //ELIMINAR USUARIO.
-				break;
-			case 6: //MODIFICAR USUARIO.
-				break;
-			case 7: //SALIR
+				}else {
+					System.out.println("Usuario y contraseña incorrecto o Usuario no registrado.");
+					break;
+				}//FIN DE COMPROBACION DE USUARIO Y CONTRASEÑA
+				
+				break; //FIN DE MODIFICACION DE USUARIO
+				
+			case 6: // INFORMACION PERSONAL
+				
+				System.out.println("INFORMACION PERSONAL");
+				
+				System.out.print("Ingrese su nombre de usuario: ");
+				usuario = sc.nextLine();
+				System.out.print("Ingrese su contraseña: ");
+				constrasena = sc.nextLine();
+				
+				if(gestionUsuario.buscarNombreUsuario(usuario) && gestionUsuario.buscarcontrasena(constrasena)) {
+					
+					System.out.print("Ingrese su RTN: ");
+					rtn = sc.nextLine();
+					
+					Usuario usuarioBuscado = gestionUsuario.buscarUsuario(rtn);
+					CuentaBancaria tipoCuentaBuscada = gestionCuentaBancaria.bucarTipoCuenta(rtn);
+					
+					if (usuarioBuscado == null) {
+						System.out.println("Usuario no encontrado.\n");
+					}else {
+						
+						boolean centinelamenuinfo = true;
+						Byte opcmenupersonal, opcCentinela2;
+						while(centinelamenuinfo) {
+							
+							System.out.println("MENU DE INFORMACION PERSONAL");
+							System.out.println("1. Datos personales.");
+							System.out.println("2. Cuentas bancarias.");
+							System.out.println("3. Referencia");
+							System.out.println("4. Beneficiarios.");
+							System.out.println("5. Salir.");
+							opcmenupersonal = scnum.nextByte();
+							
+							switch(opcmenupersonal) {
+							case 1: //  Datos personales
+								
+								System.out.println("Datos personales:");
+								
+								for(Persona personaactual: _listaClasePersona) {
+									if (personaactual instanceof Usuario) {
+										
+										String _infousuario = String.format("Codigo del Usuario: %s\n"
+																		  + "Fecha de registro: %s\n"
+																		  + "Nombre Completo: %s\n"
+												                          + "RTN: %s\n"
+												                          + "Fecha Nacimiento: %s\n"
+												                          + "Dirección:"
+												                          + "Telefono: %s \n"																		  
+																		  + "Correo Electronico: %s \n", usuarioBuscado.get_codigoUsuario(), usuarioBuscado.get_fechaRegistro(),
+																		  usuarioBuscado.get_nombre() +" "+ usuarioBuscado.get_apellido(), usuarioBuscado.get_rtn(), usuarioBuscado.get_fechaNacimiento(),
+																		  usuarioBuscado.get_direccion(),usuarioBuscado.get_telefono(),usuarioBuscado.get_correoelectronico());
+										System.out.println(_infousuario);
+									}
+								}
+							
+								
+								break;// fin de datos personales
+								
+							case 2: // Cuentas bancarias
+								
+								System.out.println("Información de cuentas bancarias");
+								
+								for(CuentaBancaria CuentaActual: _listaCuentasBancarias) {
+									if(CuentaActual instanceof CuentaBancaria) {
+										
+									}
+								}
+								
+								
+								break;//FIN DE INFORMACION DE CUENTAS BANCARIAS
+								
+							case 3: //INFORMACION DE REFERENCIA
+								
+								System.out.println("Información de referencia.");
+								
+								for(Persona personaactual: _listaClasePersona) {
+									if (personaactual instanceof Usuario) {
+										
+										String _infousuario = String.format("Codigo del referencia: %s\n"
+																		  + "Fecha de nacimiento: %s\n"
+																		  + "Nombre Completo: %s\n"
+												                          + "RTN: %s\n"												                          
+												                          + "Dirección:"
+												                          + "Telefono: %s \n"																		  
+																		  + "Correo Electronico: %s \n", usuarioBuscado.get_referencia().get_codigoReferencia(), usuarioBuscado.get_referencia().get_fechaNacimiento(),
+																		  usuarioBuscado.get_referencia().get_nombre() +" "+ usuarioBuscado.get_referencia().get_apellido(), usuarioBuscado.get_referencia().get_rtn(), 																		
+																		  usuarioBuscado.get_referencia().get_direccion(),usuarioBuscado.get_referencia().get_telefono(),usuarioBuscado.get_referencia().get_correoelectronico());
+										System.out.println(_infousuario);
+									}
+								}
+								
+								break;//FIN DE INFORMACION DE REFERENCIA
+								
+							case 4:// INFORMACION DE BENEFICIARIO
+								
+								
+								
+								break; // FIN DE INFORMACION DE BENEFICIARIO
+								
+							case 5: //salir
+								break;
+								
+								default:
+									System.out.println("Opción no valida.");
+									break;
+							}
+							
+							
+							System.out.println("¿Desea obtener otro dato personal?\n1. SI\n2. N0");
+							opcCentinela2 = scnum.nextByte();
+							if(opcCentinela2 == 2) {
+								centinelamenuinfo = false;
+							}
+						}
+																	
+					}
+					
+				}else {
+					System.out.println("Usuario y contraseña incorrecto o Usuario no registrado.");
+					break;
+				}
+
+				break; //FIN DE INFORMACION PERSONAL
+				
+			case 7://RECUPERAR NOMBRE DE USUARIO Y CONTRASEÑA
+				
+				
+				break; // FIN RECUPERAR NOMBRE DE USUARIO Y CONTRASEÑA
+				
+			case 8: //SALIR
 				centinelaPrincipal = false;
 				break;
 				default: 

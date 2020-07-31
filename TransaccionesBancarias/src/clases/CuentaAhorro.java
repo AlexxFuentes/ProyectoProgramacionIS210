@@ -9,7 +9,7 @@ import java.util.Date;
  *FECHA: 12/07/20
  */
 
-public class CuentaAhorro extends CuentaBancaria{
+public class CuentaAhorro extends CuentaBancaria {
 	
 	//ATRIBUTOS
 	private double _saldo;
@@ -26,15 +26,19 @@ public class CuentaAhorro extends CuentaBancaria{
 		this._interesremunerado = _interesremunerado;
 	}
 	*/
+	
+	
+	public double get_saldo() {
+		return _saldo;
+	}
 	public CuentaAhorro(Usuario _titular, Date _fechaDeApertura, String _nombreTipoCuenta,
-			String _numeroCuenta, double _saldo, double _interesremunerado) {
+			int _numeroCuenta, double _saldo, double _interesremunerado) {
 		super(_titular, _fechaDeApertura, _nombreTipoCuenta, _numeroCuenta);
 		this._saldo = _saldo;
 		this._interesremunerado = _interesremunerado;
 	}
-	public double get_saldo() {
-		return _saldo;
-	}
+
+
 	public void set_saldo(double _saldo) {
 		this._saldo = _saldo;
 	}
@@ -73,7 +77,5 @@ public class CuentaAhorro extends CuentaBancaria{
 	public double consultarSaldo() {
 		return this._saldo;
 	}
-	
-	
 	
 }

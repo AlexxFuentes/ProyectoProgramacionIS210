@@ -26,16 +26,19 @@ public class CuentaNomina extends CuentaBancaria{
 		this._empresaDepositante = _empresaDepositante;
 	}
 	*/
+	
+
+	public double get_saldo() {
+		return _saldo;
+	}
+
 	public CuentaNomina(Usuario _titular, Date _fechaDeApertura, String _nombreTipoCuenta,
-			String _numeroCuenta, double _saldo, String _empresaDepositante) {
+			int _numeroCuenta, double _saldo, String _empresaDepositante) {
 		super(_titular, _fechaDeApertura, _nombreTipoCuenta, _numeroCuenta);
 		this._saldo = _saldo;
 		this._empresaDepositante = _empresaDepositante;
 	}
 
-	public double get_saldo() {
-		return _saldo;
-	}
 
 	public void set_saldo(double _saldo) {
 		this._saldo = _saldo;

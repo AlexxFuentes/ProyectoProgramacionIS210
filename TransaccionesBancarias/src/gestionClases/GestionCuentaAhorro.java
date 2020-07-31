@@ -38,10 +38,10 @@ public class GestionCuentaAhorro {
 	 * @param numCuenta
 	 * @return null - SI NO ENCUENTRA LA CUENTA AHORRO, CASO CONTRARIO RETORNA OBJ.CUENTAAHORRO
 	 */
-	public CuentaAhorro BuscarCuentaAhorro(String numCuenta) {
+	public CuentaAhorro BuscarCuentaAhorro(int numCuenta) {
 		CuentaAhorro CuentaAhorroBuscada = null;
 		for(int i = 0; i < listaCuentaAhorro.size(); i++) {
-			if( listaCuentaAhorro.get(i).get_numeroCuenta().equals(numCuenta)) {
+			if( listaCuentaAhorro.get(i).get_numeroCuenta() == numCuenta) {
 				CuentaAhorroBuscada = listaCuentaAhorro.get(i);
 			}
 		}
@@ -115,46 +115,42 @@ public class GestionCuentaAhorro {
 		}
 	}
 	
-	/**
-	 * MÉTODO QUE CALCULA EL INTERES REMUNERADO DE UNA CUENTA DE AHORRO
-	 * @param MontoInicial
-	 * @return Interesesremunerados
-	 */
-	public double InteresRemunerado(double MontoInicial) {
+	public double interesRemunerados(double Monto) {
 		double Interesesremunerados = 0;
 		
-		if(MontoInicial >= 0 || MontoInicial <= 999.99 ) {
-			Interesesremunerados = (MontoInicial*(0.0005)); 
+		if(Monto >= 0 || Monto <= 999.99 ) {
+			Interesesremunerados = (Monto*(0.0005)); 
 			return Interesesremunerados;
-		} else if(MontoInicial >= 1000 || MontoInicial <= 9999.99 ) {
-			Interesesremunerados =  (MontoInicial*(0.0075)); 
+		} else if(Monto >= 1000 || Monto <= 9999.99 ) {
+			Interesesremunerados =  (Monto*(0.0075)); 
 			return Interesesremunerados;
-		} else if(MontoInicial >= 10000 || MontoInicial <= 24999.99 ) {
-			Interesesremunerados =  (MontoInicial*(0.01)); 
+		} else if(Monto >= 10000 || Monto <= 24999.99 ) {
+			Interesesremunerados =  (Monto*(0.01)); 
 			return Interesesremunerados;
-		} else if(MontoInicial >= 25000 || MontoInicial <= 49999.99 ) {
-			Interesesremunerados = (MontoInicial*(0.0126)); 
+		} else if(Monto >= 25000 || Monto <= 49999.99 ) {
+			Interesesremunerados = (Monto*(0.0126)); 
 			return Interesesremunerados;
-		} else if(MontoInicial >= 50000 || MontoInicial <= 99999.99 ) {
-			Interesesremunerados = MontoInicial + (MontoInicial*(0.0151)); 
+		} else if(Monto >= 50000 || Monto <= 99999.99 ) {
+			Interesesremunerados = Monto + (Monto*(0.0151)); 
 			return Interesesremunerados;
-		} else if(MontoInicial >= 100000 || MontoInicial <= 249999.99 ) {
-			Interesesremunerados = (MontoInicial*(0.0176)); 
+		} else if(Monto >= 100000 || Monto <= 249999.99 ) {
+			Interesesremunerados = (Monto*(0.0176)); 
 			return Interesesremunerados;
-		} else if(MontoInicial >= 250000 || MontoInicial <= 499999.99 ) {
-			Interesesremunerados = (MontoInicial*(0.0176)); 
+		} else if(Monto >= 250000 || Monto <= 499999.99 ) {
+			Interesesremunerados = (Monto*(0.0176)); 
 			return Interesesremunerados;
-		} else if(MontoInicial >= 500000 || MontoInicial <= 999999.99 ) {
-			Interesesremunerados = (MontoInicial*(0.0176)); 
+		} else if(Monto >= 500000 || Monto <= 999999.99 ) {
+			Interesesremunerados = (Monto*(0.0176)); 
 			return Interesesremunerados;
-		} else if(MontoInicial >= 1000000 || MontoInicial <= 1999999.99 ) {
-			Interesesremunerados = (MontoInicial*(0.0176)); 
+		} else if(Monto >= 1000000 || Monto <= 1999999.99 ) {
+			Interesesremunerados = (Monto*(0.0176)); 
 			return Interesesremunerados;
-		} else if(MontoInicial >= 2000000 || MontoInicial > 2000000 ) {
-			Interesesremunerados =   (MontoInicial*(0.0176)); 
+		} else if(Monto >= 2000000 || Monto > 2000000 ) {
+			Interesesremunerados =   (Monto*(0.0176)); 
 			return Interesesremunerados;
 		}else {
 			return Interesesremunerados;
 		}
 	}
+	
 }

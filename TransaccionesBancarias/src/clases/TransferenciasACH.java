@@ -15,15 +15,19 @@ public class TransferenciasACH extends Transferencias{
 		this._bancoDestino = _bancoDestino;
 	}
 	*/
-	public TransferenciasACH(String _codigoTransferencias, String _tipoMoneda, String _cuentaDebitar, String _cuentaAcreditar,
-			double _montoTransferir, String _bancoDestino, String _concepto, String _enviarConfirmacion) {
+	
+	
+	public String get_codigoTransferencias() {
+		return _codigoTransferencias;
+	}
+	public TransferenciasACH(String _codigoTransferencias, String _tipoMoneda, int _cuentaDebitar, int _cuentaAcreditar, 
+			double _montoTransferir, String _concepto, String _enviarConfirmacion,  String _bancoDestino) {
 		super(_tipoMoneda, _cuentaDebitar, _cuentaAcreditar, _montoTransferir, _concepto, _enviarConfirmacion);
 		this._codigoTransferencias = _codigoTransferencias;
 		this._bancoDestino = _bancoDestino;
 	}
-	public String get_codigoTransferencias() {
-		return _codigoTransferencias;
-	}
+
+
 	public void set_codigoTransferencias(String _codigoTransferencias) {
 		this._codigoTransferencias = _codigoTransferencias;
 	}

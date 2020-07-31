@@ -40,10 +40,10 @@ public class GestionCuentaCorrientePersonal {
 	 * @param numCuenta
 	 * @return null - SI NO ENCUENTRA LA CUENTA_CORRIENTE_PERSONAL, CASO CONTRARIO RETORNA OBJ.CUENTA_CORRIENTE_PERSONAL
 	 */
-	public CuentaCorrientePersonal BuscarCuentaCorrientePersonal(String numCuenta) {
+	public CuentaCorrientePersonal BuscarCuentaCorrientePersonal(int numCuenta) {
 		CuentaCorrientePersonal CuentaCorrientePersonalBuscada = null;
 		for(int i = 0; i < listaCuentaCorrientePersonal.size(); i++) {
-			if( listaCuentaCorrientePersonal.get(i).get_numeroCuenta().equals(numCuenta)) {
+			if( listaCuentaCorrientePersonal.get(i).get_numeroCuenta() == numCuenta) {
 				CuentaCorrientePersonalBuscada = listaCuentaCorrientePersonal.get(i);
 			}
 		}

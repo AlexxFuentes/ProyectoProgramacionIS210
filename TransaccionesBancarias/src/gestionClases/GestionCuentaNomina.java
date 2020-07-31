@@ -38,10 +38,10 @@ public class GestionCuentaNomina {
 	 * @param numCuenta
 	 * @return null - SI NO ENCUENTRA LA CUENTA_NOMINA, CASO CONTRARIO RETORNA OBJ.CUENTA_NOMINA
 	 */
-	public CuentaNomina BuscarCuentaNomina(String numCuenta) {
+	public CuentaNomina BuscarCuentaNomina(int numCuenta) {
 		CuentaNomina CuentaNominaBuscada = null;
 		for(int i = 0; i < listaCuentaNomina.size(); i++) {
-			if( listaCuentaNomina.get(i).get_numeroCuenta().equals(numCuenta)) {
+			if( listaCuentaNomina.get(i).get_numeroCuenta() == numCuenta) {
 				CuentaNominaBuscada = listaCuentaNomina.get(i);
 			}
 		}

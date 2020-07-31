@@ -2,7 +2,7 @@ package clases;
 
 import java.util.Date;
 
-public class CuentaCheques extends CuentaBancaria{
+public class CuentaCheques extends CuentaBancaria {
 	
 	//ATRIBUTOS
 	private double _saldo;
@@ -20,16 +20,20 @@ public class CuentaCheques extends CuentaBancaria{
 	}
 	*/
 
-	public CuentaCheques(Usuario _titular, Date _fechaDeApertura, String _nombreTipoCuenta,
-			String _numeroCuenta, double _saldo, double _interesremunerado) {
-		super(_titular, _fechaDeApertura, _nombreTipoCuenta, _numeroCuenta);
-		this._saldo = _saldo;
-		this._interesremunerado = _interesremunerado;
-	}
+	
 	
 	public double get_saldo() {
 		return _saldo;
 	}
+
+	public CuentaCheques(Usuario _titular, Date _fechaDeApertura, String _nombreTipoCuenta,
+			int _numeroCuenta, double _saldo, double _interesremunerado) {
+		super(_titular, _fechaDeApertura, _nombreTipoCuenta, _numeroCuenta);
+		this._saldo = _saldo;
+		this._interesremunerado = _interesremunerado;
+	}
+
+
 
 	public void set_saldo(double _saldo) {
 		this._saldo = _saldo;

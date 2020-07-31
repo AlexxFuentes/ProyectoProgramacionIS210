@@ -25,15 +25,19 @@ public class CuentaCorrientePersonal extends CuentaBancaria{
 	}
 	*/
 	
-	public CuentaCorrientePersonal(Usuario _titular, Date _fechaDeApertura, String _nombreTipoCuenta,
-			String _numeroCuenta, double _saldo) {
-		super(_titular, _fechaDeApertura, _nombreTipoCuenta, _numeroCuenta);
-		this._saldo = _saldo;
-	}
+	
 
 	public double get_saldo() {
 		return _saldo;
 	}
+
+	public CuentaCorrientePersonal(Usuario _titular, Date _fechaDeApertura, String _nombreTipoCuenta,
+			int _numeroCuenta, double _saldo) {
+		super(_titular, _fechaDeApertura, _nombreTipoCuenta, _numeroCuenta);
+		this._saldo = _saldo;
+	}
+
+
 
 	public void set_saldo(double _saldo) {
 		this._saldo = _saldo;
@@ -69,7 +73,4 @@ public class CuentaCorrientePersonal extends CuentaBancaria{
 		return this._saldo;
 	}
 
-	
-
-	
 }

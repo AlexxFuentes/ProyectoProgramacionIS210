@@ -39,10 +39,10 @@ public class GestionCuentaCheques {
 	 * @param numCuenta
 	 * @return null - SI NO ENCUENTRA LA CUENTA_CHEQUES, CASO CONTRARIO RETORNA OBJ.CUENTA_CHEQUES
 	 */
-	public CuentaCheques BuscarCuentaCheques(String numCuenta) {
+	public CuentaCheques BuscarCuentaCheques(int numCuenta) {
 		CuentaCheques CuentaChequesBuscada = null;
 		for(int i = 0; i < listaCuentaCheques.size(); i++) {
-			if( listaCuentaCheques.get(i).get_numeroCuenta().equals(numCuenta)) {
+			if( listaCuentaCheques.get(i).get_numeroCuenta() == numCuenta) {
 				CuentaChequesBuscada = listaCuentaCheques.get(i);
 			}
 		}
@@ -116,25 +116,20 @@ public class GestionCuentaCheques {
 		}
 	}
 	
-	/**
-	 * MÉTODO PARA CALCULAR EL INTERES REMUNERADO DE CUENTA DE CHEQUES
-	 * @param MontoInicial
-	 * @return Interesesremunerados
-	 */
-	public double InteresRemunerados(double MontoInicial) {
+	public double interesRemunerados(double Monto) {
 		double Interesesremunerados = 0;
 		
-		if(MontoInicial >= 0 || MontoInicial <= 500000 ) {
-			Interesesremunerados = (MontoInicial*(0.0)); 
+		if(Monto >= 0 || Monto <= 500000 ) {
+			Interesesremunerados = (Monto*(0.0)); 
 			return Interesesremunerados;
-		} else if(MontoInicial >= 500000 || MontoInicial <= 1000000 ) {
-			Interesesremunerados =  (MontoInicial*(0.0025)); 
+		} else if(Monto >= 500000 || Monto <= 1000000 ) {
+			Interesesremunerados =  (Monto*(0.0025)); 
 			return Interesesremunerados;
-		} else if(MontoInicial >= 1000000 || MontoInicial <= 2000000 ) {
-			Interesesremunerados =  (MontoInicial*(0.005)); 
+		} else if(Monto >= 1000000 || Monto <= 2000000 ) {
+			Interesesremunerados =  (Monto*(0.005)); 
 			return Interesesremunerados;
-		} else if(MontoInicial >= 2000000 || MontoInicial > 2000000 ) {
-			Interesesremunerados = (MontoInicial*(0.0356)); 
+		} else if(Monto >= 2000000 || Monto > 2000000 ) {
+			Interesesremunerados = (Monto*(0.0356)); 
 			return Interesesremunerados;
 		} else {
 			return Interesesremunerados;

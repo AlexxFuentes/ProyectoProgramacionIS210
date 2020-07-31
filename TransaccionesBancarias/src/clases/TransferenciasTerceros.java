@@ -7,17 +7,17 @@ public class TransferenciasTerceros extends Transferencias{
 		super();
 	}
 	/*
-	public TransferenciasTerceros(String _codigoTransferencia, Beneficiario _beneficiario) {
+	public TransferenciasTerceros(String _codigoTransferencia) {
 		super();
 		this._codigoTransferencia = _codigoTransferencia;
-		this._beneficiario = _beneficiario;
 	}
 	*/
-	public TransferenciasTerceros(String _codigoTransferencia, String _tipoMoneda, String _cuentaDebitar, String _cuentaAcreditar,
-			double _montoTransferir, String _concepto, String _enviarConfirmacion) {
+	public TransferenciasTerceros(String _codigoTransferencia, String _tipoMoneda, int _cuentaDebitar, int _cuentaAcreditar, double _montoTransferir,
+			String _concepto, String _enviarConfirmacion) {
 		super(_tipoMoneda, _cuentaDebitar, _cuentaAcreditar, _montoTransferir, _concepto, _enviarConfirmacion);
 		this._codigoTransferencia = _codigoTransferencia;
 	}
+	
 	public String get_codigoTransferencia() {
 		return _codigoTransferencia;
 	}

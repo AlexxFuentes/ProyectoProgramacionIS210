@@ -24,15 +24,19 @@ public class TransferenciasInternacionales extends Transferencias{
 		this._bancoDestino = _bancoDestino;
 	}
 	*/
-	public TransferenciasInternacionales(String _codigotransferencias, String _tipoMoneda, String _cuentaDebitar, String _cuentaAcreditar,
+	public TransferenciasInternacionales(String _codigotransferencias, String _tipoMoneda, int _cuentaDebitar, int _cuentaAcreditar,
 			double _montoTransferir, String _concepto, String _enviarConfirmacion, String _bancoDestino) {
 		super(_tipoMoneda, _cuentaDebitar, _cuentaAcreditar, _montoTransferir, _concepto, _enviarConfirmacion);
 		this._codigotransferencias = _codigotransferencias;
 		this._bancoDestino = _bancoDestino;
 	}
+
+	
+	
 	public String get_codigotransferencias() {
 		return _codigotransferencias;
 	}
+	
 	public void set_codigotransferencias(String _codigotransferencias) {
 		this._codigotransferencias = _codigotransferencias;
 	}
