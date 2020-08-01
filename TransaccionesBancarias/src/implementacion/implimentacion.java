@@ -67,7 +67,7 @@ public class implimentacion {
 		gestionCuentaCheques.AgregarCuentaCheques(Cuentacheques);
 		gestionUsuario.AgregarUsuario(titular);
 		//System.out.println((int)Math.random()+2);
-		System.out.println(gestionCuentaBancaria.generaNumeroCuenta());
+		//System.out.println(gestionCuentaBancaria.generaNumeroCuenta());
 		/*-----------------------------------------------------------------------------------------------------------*/
 		/*-------------------------------------------------INICIO---------------------------------------------------*/
 		/*---------------------------------------------------------------------------------------------------------*/
@@ -418,9 +418,9 @@ public class implimentacion {
 								
 								while(centinenlamenutrasn) {
 									System.out.println("MENU DE OPERACIONES BANCARIAS");
-									System.out.println("1. Depositar.");
-									System.out.println("2. Retirar.");
-									System.out.println("3. Consultar saldo.");
+									System.out.println("1. DEPOSITAR.");
+									System.out.println("2. RETIRAR.");
+									System.out.println("3. CONSULTAR SALDO.");
 									System.out.println("4. Transferencias.");
 									System.out.println("5. Pago de servicios.");
 									System.out.println("6. salir.");
@@ -991,17 +991,8 @@ public class implimentacion {
 										break;
 									case 5: //PAGO DE SERVICIOS
 										
-										System.out.println("PAGO DE SERVICIOS");
-										/*
-										 * 
-										 * 
-										 * 
-										 * 	FALTA
-										 * 
-										 *  
-										 * 
-										 */
-										
+									
+						
 										break;
 										
 									case 6: //SALIR
