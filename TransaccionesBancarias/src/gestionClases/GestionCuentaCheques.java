@@ -39,7 +39,7 @@ public class GestionCuentaCheques {
 	 * @param numCuenta
 	 * @return null - SI NO ENCUENTRA LA CUENTA_CHEQUES, CASO CONTRARIO RETORNA OBJ.CUENTA_CHEQUES
 	 */
-	public CuentaCheques BuscarCuentaCheques(int numCuenta) {
+	public CuentaCheques buscarCuentaCheques(int numCuenta) {
 		CuentaCheques CuentaChequesBuscada = null;
 		for(int i = 0; i < listaCuentaCheques.size(); i++) {
 			if( listaCuentaCheques.get(i).get_numeroCuenta() == numCuenta) {
@@ -54,8 +54,8 @@ public class GestionCuentaCheques {
 	 * @param cuentaCheques
 	 * @return true - SI SE AGREGO CORRECTAMENTE LA CUENTA_CHEQUES, CASO CONTRARIO return false.
 	 */
-	public boolean AgregarCuentaCheques(CuentaCheques cuentaCheques) {
-		if(BuscarCuentaCheques(cuentaCheques.get_numeroCuenta()) == null) {//Si el usuario no esta agregado
+	public boolean agregarCuentaCheques(CuentaCheques cuentaCheques) {
+		if(buscarCuentaCheques(cuentaCheques.get_numeroCuenta()) == null) {//Si el usuario no esta agregado
 			listaCuentaCheques.add(cuentaCheques);
 			return true;
 		}else {
@@ -68,8 +68,8 @@ public class GestionCuentaCheques {
 	 * @param numCuenta
 	 * @return false - SI NO SE ENCONTRO LA CUENTA_CHEQUES, CASO CONTRARIO return true.
 	 */
-	public boolean EliminarCuentaCheques(clases.CuentaCheques CuentaCheques) {
-		if(BuscarCuentaCheques(CuentaCheques.get_numeroCuenta()) == null) {//CUENTA_AHORRO NO ENCONTRADO
+	public boolean eliminarCuentaCheques(clases.CuentaCheques CuentaCheques) {
+		if(buscarCuentaCheques(CuentaCheques.get_numeroCuenta()) == null) {//CUENTA_AHORRO NO ENCONTRADO
 			return false;
 		}else {
 			listaCuentaCheques.remove(CuentaCheques);//ELIMINA CUENTA_AHORRO ENCONTRADO
@@ -83,13 +83,13 @@ public class GestionCuentaCheques {
 	 * @param posicion
 	 * @return false - SI NO LO ENCUENTRA EN LA COLECCION, CASO CONTRARIO return true (CUENTA_CHEQUES MODIFICADO)
 	 */
-	public boolean ModificarCuentaAhorro(CuentaCheques CuentaChequeModificado, int posicion) {
+	public boolean modificarCuentaAhorro(CuentaCheques CuentaChequeModificado, int posicion) {
 		
 		if(posicion<0 || posicion>listaCuentaCheques.size()) {
 			return false;
 		}else {
 			
-			if(BuscarCuentaCheques(CuentaChequeModificado.get_numeroCuenta()) != null) {
+			if(buscarCuentaCheques(CuentaChequeModificado.get_numeroCuenta()) != null) {
 				listaCuentaCheques.set(posicion, CuentaChequeModificado);
 				return true;
 			}else {

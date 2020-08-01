@@ -13,26 +13,11 @@ import clases.Prestamos;
 
 public class GestionPrestamos {
 	//ATRIBUTO DE GESTION PRESTAMOS
-	private LinkedList<Prestamos> listaPrestamo=new LinkedList<>();
+	private LinkedList<Prestamos> _listaPrestamo=new LinkedList<>();
 
-	//CONSTRUCTOR POR DEFECTO
-	public GestionPrestamos() {
-		super();
-	}
-
-	//CONSTRUCTOR CON SUS ATRIBUTOS
-	public GestionPrestamos(LinkedList<Prestamos> listaPrestamo) {
-		super();
-		this.listaPrestamo = listaPrestamo;
-	}
-
-	//GETTERS Y SETTERS
-	public LinkedList<Prestamos> getListaPrestamo() {
-		return listaPrestamo;
-	}
 
 	public void setListaPrestamo(LinkedList<Prestamos> listaPrestamo) {
-		this.listaPrestamo = listaPrestamo;
+		this._listaPrestamo = listaPrestamo;
 	}
 	
 	/**
@@ -41,12 +26,12 @@ public class GestionPrestamos {
      * return prestamo
      */
 	
-	public Pagos BuscarPrestamo(Prestamos prestamo) {
+	public Pagos buscarPrestamo(Prestamos prestamo) {
 		prestamo = null;
 		
-		for(int i = 0; i < listaPrestamo.size(); i++) {
-			if( listaPrestamo.get(i).equals(prestamo)) {
-				prestamo = listaPrestamo.get(i);
+		for(int i = 0; i < _listaPrestamo.size(); i++) {
+			if( _listaPrestamo.get(i).equals(prestamo)) {
+				prestamo = _listaPrestamo.get(i);
 			}
 		}
 		return prestamo;
@@ -59,9 +44,9 @@ public class GestionPrestamos {
 	 */
 	public boolean AgregarPago(Prestamos Prestamo) {
 		
-		if(BuscarPrestamo(Prestamo) == null) {//Si el prestamo no esta agregado
+		if(buscarPrestamo(Prestamo) == null) {//Si el prestamo no esta agregado
 			
-			listaPrestamo.add(Prestamo);
+			_listaPrestamo.add(Prestamo);
 			
 			return true;
 		}else {
@@ -76,12 +61,12 @@ public class GestionPrestamos {
 	 * @return true - SI SE MODIFICA CORRECTAMENTE, CASO CONTRARIO return false
 	 */
 	public boolean ModificarPago(Prestamos prestamoModificar, int posicion) {
-		if(posicion<0 || posicion>listaPrestamo.size()) {
+		if(posicion<0 || posicion>_listaPrestamo.size()) {
 			return false;
 		}else {
 	
-			if(BuscarPrestamo(prestamoModificar) != null) {
-				listaPrestamo.set(posicion, prestamoModificar);
+			if(buscarPrestamo(prestamoModificar) != null) {
+				_listaPrestamo.set(posicion, prestamoModificar);
 				return true;
 			}else {
 				return false;
@@ -98,10 +83,10 @@ public class GestionPrestamos {
 	
 	public boolean EliminarPrestamo(Prestamos prestamoEliminar) {
 		
-		if(BuscarPrestamo(prestamoEliminar) == null) {
+		if(buscarPrestamo(prestamoEliminar) == null) {
 			return false;
 		}else {
-			listaPrestamo.remove(BuscarPrestamo(prestamoEliminar));
+			_listaPrestamo.remove(buscarPrestamo(prestamoEliminar));
 			return true;
 		}
 	}
@@ -112,15 +97,15 @@ public class GestionPrestamos {
 	 * @return POSICIÓN O INDICE DE LA COLECIÓN
 	 */
 	public Prestamos getPosicion(int posicion) {
-		return listaPrestamo.get(posicion);
+		return _listaPrestamo.get(posicion);
 	}
 	
 	/**
 	 * METODO PARA IMPRIMIR TODOS
 	 */
 	public void imprimirTodos() {
-		for(int i=0;i<listaPrestamo.size();i++) {
-			System.out.println(listaPrestamo.get(i));
+		for(int i=0;i<_listaPrestamo.size();i++) {
+			System.out.println(_listaPrestamo.get(i));
 		}
 	}
 	

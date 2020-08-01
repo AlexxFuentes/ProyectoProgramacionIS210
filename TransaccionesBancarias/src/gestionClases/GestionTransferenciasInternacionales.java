@@ -10,15 +10,6 @@ public class GestionTransferenciasInternacionales {
 
 	private LinkedList<TransferenciasInternacionales> _listaTransferenciasInternacionales = new LinkedList<>();
 	
-	public GestionTransferenciasInternacionales() {
-		super();
-	}
-
-	public GestionTransferenciasInternacionales(
-			LinkedList<TransferenciasInternacionales> _listaTransferenciasInternacionales) {
-		super();
-		this._listaTransferenciasInternacionales = _listaTransferenciasInternacionales;
-	}
 
 	public TransferenciasInternacionales buscarTI(TransferenciasInternacionales TInternacionales) {
 		TransferenciasInternacionales tranfInternacionalBuscada = null;
@@ -39,9 +30,6 @@ public class GestionTransferenciasInternacionales {
 			return true;
 		}
 	}
-
-	
-	
 
 	public void imprimirtodo() {
 		for(int i = 0; i < _listaTransferenciasInternacionales.size(); i++) {

@@ -14,17 +14,6 @@ public class GestionCuentaBancaria {
 	
 	//ATRIBUTOS (COLECCIÓN)
 	LinkedList<CuentaBancaria> listaTipoCuenta = new LinkedList<>();
-	
-	//CONSTRUCTOR POR DEFECTO
-	public GestionCuentaBancaria() {
-		super();
-	}
-	
-	//CONSTRUCTOR CON TODOS LOS CAMPOS
-	public GestionCuentaBancaria(LinkedList<CuentaBancaria> listaTipoCuenta) {
-		super();
-		this.listaTipoCuenta = listaTipoCuenta;
-	}
 
 	/**
 	 * MÉTODO QUE OBTIENE TIPO DE CUENTA DE LA COLECCIÓN

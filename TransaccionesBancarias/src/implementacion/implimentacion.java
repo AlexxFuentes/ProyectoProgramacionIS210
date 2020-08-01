@@ -63,9 +63,9 @@ public class implimentacion {
 		_listaCuentasBancarias.add(Cuentacheques);
 		gestionCuentaBancaria.AgregarTipoCuenta(CuentaAhorros);		
 		gestionCuentaBancaria.AgregarTipoCuenta(Cuentacheques);
-		gestionCuentaAhorro.AgregarCuentaAhorro(CuentaAhorros);
-		gestionCuentaCheques.AgregarCuentaCheques(Cuentacheques);
-		gestionUsuario.AgregarUsuario(titular);
+		gestionCuentaAhorro.agregarCuentaAhorro(CuentaAhorros);
+		gestionCuentaCheques.agregarCuentaCheques(Cuentacheques);
+		gestionUsuario.agregarUsuario(titular);
 		//System.out.println((int)Math.random()+2);
 		//System.out.println(gestionCuentaBancaria.generaNumeroCuenta());
 		/*-----------------------------------------------------------------------------------------------------------*/
@@ -169,7 +169,7 @@ public class implimentacion {
 								Titular1.set_nombreUsuario(usuario);
 								Titular1.set_contrasena(constrasena);
 							
-								if(gestionUsuario.AgregarUsuario(Titular1)) {
+								if(gestionUsuario.agregarUsuario(Titular1)) {
 									System.out.println("DATOS DEL USUARIO AGREGADO CORRECTAMENTE.\n");
 								} else {
 									System.out.println("EL USUARIO YA EXISTE.\n");
@@ -201,7 +201,7 @@ public class implimentacion {
 										FechaNacimientoReferencia , direccionreferencia, telefonoreferencia, 
 										rtnreferencia, correorefencia);
 								
-								if(gestionRefencia.AgregarReferencia(referencia1)) {
+								if(gestionRefencia.agregarReferencia(referencia1)) {
 									Titular1.set_referencia(referencia1);
 									_listaPersona.add(Titular1);
 									System.out.println("REFERENCIA AGREGADA CON EXITO.\n");
@@ -242,7 +242,7 @@ public class implimentacion {
 												CuentaAhorro cuentaAhorro1 = new CuentaAhorro(Titular1, AdminFechas.getFechaActual(),"CUENTA DE AHORRO", NumCuenta,
 														montoInicial + interesRemunerado, interesRemunerado);
 												
-												if(gestionCuentaAhorro.AgregarCuentaAhorro(cuentaAhorro1) && gestionCuentaBancaria.AgregarTipoCuenta(cuentaAhorro1)) {
+												if(gestionCuentaAhorro.agregarCuentaAhorro(cuentaAhorro1) && gestionCuentaBancaria.AgregarTipoCuenta(cuentaAhorro1)) {
 													System.out.println("CUENTA DE AHORRO CREADA EXITOSAMENTE.\n");
 													//System.out.println(cuentaAhorro1);
 													_listaCuentasBancarias.add(cuentaAhorro1);
@@ -273,7 +273,7 @@ public class implimentacion {
 												CuentaCheques cuentachques1 = new CuentaCheques(Titular1, AdminFechas.getFechaActual(),"CUENTA DE CHEQUES", 
 														NumCuenta, montoInicial + interesRemunerado, interesRemunerado);
 												
-												if(gestionCuentaCheques.AgregarCuentaCheques(cuentachques1) && gestionCuentaBancaria.AgregarTipoCuenta(cuentachques1)) {
+												if(gestionCuentaCheques.agregarCuentaCheques(cuentachques1) && gestionCuentaBancaria.AgregarTipoCuenta(cuentachques1)) {
 														System.out.println("CUENTA DE CHEQUES CREADA EXITOSAMENTE.\n");
 														//System.out.println(cuentachques1);
 														_listaCuentasBancarias.add(cuentachques1);
@@ -333,7 +333,7 @@ public class implimentacion {
 												CuentaNomina cuentaNomina1 = new CuentaNomina(Titular1, AdminFechas.getFechaActual(), "CUENTA DE NOMINA", 
 														NumCuenta, 0, empresa);
 												
-												if(gestionCuentaNomina.AgregarCuentaNomina(cuentaNomina1) && gestionCuentaBancaria.AgregarTipoCuenta(cuentaNomina1)) {
+												if(gestionCuentaNomina.agregarCuentaNomina(cuentaNomina1) && gestionCuentaBancaria.AgregarTipoCuenta(cuentaNomina1)) {
 														System.out.println("CUENTA DE NOMINA CREADA EXITOSAMENTE.\n");
 														//System.out.println(cuentaNomina1);
 														_listaCuentasBancarias.add(cuentaNomina1);
@@ -441,7 +441,7 @@ public class implimentacion {
 											System.out.print("Ingrese Su numero de cuenta: ");
 											numCuenta = scnum.nextInt();
 											
-											CuentaAhorro CtaAhorroBuscada = gestionCuentaAhorro.BuscarCuentaAhorro(numCuenta);
+											CuentaAhorro CtaAhorroBuscada = gestionCuentaAhorro.buscarCuentaAhorro(numCuenta);
 											
 											if(CtaAhorroBuscada != null) {
 												System.out.print("Ingrese el monto a depositar:");
@@ -467,7 +467,7 @@ public class implimentacion {
 											System.out.print("Ingrese Su numero de cuenta: ");
 											numCuenta = scnum.nextInt();
 											
-											CuentaCheques CtaChequesBuscada = gestionCuentaCheques.BuscarCuentaCheques(numCuenta);
+											CuentaCheques CtaChequesBuscada = gestionCuentaCheques.buscarCuentaCheques(numCuenta);
 											
 											if(CtaChequesBuscada != null) {
 												System.out.print("Ingrese el monto a depositar:");
@@ -493,7 +493,7 @@ public class implimentacion {
 											System.out.print("Ingrese Su numero de cuenta: ");
 											numCuenta = scnum.nextInt();
 											
-											CuentaCorrientePersonal CtsCorrientePersonalBuscada = gestionCuenCorrienteper.BuscarCuentaCorrientePersonal(numCuenta);
+											CuentaCorrientePersonal CtsCorrientePersonalBuscada = gestionCuenCorrienteper.buscarCuentaCorrientePersonal(numCuenta);
 											
 											if(CtsCorrientePersonalBuscada != null) {
 												System.out.print("Ingrese el monto a depositar:");
@@ -532,7 +532,7 @@ public class implimentacion {
 											System.out.print("Ingrese Su numero de cuenta: ");
 											numCuenta = scnum.nextInt();
 											
-											CuentaAhorro CtaAhorroBuscada = gestionCuentaAhorro.BuscarCuentaAhorro(numCuenta);
+											CuentaAhorro CtaAhorroBuscada = gestionCuentaAhorro.buscarCuentaAhorro(numCuenta);
 											
 											if(CtaAhorroBuscada != null) {
 												System.out.print("Ingrese el monto a retirar:");
@@ -556,7 +556,7 @@ public class implimentacion {
 											System.out.print("Ingrese Su numero de cuenta: ");
 											numCuenta = scnum.nextInt();
 											
-											CuentaCheques CtaChequesBuscada = gestionCuentaCheques.BuscarCuentaCheques(numCuenta);
+											CuentaCheques CtaChequesBuscada = gestionCuentaCheques.buscarCuentaCheques(numCuenta);
 											
 											if(CtaChequesBuscada != null) {
 												System.out.print("Ingrese el monto a retirar:");
@@ -580,7 +580,7 @@ public class implimentacion {
 											System.out.print("Ingrese Su numero de cuenta: ");
 											numCuenta = scnum.nextInt();
 											
-											CuentaCorrientePersonal CtsCorrientePersonalBuscada = gestionCuenCorrienteper.BuscarCuentaCorrientePersonal(numCuenta);
+											CuentaCorrientePersonal CtsCorrientePersonalBuscada = gestionCuenCorrienteper.buscarCuentaCorrientePersonal(numCuenta);
 											
 											if(CtsCorrientePersonalBuscada != null) {
 												System.out.print("Ingrese el monto a Retirar:");
@@ -602,7 +602,7 @@ public class implimentacion {
 											System.out.print("Ingrese Su numero de cuenta: ");
 											numCuenta = scnum.nextInt();
 											
-											CuentaNomina CtaNominaBuscada = gestionCuentaNomina.BuscarCuentaNomina(numCuenta);
+											CuentaNomina CtaNominaBuscada = gestionCuentaNomina.buscarCuentaNomina(numCuenta);
 											
 											if(CtaNominaBuscada != null) {
 												System.out.print("Ingrese el monto a retirar:");
@@ -644,7 +644,7 @@ public class implimentacion {
 											System.out.print("Ingrese Su numero de cuenta: ");
 											numCuenta = scnum.nextInt();
 											
-											CuentaAhorro CtaAhorroBuscada = gestionCuentaAhorro.BuscarCuentaAhorro(numCuenta);
+											CuentaAhorro CtaAhorroBuscada = gestionCuentaAhorro.buscarCuentaAhorro(numCuenta);
 											
 											if(CtaAhorroBuscada != null) {
 												System.out.println("Su saldo es: " + CtaAhorroBuscada.consultarSaldo());
@@ -658,7 +658,7 @@ public class implimentacion {
 											System.out.print("Ingrese Su numero de cuenta: ");
 											numCuenta = scnum.nextInt();
 											
-											CuentaCheques CtaChequesBuscada = gestionCuentaCheques.BuscarCuentaCheques(numCuenta);
+											CuentaCheques CtaChequesBuscada = gestionCuentaCheques.buscarCuentaCheques(numCuenta);
 											
 											if(CtaChequesBuscada != null) {
 												System.out.println("Su saldo es: " + CtaChequesBuscada.consultarSaldo());
@@ -672,7 +672,7 @@ public class implimentacion {
 											System.out.print("Ingrese Su numero de cuenta: ");
 											numCuenta = scnum.nextInt();
 											
-											CuentaCorrientePersonal CtsCorrientePersonalBuscada = gestionCuenCorrienteper.BuscarCuentaCorrientePersonal(numCuenta);
+											CuentaCorrientePersonal CtsCorrientePersonalBuscada = gestionCuenCorrienteper.buscarCuentaCorrientePersonal(numCuenta);
 											
 											if(CtsCorrientePersonalBuscada != null) {
 												System.out.print("Su saldo es: " + CtsCorrientePersonalBuscada.consultarSaldo());
@@ -686,7 +686,7 @@ public class implimentacion {
 											System.out.print("Ingrese Su numero de cuenta: ");
 											numCuenta = scnum.nextInt();
 											
-											CuentaNomina CtaNominaBuscada = gestionCuentaNomina.BuscarCuentaNomina(numCuenta);
+											CuentaNomina CtaNominaBuscada = gestionCuentaNomina.buscarCuentaNomina(numCuenta);
 											
 											if(CtaNominaBuscada != null) {
 												System.out.println("Su saldo es: " + CtaNominaBuscada.consultarSaldo());
@@ -1039,14 +1039,7 @@ public class implimentacion {
 				
 				System.out.println("ELIMINAR TIPO DE CUENTA");
 				
-				/*
-				 * 
-				 * 
-				 * FALTA 
-				 * 
-				 * 
-				 * 
-				 */
+				
 				
 				
 				break;
@@ -1323,7 +1316,7 @@ public class implimentacion {
 										UsuarioEncontrado.get_direccion(),UsuarioEncontrado.get_telefono(),UsuarioEncontrado.get_rtn(),
 										UsuarioEncontrado.get_correoelectronico(), UsuarioEncontrado.get_nombreUsuario(), UsuarioEncontrado.get_contrasena(), referenciaModificar);
 								
-								if(gestionRefencia.ModificarReferencia(referenciaModificar, posicionReferencia) && gestionUsuario.ModificarUsuario(UsuarioModificado7, posicionusuarioBuscado)){
+								if(gestionRefencia.modificarReferencia(referenciaModificar, posicionReferencia) && gestionUsuario.ModificarUsuario(UsuarioModificado7, posicionusuarioBuscado)){
 									System.out.println("\nReferencia modificada con exito.\n");
 									System.out.println(UsuarioModificado7);
 									
@@ -1534,7 +1527,7 @@ public class implimentacion {
 								
 								for(Persona personaactual: _listaPersona) {
 									if (personaactual instanceof Usuario) {
-										
+										System.out.println(personaactual.getClass().getName());
 										String _infousuario = String.format("Codigo del referencia: %s\n"
 																		  + "Fecha de nacimiento: %s\n"
 																		  + "Nombre Completo: %s\n"
@@ -1551,12 +1544,22 @@ public class implimentacion {
 								break;//FIN DE INFORMACION DE REFERENCIA
 								
 							case 4:// INFORMACION DE BENEFICIARIO
-								/*
-								 * 
-								 * 
-								 * falta
-								 * 
-								 */
+								
+								System.out.println("Información de referencia.");
+								
+								for(Persona personaactual: _listaPersona) {
+									if (personaactual instanceof Beneficiario) {
+										
+										String _infousuario = String.format("Codigo del beneficiario: %s\n"
+																		  + "Fecha de nacimiento: %s\n"
+																		  + "Nombre Completo: %s\n"
+												                          + "RTN: %s\n"												                          
+												                          + "Dirección:"
+												                          + "Telefono: %s \n"																		  
+																		  + "Correo Electronico: %s \n",((Beneficiario) personaactual).get_codigoBeneficario() );
+										System.out.println(_infousuario);
+									}
+								}
 								
 								
 								break; // FIN DE INFORMACION DE BENEFICIARIO

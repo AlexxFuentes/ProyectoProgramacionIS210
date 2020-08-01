@@ -12,40 +12,20 @@ import clases.SeguroAuto;
  */
 
 public class GestionSeguroAuto {
-	private LinkedList<SeguroAuto> listaSA=new LinkedList<>();
+	private LinkedList<SeguroAuto> _listaSA=new LinkedList<>();
 	
-	//CONSTRUCTOR POR DEFECTO
-	public GestionSeguroAuto() {
-		super();
-	}
-	
-	//CONSTRUCTOR CON SUS ATRIBUTOS
-	public GestionSeguroAuto(LinkedList<SeguroAuto> listaSA) {
-		super();
-		this.listaSA = listaSA;
-	}
-	
-	//GETTERS Y SETTERS
-	public LinkedList<SeguroAuto> getListaSA() {
-		return listaSA;
-	}
-
-	public void setListaSA(LinkedList<SeguroAuto> listaSA) {
-		this.listaSA = listaSA;
-	}
-
 	/**
      * METODO PARA BUSCAR SEGURO AUTO
      * @param seguroABuscado
      * return seguroABuscado
      */ 
 	
-	public SeguroAuto BuscarSeguroAuto(SeguroAuto seguroABuscado) {
+	public SeguroAuto buscarSeguroAuto(SeguroAuto seguroABuscado) {
 		seguroABuscado = null;
-		for(int i=0; i<listaSA.size();i++) {
-			if(listaSA.get(i).equals(seguroABuscado)) {
+		for(int i=0; i<_listaSA.size();i++) {
+			if(_listaSA.get(i).equals(seguroABuscado)) {
 				
-				seguroABuscado = listaSA.get(i);
+				seguroABuscado = _listaSA.get(i);
 			}
 		}
 		return seguroABuscado;
@@ -57,9 +37,9 @@ public class GestionSeguroAuto {
      * return seguroAEncontrado
      */ 
 	
-	public boolean AgregarSeguroAuto(SeguroAuto agregarSeguro) {
-		if(BuscarSeguroAuto(agregarSeguro) == null) {
-			listaSA.add(agregarSeguro);
+	public boolean agregarSeguroAuto(SeguroAuto agregarSeguro) {
+		if(buscarSeguroAuto(agregarSeguro) == null) {
+			_listaSA.add(agregarSeguro);
 			return true;
 		}else {
 			return false;
@@ -72,12 +52,12 @@ public class GestionSeguroAuto {
      * return TRUE. SI TODO SE REALIZO CORRECTAMENTE, CASO CONTRARIO RETORNARA FALSE.
      */ 
 	
-	public boolean ModificarSeguroA(SeguroAuto seguroAModificado, int posicion ) {
-		if(posicion<0 || posicion>listaSA.size()) {
+	public boolean modificarSeguroA(SeguroAuto seguroAModificado, int posicion ) {
+		if(posicion<0 || posicion>_listaSA.size()) {
 			return false;
 		}else {
-			if(BuscarSeguroAuto(seguroAModificado) != null) {
-				listaSA.set(posicion, seguroAModificado);
+			if(buscarSeguroAuto(seguroAModificado) != null) {
+				_listaSA.set(posicion, seguroAModificado);
 				return true;
 			}else {
 				return false;
@@ -92,10 +72,10 @@ public class GestionSeguroAuto {
 	 */
 	
 	public boolean EliminarSeguroA(SeguroAuto seguroAEliminado) {
-		if(BuscarSeguroAuto(seguroAEliminado) == null) {
+		if(buscarSeguroAuto(seguroAEliminado) == null) {
 			return false;
 		}else {
-			listaSA.remove(seguroAEliminado);
+			_listaSA.remove(seguroAEliminado);
 			return true;
 		}
 	}
@@ -104,8 +84,8 @@ public class GestionSeguroAuto {
 	 * METODO PARA IMPRIMIR TODO
 	 */
 	public void imprimirTodos() {
-		for(int i=0;i<listaSA.size();i++) {
-			System.out.println(listaSA.get(i));
+		for(int i=0;i<_listaSA.size();i++) {
+			System.out.println(_listaSA.get(i));
 		}
 	}
 	
@@ -115,7 +95,7 @@ public class GestionSeguroAuto {
 	 * @return POSICIÓN O INDICE DE LA COLECIÓN
 	 */
 	public SeguroAuto getPosicion(int posicion) {
-		return listaSA.get(posicion);
+		return _listaSA.get(posicion);
 	}
 	
 }

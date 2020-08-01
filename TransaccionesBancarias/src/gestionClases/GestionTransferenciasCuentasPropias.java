@@ -18,27 +18,13 @@ public class GestionTransferenciasCuentasPropias {
       //COLECCION
 	private LinkedList<TransferenciasCuentasPropias> _listaTransCuentas=new LinkedList<>();
 
-	 //CONSTRUCTOR POR DEFECTO
-	public GestionTransferenciasCuentasPropias() {
-		super();
-	}
-
-	//GENERAR LOS SET Y GET
-	public LinkedList<TransferenciasCuentasPropias> getListaTransCuentas() {
-		return _listaTransCuentas;
-	}
-
-	public void setListaTransCuentas(LinkedList<TransferenciasCuentasPropias> listaTransCuentas) {
-		this._listaTransCuentas = listaTransCuentas;
-	}
-	
      /**
       * METODO PARA BUSCAR LA TRASNFERENCIA ENTRE CUENTA
       * @param
       * return
       */
 
-	public TransferenciasCuentasPropias BuscarTrasnEntreCuentas(TransferenciasCuentasPropias trasn_entre_cuentas) {
+	public TransferenciasCuentasPropias buscarTrasnEntreCuentas(TransferenciasCuentasPropias trasn_entre_cuentas) {
 		trasn_entre_cuentas = null;
 		for(int j=0; j<_listaTransCuentas.size();j++) {
 			if( _listaTransCuentas.get(j).equals(trasn_entre_cuentas) ) {
@@ -54,7 +40,7 @@ public class GestionTransferenciasCuentasPropias {
      * return
      */
 	public boolean agregarTrasEntreCuentas(TransferenciasCuentasPropias trasn_entre_cuentas) {
-		if(BuscarTrasnEntreCuentas(trasn_entre_cuentas) == null){
+		if(buscarTrasnEntreCuentas(trasn_entre_cuentas) == null){
 			_listaTransCuentas.add(trasn_entre_cuentas);
 			return true;
 		} else {
@@ -68,12 +54,12 @@ public class GestionTransferenciasCuentasPropias {
      * return
      */
 	
-	public boolean ModificarTransEntreCuentas(TransferenciasCuentasPropias tecModificado, int posicion ) {
+	public boolean modificarTransEntreCuentas(TransferenciasCuentasPropias tecModificado, int posicion ) {
 		if(posicion<0 || posicion>_listaTransCuentas.size()) {
 			return false;
 		}else {
 			
-			if(BuscarTrasnEntreCuentas(tecModificado) != null) {
+			if(buscarTrasnEntreCuentas(tecModificado) != null) {
 				_listaTransCuentas.set(posicion, tecModificado);
 				return true;
 			}else {
@@ -89,11 +75,11 @@ public class GestionTransferenciasCuentasPropias {
 	 */
 	
 
-	public boolean EliminarTransEntreCuenta(TransferenciasCuentasPropias tecEliminado) {
+	public boolean eliminarTransEntreCuenta(TransferenciasCuentasPropias tecEliminado) {
 		if(tecEliminado == null) {
 			return false;
 		}else {
-			_listaTransCuentas.remove(BuscarTrasnEntreCuentas(tecEliminado));
+			_listaTransCuentas.remove(buscarTrasnEntreCuentas(tecEliminado));
 			return true;
 		}
 	}

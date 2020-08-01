@@ -14,25 +14,14 @@ import clases.Usuario;
 public class GestionUsuario {
 	
 	//ATRIBUTOS (COLECCIÓN)
-	private LinkedList<Usuario> listaUsuario = new LinkedList<>();
+	private LinkedList<Usuario> _listaUsuario = new LinkedList<>();
 	
-	//CONSTRUCTOR POR DEFECTO
-	public GestionUsuario() {
-		super();
-	}
-	
-	//CONSTRUCTOR DE LA CLASE CON TODOS LOS CAMPOS
-	public GestionUsuario(LinkedList<Usuario> listaUsuario) {
-		super();
-		this.listaUsuario = listaUsuario;
-	}
-
 	/**
 	 * MÉTODO QUE OBTIENE UN USUARIO DE LA COLECCIÓN
 	 * @return ELEMETO COLECCIÓN
 	 */
 	public LinkedList<Usuario> getUsuario(){
-		return listaUsuario;
+		return _listaUsuario;
 	}
 	
 	/**
@@ -42,8 +31,8 @@ public class GestionUsuario {
 	 */
 	public int buscarUsuarioPosicion(String RTN) {
 		int posicion = -1;
-		for(int i = 0; i < listaUsuario.size();) {
-			if( listaUsuario.get(i).get_rtn().equals(RTN) ) {
+		for(int i = 0; i < _listaUsuario.size();) {
+			if( _listaUsuario.get(i).get_rtn().equals(RTN) ) {
 				posicion = i;
 				break;
 			}
@@ -57,9 +46,9 @@ public class GestionUsuario {
 	 */
 	public Usuario buscarUsuario(String RTN) {
 		Usuario usuarioBuscado = null;
-		for(int i = 0; i < listaUsuario.size(); i++) {
-			if(listaUsuario.get(i).get_rtn().equals(RTN)) {
-				usuarioBuscado = listaUsuario.get(i);
+		for(int i = 0; i < _listaUsuario.size(); i++) {
+			if(_listaUsuario.get(i).get_rtn().equals(RTN)) {
+				usuarioBuscado = _listaUsuario.get(i);
 				break;
 			}
 		}
@@ -71,9 +60,9 @@ public class GestionUsuario {
 	 * @param usuario
 	 * @return true - SI SE AGREGO CORRECTAMENTE, CASO CONTRARIO return false
 	 */
-	public boolean AgregarUsuario(Usuario usuario) {
+	public boolean agregarUsuario(Usuario usuario) {
 		if(buscarUsuarioPosicion(usuario.get_rtn()) == -1) {
-			listaUsuario.add(usuario);
+			_listaUsuario.add(usuario);
 			return true;
 		}else {
 			return false;
@@ -88,7 +77,7 @@ public class GestionUsuario {
 		if(buscarUsuarioPosicion(usuario.get_rtn()) == -1) {
 			return false;
 		}else {
-			listaUsuario.remove(usuario);
+			_listaUsuario.remove(usuario);
 			return true;
 		}
 	}
@@ -99,11 +88,11 @@ public class GestionUsuario {
 	 * @return true -  SI SE MODIFICO CORRECTAMENTE, CASO CONTRARIO return false.
 	 */
 	public boolean ModificarUsuario(Usuario usuarioModificado, int posicion) {
-		if(posicion<0 || posicion>listaUsuario.size()) {
+		if(posicion<0 || posicion>_listaUsuario.size()) {
 			return false;
 		}else {
-			if(buscarUsuarioPosicion(usuarioModificado.get_rtn()) != 1) {
-				listaUsuario.set(posicion, usuarioModificado);
+			if(buscarUsuarioPosicion(usuarioModificado.get_rtn()) != -1) {
+				_listaUsuario.set(posicion, usuarioModificado);
 				return true;
 			}else {
 				return false;
@@ -117,15 +106,15 @@ public class GestionUsuario {
 	 * @return POSICIÓN O INDICE DE LA COLECIÓN
 	 */
 	public Usuario getUsuarioPorPosicion(int posicion) {
-		return listaUsuario.get(posicion);
+		return _listaUsuario.get(posicion);
 	}
 	
 	/**
 	 * MÉTODO PARA IMPRIMIR TODA LA COLECCIÓN
 	 */
 	public void imprimirTodos() {
-		for(int i=0;i<listaUsuario.size();i++) {
-			System.out.println(listaUsuario.get(i));
+		for(int i=0;i<_listaUsuario.size();i++) {
+			System.out.println(_listaUsuario.get(i));
 		}
 	}
 	
@@ -138,15 +127,15 @@ public class GestionUsuario {
 	}
 	
 	public String getCodigoUsuario() {
-		String _numUsuario = "USUARIO_" + listaUsuario.size()+1;
+		String _numUsuario = "USUARIO_" + _listaUsuario.size()+1;
 		
 		return _numUsuario;
 	}
 	
 	
 	public boolean buscarNombreUsuario(String usuario) {
-		for(int i = 0; i < listaUsuario.size();) {
-			if(listaUsuario.get(i).get_nombreUsuario().equals(usuario)) {
+		for(int i = 0; i < _listaUsuario.size();) {
+			if(_listaUsuario.get(i).get_nombreUsuario().equals(usuario)) {
 				return true;
 			}else {
 				return false;
@@ -155,8 +144,8 @@ public class GestionUsuario {
 		return false;
 	}
 	public boolean buscarcontrasena(String contrasena) {
-		for(int i = 0; i < listaUsuario.size();) {
-			if(listaUsuario.get(i).get_contrasena().equals(contrasena)) {
+		for(int i = 0; i < _listaUsuario.size();) {
+			if(_listaUsuario.get(i).get_contrasena().equals(contrasena)) {
 				return true;
 			}else {
 				return false;

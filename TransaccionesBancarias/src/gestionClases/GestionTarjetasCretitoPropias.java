@@ -12,36 +12,26 @@ import clases.TarjetaCredito;
  */
 
 public class GestionTarjetasCretitoPropias {
+	
 	//ATRIBUTO GESTION TARJETAS CREDITPO PROPIAS
-	private LinkedList<TarjetaCredito> listaTCP=new LinkedList<>();
+	private LinkedList<TarjetaCredito> _listaTCP = new LinkedList<>();
 	
-	//CONSTRUCTOR POR DEFECTO
-	public GestionTarjetasCretitoPropias() {
-		super();
-	}
 	
-    //CONSTRUCTOR CON SUS ATRIBUTOS
-	public GestionTarjetasCretitoPropias(LinkedList<TarjetaCredito> listaTCP) {
-		super();
-		this.listaTCP = listaTCP;
-	}
-
-
 	/**
      * METODO PARA BUSCAR TCP
      * @param tcp
      * return tcp
      */
 	
-	public TarjetaCredito BuscarTarjetaTCP(TarjetaCredito tcp) {
-		tcp = null;
+	public TarjetaCredito buscarTarjetaTCP(TarjetaCredito tcp) {
+		TarjetaCredito tcpBuscada = null;
 		
-		for(int i = 0; i < listaTCP.size(); i++) {
-			if( listaTCP.get(i).equals(tcp)) {
-				tcp = listaTCP.get(i);
+		for(int i = 0; i < _listaTCP.size(); i++) {
+			if( _listaTCP.get(i).equals(tcp)) {
+				tcpBuscada = _listaTCP.get(i);
 			}
 		}
-		return tcp;
+		return tcpBuscada;
 	}
 	
 	/**
@@ -49,11 +39,11 @@ public class GestionTarjetasCretitoPropias {
 	 * @param tarjetaTCP
 	 * @return true - SI SE AGREGA CORRECTAMENTE, CASO CONTRARIO return false
 	 */
-	public boolean AgregarTarjetaTCP(TarjetaCredito tarjetaTCP) {
+	public boolean agregarTarjetaTCP(TarjetaCredito tarjetaTCP) {
 		
-		if(BuscarTarjetaTCP(tarjetaTCP) == null) {//Si la tarjeta no esta agregada
+		if(buscarTarjetaTCP(tarjetaTCP) == null) {//Si la tarjeta no esta agregada
 			
-			listaTCP.add(tarjetaTCP);
+			_listaTCP.add(tarjetaTCP);
 			
 			return true;
 		}else {
@@ -67,13 +57,13 @@ public class GestionTarjetasCretitoPropias {
 	 * @param posicion
 	 * @return true - SI SE MODIFICA CORRECTAMENTE, CASO CONTRARIO return false
 	 */
-	public boolean ModificarTarjetaTCP(TarjetaCredito tarjetaTCPModificar, int posicion) {
-		if(posicion<0 || posicion>listaTCP.size()) {
+	public boolean modificarTarjetaTCP(TarjetaCredito tarjetaTCPModificar, int posicion) {
+		if(posicion<0 || posicion>_listaTCP.size()) {
 			return false;
 		}else {
 	
-			if(BuscarTarjetaTCP(tarjetaTCPModificar) != null) {
-				listaTCP.set(posicion, tarjetaTCPModificar);
+			if(buscarTarjetaTCP(tarjetaTCPModificar) != null) {
+				_listaTCP.set(posicion, tarjetaTCPModificar);
 				return true;
 			}else {
 				return false;
@@ -88,12 +78,12 @@ public class GestionTarjetasCretitoPropias {
 	 * @return true - SI TODOS SE REALIZO CORRECTAMENTE , CASO CONTRARIO RETORNA FALSE
 	 */
 	
-	public boolean EliminarTarjetaTCP(TarjetaCredito tarjetaTCPEliminar) {
+	public boolean eliminarTarjetaTCP(TarjetaCredito tarjetaTCPEliminar) {
 		
-		if(BuscarTarjetaTCP(tarjetaTCPEliminar) == null) {
+		if(buscarTarjetaTCP(tarjetaTCPEliminar) == null) {
 			return false;
 		}else {
-			listaTCP.remove(BuscarTarjetaTCP(tarjetaTCPEliminar));
+			_listaTCP.remove(buscarTarjetaTCP(tarjetaTCPEliminar));
 			return true;
 		}
 	}
@@ -104,15 +94,15 @@ public class GestionTarjetasCretitoPropias {
 	 * @return POSICIÓN O INDICE DE LA COLECIÓN
 	 */
 	public TarjetaCredito getPosicion(int posicion) {
-		return listaTCP.get(posicion);
+		return _listaTCP.get(posicion);
 	}
 	
 	/**
 	 * METODO PARA IMPRIMIR TODOS
 	 */
 	public void imprimirTodos() {
-		for(int i=0;i<listaTCP.size();i++) {
-			System.out.println(listaTCP.get(i));
+		for(int i=0;i<_listaTCP.size();i++) {
+			System.out.println(_listaTCP.get(i));
 		}
 	}
 }

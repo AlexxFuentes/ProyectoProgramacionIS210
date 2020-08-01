@@ -14,31 +14,20 @@ import clases.Referencia;
 public class GestionReferencia {
 	
 	//ATRIBUTOS (COLECCIÓN)
-	LinkedList<Referencia> listaReferencia = new LinkedList<>();
+	LinkedList<Referencia> _listaReferencia = new LinkedList<>();
 	
-	//CONSTRUCTOR POR DEFECTO
-	public GestionReferencia() {
-		super();
-	}
-
-	//CONSTRUCTOR CON TODOS LOS CAMPOS
-	public GestionReferencia(LinkedList<Referencia> listaReferencia) {
-		super();
-		this.listaReferencia = listaReferencia;
-	}
-
 	/**
 	 * MÉTODO QUE OBTIENE ELEMENTO DE LA COLEECIÓN REFERENCIA
 	 * @return listaReferencia
 	 */
 	public LinkedList<Referencia> getReferencia(){
-		return listaReferencia;
+		return _listaReferencia;
 	}
 	
 	public int buscarReferenciaPosicion(String RTN) {
 		int posicion = -1;
-		for(int i = 0; i < listaReferencia.size();) {
-			if( listaReferencia.get(i).get_rtn().equals(RTN) ) {
+		for(int i = 0; i < _listaReferencia.size();) {
+			if( _listaReferencia.get(i).get_rtn().equals(RTN) ) {
 				posicion = i;
 			}
 		}
@@ -51,9 +40,9 @@ public class GestionReferencia {
 	 */
 	public Referencia buscarReferencia(String RTN) {
 		Referencia ReferenciaBuscada = null;
-		for(int i= 0; i < listaReferencia.size(); i++) {
-			if(listaReferencia.get(i).get_rtn().equals(RTN)) {
-				ReferenciaBuscada = listaReferencia.get(i);
+		for(int i= 0; i < _listaReferencia.size(); i++) {
+			if(_listaReferencia.get(i).get_rtn().equals(RTN)) {
+				ReferenciaBuscada = _listaReferencia.get(i);
 				break;
 			}
 		}
@@ -65,9 +54,9 @@ public class GestionReferencia {
 	 * @param referencia
 	 * @return true - SI SE AGREGA CORRECTAMENTE, CASO CONTRARIO return false.
 	 */
-	public boolean AgregarReferencia(Referencia referencia) {
+	public boolean agregarReferencia(Referencia referencia) {
 		if(buscarReferenciaPosicion(referencia.get_rtn()) == -1) {
-			listaReferencia.add(referencia);
+			_listaReferencia.add(referencia);
 			return true;
 		}else {
 			return false;
@@ -78,11 +67,11 @@ public class GestionReferencia {
 	 * @param posicion
 	 * @return false - SI NO ENCUENTRA LA REFERENCIA, CASO CONTRARIO return true - SI SE ELIMINO CORRECTAMENTE
 	 */
-	public boolean EliminarReferencia(int posicion) {
-		if(posicion < 0 || posicion > listaReferencia.size()) {
+	public boolean eliminarReferencia(int posicion) {
+		if(posicion < 0 || posicion > _listaReferencia.size()) {
 			return false;
 		}else {
-			listaReferencia.remove(posicion);
+			_listaReferencia.remove(posicion);
 			return true;
 		}
 	}
@@ -93,15 +82,15 @@ public class GestionReferencia {
 	 * @param posicion
 	 * @return true - SI SE MODIFICO CORRECTAMENTE, CASO CONTRARIO return false
 	 */
-	public boolean ModificarReferencia(Referencia referenciaModificado, int posicion) {
+	public boolean modificarReferencia(Referencia referenciaModificado, int posicion) {
 		
-		if(posicion < 0 || posicion > listaReferencia.size()) {
+		if(posicion < 0 || posicion > _listaReferencia.size()) {
 			return false;
 		}else {
 			int posicionrefencia = buscarReferenciaPosicion(referenciaModificado.get_rtn());
 	
 			if(posicionrefencia != -1) {
-				listaReferencia.set(posicion, referenciaModificado);
+				_listaReferencia.set(posicion, referenciaModificado);
 				return true;
 			}else {
 				return false;
@@ -115,20 +104,20 @@ public class GestionReferencia {
 	 * @return POSICIÓN/INDICE DE LA COLECCIÓN
 	 */
 	public Referencia getRTN(int posicion) {
-		return listaReferencia.get(posicion);
+		return _listaReferencia.get(posicion);
 	}
 	
 	/**
 	 * MÉTODO PARA IMPRIMIR TODA LA COLECCIÓN
 	 */
 	public void imprimirTodos() {
-		for(int i=0;i<listaReferencia.size();i++) {
-			System.out.println(listaReferencia.get(i));
+		for(int i=0;i<_listaReferencia.size();i++) {
+			System.out.println(_listaReferencia.get(i));
 		}
 	}
 	
 	public String getCodigoReferencia() {
-		String _numReferencia = "REF_" + listaReferencia.size()+1;
+		String _numReferencia = "REF_" + _listaReferencia.size()+1;
 		
 		return _numReferencia;
 	}

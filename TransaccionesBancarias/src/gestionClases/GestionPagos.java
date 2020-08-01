@@ -15,27 +15,7 @@ import clases.Pagos;
 
 
 public class GestionPagos {
-	private LinkedList<Pagos> lstPagoServicios=new LinkedList<>();
-
-	//CONSTRUCTOR POR DEFECTO
-	public GestionPagos() {
-		super();
-	}
-
-	//CONSTRUCTOR CON SUS ATRIBUTOS
-	public GestionPagos(LinkedList<Pagos> lstPagoServicios) {
-		super();
-		this.lstPagoServicios = lstPagoServicios;
-	}
-
-	//GETTERS Y SETTERS
-	public LinkedList<Pagos> getLstPagoServicios() {
-		return lstPagoServicios;
-	}
-
-	public void setLstPagoServicios(LinkedList<Pagos> lstPagoServicios) {
-		this.lstPagoServicios = lstPagoServicios;
-	}
+	private LinkedList<Pagos> _lstPagoServicios=new LinkedList<>();
 
 	
 	/**
@@ -44,12 +24,12 @@ public class GestionPagos {
      * return pago
      */
 	
-	public Pagos BuscarPago(Pagos pago) {
+	public Pagos buscarPago(Pagos pago) {
 		pago = null;
 		
-		for(int i = 0; i < lstPagoServicios.size(); i++) {
-			if( lstPagoServicios.get(i).equals(pago)) {
-				pago = lstPagoServicios.get(i);
+		for(int i = 0; i < _lstPagoServicios.size(); i++) {
+			if( _lstPagoServicios.get(i).equals(pago)) {
+				pago = _lstPagoServicios.get(i);
 			}
 		}
 		return pago;
@@ -60,11 +40,11 @@ public class GestionPagos {
 	 * @param PagoRealizar
 	 * @return true - SI SE AGREGA CORRECTAMENTE, CASO CONTRARIO return false
 	 */
-	public boolean AgregarPago(Pagos PagoRealizar) {
+	public boolean agregarPago(Pagos PagoRealizar) {
 		
-		if(BuscarPago(PagoRealizar) == null) {//Si el pago no esta agregado
+		if(buscarPago(PagoRealizar) == null) {//Si el pago no esta agregado
 			
-			lstPagoServicios.add(PagoRealizar);
+			_lstPagoServicios.add(PagoRealizar);
 			
 			return true;
 		}else {
@@ -78,13 +58,13 @@ public class GestionPagos {
 	 * @param posicion
 	 * @return true - SI SE MODIFICA CORRECTAMENTE, CASO CONTRARIO return false
 	 */
-	public boolean ModificarPago(Pagos pagoModificar, int posicion) {
-		if(posicion<0 || posicion>lstPagoServicios.size()) {
+	public boolean modificarPago(Pagos pagoModificar, int posicion) {
+		if(posicion<0 || posicion>_lstPagoServicios.size()) {
 			return false;
 		}else {
 	
-			if(BuscarPago(pagoModificar) != null) {
-				lstPagoServicios.set(posicion, pagoModificar);
+			if(buscarPago(pagoModificar) != null) {
+				_lstPagoServicios.set(posicion, pagoModificar);
 				return true;
 			}else {
 				return false;
@@ -99,12 +79,12 @@ public class GestionPagos {
 	 * @return true - SI TODOS SE REALIZO CORRECTAMENTE , CASO CONTRARIO RETORNA FALSE
 	 */
 	
-	public boolean EliminarPago(Pagos pagoEliminar) {
+	public boolean eliminarPago(Pagos pagoEliminar) {
 		
-		if(BuscarPago(pagoEliminar) == null) {
+		if(buscarPago(pagoEliminar) == null) {
 			return false;
 		}else {
-			lstPagoServicios.remove(BuscarPago(pagoEliminar));
+			_lstPagoServicios.remove(buscarPago(pagoEliminar));
 			return true;
 		}
 	}
@@ -115,15 +95,15 @@ public class GestionPagos {
 	 * @return POSICIÓN O INDICE DE LA COLECIÓN
 	 */
 	public Pagos getPosicion(int posicion) {
-		return lstPagoServicios.get(posicion);
+		return _lstPagoServicios.get(posicion);
 	}
 	
 	/**
 	 * METODO PARA IMPRIMIR TODOS
 	 */
 	public void imprimirTodos() {
-		for(int i=0;i<lstPagoServicios.size();i++) {
-			System.out.println(lstPagoServicios.get(i));
+		for(int i=0;i<_lstPagoServicios.size();i++) {
+			System.out.println(_lstPagoServicios.get(i));
 		}
 	}
 	

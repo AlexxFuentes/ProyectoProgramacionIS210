@@ -12,25 +12,14 @@ import clases.CuentaNomina;
 public class GestionCuentaNomina {
 	
 	//ATRIBUTOS (COLECCIÓN)
-	private LinkedList<CuentaNomina> listaCuentaNomina = new LinkedList<>();
-
-	//CONSTRUCTOR POR DEFECTO 
-	public GestionCuentaNomina() {
-		super();
-	}
-
-	//CONSTRUCTOR CON TODOS LOS CAMPOS
-	public GestionCuentaNomina(LinkedList<CuentaNomina> listaCuentaNomina) {
-		super();
-		this.listaCuentaNomina = listaCuentaNomina;
-	}
+	private LinkedList<CuentaNomina> _listaCuentaNomina = new LinkedList<>();
 	
 	/**
 	 * MÉTODO QUE OBTIENE UNA CUENTA_NOMINA DE LA COLECCIÓN
 	 * @return ELEMETO COLECCIÓN
 	 */
 	public LinkedList<CuentaNomina> getCuentaCheques(){
-		return listaCuentaNomina;
+		return _listaCuentaNomina;
 	}
 	
 	/**
@@ -38,11 +27,11 @@ public class GestionCuentaNomina {
 	 * @param numCuenta
 	 * @return null - SI NO ENCUENTRA LA CUENTA_NOMINA, CASO CONTRARIO RETORNA OBJ.CUENTA_NOMINA
 	 */
-	public CuentaNomina BuscarCuentaNomina(int numCuenta) {
+	public CuentaNomina buscarCuentaNomina(int numCuenta) {
 		CuentaNomina CuentaNominaBuscada = null;
-		for(int i = 0; i < listaCuentaNomina.size(); i++) {
-			if( listaCuentaNomina.get(i).get_numeroCuenta() == numCuenta) {
-				CuentaNominaBuscada = listaCuentaNomina.get(i);
+		for(int i = 0; i < _listaCuentaNomina.size(); i++) {
+			if( _listaCuentaNomina.get(i).get_numeroCuenta() == numCuenta) {
+				CuentaNominaBuscada = _listaCuentaNomina.get(i);
 			}
 		}
 		return CuentaNominaBuscada;
@@ -53,9 +42,9 @@ public class GestionCuentaNomina {
 	 * @param cuentaCheques
 	 * @return true - SI SE AGREGO CORRECTAMENTE LA CUENTA_NOMINA, CASO CONTRARIO return false.
 	 */
-	public boolean AgregarCuentaNomina(CuentaNomina cuentaNomina) {
-		if(BuscarCuentaNomina(cuentaNomina.get_numeroCuenta()) == null) {//Si el usuario no esta agregado
-			listaCuentaNomina.add(cuentaNomina);
+	public boolean agregarCuentaNomina(CuentaNomina cuentaNomina) {
+		if(buscarCuentaNomina(cuentaNomina.get_numeroCuenta()) == null) {//Si el usuario no esta agregado
+			_listaCuentaNomina.add(cuentaNomina);
 			return true;
 		}else {
 			return false;
@@ -67,11 +56,11 @@ public class GestionCuentaNomina {
 	 * @param numCuenta
 	 * @return false - SI NO SE ENCONTRO LA CUENTA_NOMINA, CASO CONTRARIO return true.
 	 */
-	public boolean EliminarCuentaNomina(CuentaNomina cuentaNomina) {
-		if(BuscarCuentaNomina(cuentaNomina.get_numeroCuenta()) == null) {//CUENTA_AHORRO NO ENCONTRADO
+	public boolean eliminarCuentaNomina(CuentaNomina cuentaNomina) {
+		if(buscarCuentaNomina(cuentaNomina.get_numeroCuenta()) == null) {//CUENTA_AHORRO NO ENCONTRADO
 			return false;
 		}else {
-			listaCuentaNomina.remove(cuentaNomina);//ELIMINA CUENTA_AHORRO ENCONTRADO
+			_listaCuentaNomina.remove(cuentaNomina);//ELIMINA CUENTA_AHORRO ENCONTRADO
 			return true;
 		}
 	}
@@ -84,12 +73,12 @@ public class GestionCuentaNomina {
 	 */
 	public boolean ModificarCuentaAhorro(CuentaNomina CuentaNominaModificado, int posicion) {
 		
-		if(posicion<0 || posicion>listaCuentaNomina.size()) {
+		if(posicion<0 || posicion>_listaCuentaNomina.size()) {
 			return false;
 		}else {
-			CuentaNomina CuentaBuscada = BuscarCuentaNomina(CuentaNominaModificado.get_numeroCuenta());
+			CuentaNomina CuentaBuscada = buscarCuentaNomina(CuentaNominaModificado.get_numeroCuenta());
 			if(CuentaBuscada != null) {
-				listaCuentaNomina.set(posicion, CuentaNominaModificado);
+				_listaCuentaNomina.set(posicion, CuentaNominaModificado);
 				return true;
 			}else {
 				return false;
@@ -104,15 +93,15 @@ public class GestionCuentaNomina {
 	 * @return POSICIÓN O INDICE DE LA COLECIÓN
 	 */
 	public CuentaNomina getPosicion(int posicion) {
-		return listaCuentaNomina.get(posicion);
+		return _listaCuentaNomina.get(posicion);
 	}
 	
 	/**
 	 * MÉTODO PARA IMPRIMIR TODA LA COLECCIÓN
 	 */
 	public void imprimirTodos() {
-		for(int i=0;i<listaCuentaNomina.size();i++) {
-			System.out.println(listaCuentaNomina.get(i));
+		for(int i=0;i<_listaCuentaNomina.size();i++) {
+			System.out.println(_listaCuentaNomina.get(i));
 		}
 	}
 

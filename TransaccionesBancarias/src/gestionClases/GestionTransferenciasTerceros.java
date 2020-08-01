@@ -10,15 +10,6 @@ public class GestionTransferenciasTerceros {
 	
 	private LinkedList<TransferenciasTerceros> _listaTransferenciasTerceros = new LinkedList<>();
 
-	public GestionTransferenciasTerceros() {
-		super();
-	}
-
-	public GestionTransferenciasTerceros(LinkedList<TransferenciasTerceros> _listaTransferenciasTerceros) {
-		super();
-		this._listaTransferenciasTerceros = _listaTransferenciasTerceros;
-	}
-	
 	public TransferenciasTerceros buscarTT(TransferenciasTerceros transferencia) {
 		TransferenciasTerceros transferenciaBuscada = null;
 		for(int j=0; j < _listaTransferenciasTerceros.size(); j++) {

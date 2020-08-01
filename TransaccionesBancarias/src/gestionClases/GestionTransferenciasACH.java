@@ -56,7 +56,7 @@ public class GestionTransferenciasACH {
 	     * return
 	     */
 		
-		public boolean ModificarTEC(TransferenciasACH tecModificado, int posicion ) {
+		public boolean modificarTEC(TransferenciasACH tecModificado, int posicion ) {
 			if(posicion<0 || posicion>_listaTransaccionesACH.size()) {
 				return false;
 			}else {
@@ -76,7 +76,7 @@ public class GestionTransferenciasACH {
 	     * return
 	     */
 
-		public boolean EliminarTI(TransferenciasACH transEliminar) {
+		public boolean eliminarTI(TransferenciasACH transEliminar) {
 			if(buscarTACH(transEliminar) == null) {
 				return false;
 			}else {

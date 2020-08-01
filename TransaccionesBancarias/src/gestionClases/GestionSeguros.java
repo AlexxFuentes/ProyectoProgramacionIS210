@@ -12,22 +12,7 @@ import clases.Seguros;
 
 public class GestionSeguros {
 	//COLECCIÓN
-      private LinkedList<Seguros> listaSeguros = new LinkedList<>();
-
-      //CONSTRUCTOR POR DEFECTO
-	public GestionSeguros() {
-		super();
-	}
-    
-	//GENERADOR DEL GET
-	public LinkedList<Seguros> getListaSeguros() {
-		return listaSeguros;
-	}
-
-	//GENERADOR DEL SET
-	public void setListaSeguros(LinkedList<Seguros> listaSeguros) {
-		this.listaSeguros = listaSeguros;
-	}
+      private LinkedList<Seguros> _listaSeguros = new LinkedList<>();
       
     /**
      * METODO PARA BUSCAR SEGURO
@@ -35,12 +20,12 @@ public class GestionSeguros {
      * return seguroEncontrado
      */ 
 	
-	public Seguros BuscarSeguro(Seguros seguroBuscado) {
+	public Seguros buscarSeguro(Seguros seguroBuscado) {
 		seguroBuscado = null;
-		for(int i=0; i<listaSeguros.size();i++) {
-			if(listaSeguros.get(i).equals(seguroBuscado)) {
+		for(int i=0; i<_listaSeguros.size();i++) {
+			if(_listaSeguros.get(i).equals(seguroBuscado)) {
 				
-				seguroBuscado = listaSeguros.get(i);
+				seguroBuscado = _listaSeguros.get(i);
 			}
 		}
 		return seguroBuscado;
@@ -52,9 +37,9 @@ public class GestionSeguros {
      * return seguroEncontrado
      */ 
 	
-	public boolean AgregarSeguro(Seguros agregarSeguro) {
-		if(BuscarSeguro(agregarSeguro) == null) {
-			listaSeguros.add(agregarSeguro);
+	public boolean agregarSeguro(Seguros agregarSeguro) {
+		if(buscarSeguro(agregarSeguro) == null) {
+			_listaSeguros.add(agregarSeguro);
 			return true;
 		}else {
 			return false;
@@ -67,12 +52,12 @@ public class GestionSeguros {
      * return TRUE. SI TODO SE REALIZO CORRECTAMENTE, CASO CONTRARIO RETORNARA FALSE.
      */ 
 	
-	public boolean ModificarSeguro(Seguros seguroModificado, int posicion ) {
-		if(posicion<0 || posicion>listaSeguros.size()) {
+	public boolean modificarSeguro(Seguros seguroModificado, int posicion ) {
+		if(posicion<0 || posicion>_listaSeguros.size()) {
 			return false;
 		}else {
-			if(BuscarSeguro(seguroModificado) != null) {
-				listaSeguros.set(posicion, seguroModificado);
+			if(buscarSeguro(seguroModificado) != null) {
+				_listaSeguros.set(posicion, seguroModificado);
 				return true;
 			}else {
 				return false;
@@ -86,11 +71,11 @@ public class GestionSeguros {
 	 * @return true - SI TODO SE REALIZO CORRECTAMENTE , CASO CONTRARIO RETORNA FALSE
 	 */
 	
-	public boolean EliminarSeguro(Seguros seguroEliminado) {
-		if(BuscarSeguro(seguroEliminado) == null) {
+	public boolean eliminarSeguro(Seguros seguroEliminado) {
+		if(buscarSeguro(seguroEliminado) == null) {
 			return false;
 		}else {
-			listaSeguros.remove(seguroEliminado);
+			_listaSeguros.remove(seguroEliminado);
 			return true;
 		}
 	}
@@ -99,8 +84,8 @@ public class GestionSeguros {
 	 * METODO PARA IMPRIMIR TODO
 	 */
 	public void imprimirTodos() {
-		for(int i=0;i<listaSeguros.size();i++) {
-			System.out.println(listaSeguros.get(i));
+		for(int i=0;i<_listaSeguros.size();i++) {
+			System.out.println(_listaSeguros.get(i));
 		}
 	}
 	
@@ -110,7 +95,7 @@ public class GestionSeguros {
 	 * @return POSICIÓN O INDICE DE LA COLECIÓN
 	 */
 	public Seguros getPosicion(int posicion) {
-		return listaSeguros.get(posicion);
+		return _listaSeguros.get(posicion);
 	}
 	
 	

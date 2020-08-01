@@ -12,41 +12,22 @@ import clases.SeguroMedico;
  */
 
 public class GestionSeguroMedico {
+	
 	//ATRIBUTO DE LA GESTION SEGURO MEDICO
-	private LinkedList<SeguroMedico> listaSM=new LinkedList<>();
+	private LinkedList<SeguroMedico> _listaSM=new LinkedList<>();
 	
-	//CONSTRUCTOR POR DEFECTO
-	public GestionSeguroMedico() {
-		super();
-	}
-	
-	//CONSTRUCTOR CON SUS ATRIBUTOS
-	public GestionSeguroMedico(LinkedList<SeguroMedico> listaSM) {
-		super();
-		this.listaSM = listaSM;
-	}
-
-	//GETTERS Y SETTERS
-	public LinkedList<SeguroMedico> getListaSM() {
-		return listaSM;
-	}
-
-	public void setListaSM(LinkedList<SeguroMedico> listaSM) {
-		this.listaSM = listaSM;
-	}
-
 	/**
      * METODO PARA BUSCAR SEGURO MEDICO
      * @param seguroMBuscado
      * return seguroMBuscado
      */ 
 	
-	public SeguroMedico BuscarSeguroMedico(SeguroMedico seguroMBuscado) {
+	public SeguroMedico buscarSeguroMedico(SeguroMedico seguroMBuscado) {
 		seguroMBuscado = null;
-		for(int i=0; i<listaSM.size();i++) {
-			if(listaSM.get(i).equals(seguroMBuscado)) {
+		for(int i=0; i<_listaSM.size();i++) {
+			if(_listaSM.get(i).equals(seguroMBuscado)) {
 				
-				seguroMBuscado = listaSM.get(i);
+				seguroMBuscado = _listaSM.get(i);
 			}
 		}
 		return seguroMBuscado;
@@ -58,9 +39,9 @@ public class GestionSeguroMedico {
      * return seguroAEncontrado
      */ 
 	
-	public boolean AgregarSeguroMedico(SeguroMedico agregarSeguro) {
-		if(BuscarSeguroMedico(agregarSeguro) == null) {
-			listaSM.add(agregarSeguro);
+	public boolean agregarSeguroMedico(SeguroMedico agregarSeguro) {
+		if(buscarSeguroMedico(agregarSeguro) == null) {
+			_listaSM.add(agregarSeguro);
 			return true;
 		}else {
 			return false;
@@ -73,12 +54,12 @@ public class GestionSeguroMedico {
      * return TRUE. SI TODO SE REALIZO CORRECTAMENTE, CASO CONTRARIO RETORNARA FALSE.
      */ 
 	
-	public boolean ModificarSeguroM(SeguroMedico seguroMModificado, int posicion ) {
-		if(posicion<0 || posicion>listaSM.size()) {
+	public boolean modificarSeguroM(SeguroMedico seguroMModificado, int posicion ) {
+		if(posicion<0 || posicion>_listaSM.size()) {
 			return false;
 		}else {
-			if(BuscarSeguroMedico(seguroMModificado) != null) {
-				listaSM.set(posicion, seguroMModificado);
+			if(buscarSeguroMedico(seguroMModificado) != null) {
+				_listaSM.set(posicion, seguroMModificado);
 				return true;
 			}else {
 				return false;
@@ -92,11 +73,11 @@ public class GestionSeguroMedico {
 	 * @return true - SI TODO SE REALIZO CORRECTAMENTE , CASO CONTRARIO RETORNA FALSE
 	 */
 	
-	public boolean EliminarSeguroM(SeguroMedico seguroMEliminado) {
-		if(BuscarSeguroMedico(seguroMEliminado) == null) {
+	public boolean eliminarSeguroM(SeguroMedico seguroMEliminado) {
+		if(buscarSeguroMedico(seguroMEliminado) == null) {
 			return false;
 		}else {
-			listaSM.remove(seguroMEliminado);
+			_listaSM.remove(seguroMEliminado);
 			return true;
 		}
 	}
@@ -105,8 +86,8 @@ public class GestionSeguroMedico {
 	 * METODO PARA IMPRIMIR TODO
 	 */
 	public void imprimirTodos() {
-		for(int i=0;i<listaSM.size();i++) {
-			System.out.println(listaSM.get(i));
+		for(int i=0;i<_listaSM.size();i++) {
+			System.out.println(_listaSM.get(i));
 		}
 	}
 	
@@ -116,6 +97,6 @@ public class GestionSeguroMedico {
 	 * @return POSICIÓN O INDICE DE LA COLECIÓN
 	 */
 	public SeguroMedico getPosicion(int posicion) {
-		return listaSM.get(posicion);
+		return _listaSM.get(posicion);
 	}
 }

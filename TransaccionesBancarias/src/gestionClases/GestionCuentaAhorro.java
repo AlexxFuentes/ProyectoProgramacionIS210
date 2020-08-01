@@ -12,50 +12,55 @@ import clases.CuentaAhorro;
 public class GestionCuentaAhorro {
 	
 	//ATRIBUTOS (COLECCIÓN)
-	private LinkedList<CuentaAhorro> listaCuentaAhorro = new LinkedList<>();
-
-	//CONSTRUCTOR POR DEFECTO
-	public GestionCuentaAhorro() {
-		super();
-	}
-
-	//CONSTRUCTOR CON TODOS LOS CAMPOS
-	public GestionCuentaAhorro(LinkedList<CuentaAhorro> listaCuentaAhorro) {
-		super();
-		this.listaCuentaAhorro = listaCuentaAhorro;
-	}
+	private LinkedList<CuentaAhorro> _listaCuentaAhorro = new LinkedList<>();
 	
 	/**
 	 * MÉTODO QUE OBTIENE UN CUENTA AHORRO DE LA COLECCIÓN
-	 * @return ELEMETO COLECCIÓN
+	 * @return listaCuentaAhorro
 	 */
 	public LinkedList<CuentaAhorro> getCuentaAhorro(){
-		return listaCuentaAhorro;
+		return _listaCuentaAhorro;
 	}
 	
 	/**
 	 * MÉTODO PARA BUSCAR CUENTA DE AHORRO POR NÚMERO DE CUENTA
 	 * @param numCuenta
-	 * @return null - SI NO ENCUENTRA LA CUENTA AHORRO, CASO CONTRARIO RETORNA OBJ.CUENTAAHORRO
+	 * @return null - SI NO ENCUENTRA LA CUENTA AHORRO, CASO CONTRARIO return CuentaAhorroBuscada
 	 */
-	public CuentaAhorro BuscarCuentaAhorro(int numCuenta) {
+	public CuentaAhorro buscarCuentaAhorro(int numCuenta) {
 		CuentaAhorro CuentaAhorroBuscada = null;
-		for(int i = 0; i < listaCuentaAhorro.size(); i++) {
-			if( listaCuentaAhorro.get(i).get_numeroCuenta() == numCuenta) {
-				CuentaAhorroBuscada = listaCuentaAhorro.get(i);
+		for(int i = 0; i < _listaCuentaAhorro.size(); i++) {
+			if( _listaCuentaAhorro.get(i).get_numeroCuenta() == numCuenta) {
+				CuentaAhorroBuscada = _listaCuentaAhorro.get(i);
 			}
 		}
 		return CuentaAhorroBuscada;
 	}
 	
 	/**
+	 * MÉTODO PARA BUSCAR CUENTA DE AHORRO POR RTN DEL TITULAR DE LA CUENTA
+	 * @param RTN
+	 * @return null - SI NO ENCUENTRA LA CUENTA DE AHORRO, CASO CONTRARIO return CuentaAhorroBuscada
+	 */
+	public CuentaAhorro buscarCuentaAhorro(String RTN) {
+		CuentaAhorro CuentaAhorroBuscada = null;
+		for(int i = 0; i < _listaCuentaAhorro.size(); i++) {
+			if( _listaCuentaAhorro.get(i).get_titular().get_rtn().equals(RTN)) {
+				CuentaAhorroBuscada = _listaCuentaAhorro.get(i);
+			}
+		}
+		return CuentaAhorroBuscada;
+	}
+	
+	
+	/**
 	 * MÉTODO PARA AGREFAR NUEVA CUENTA DE AHORRO
 	 * @param cuentaAhorro
 	 * @return true - SI SE AGREGO CORRECTAMENTE LA CUENTA_AHORRO, CASO CONTRARIO return false.
 	 */
-	public boolean AgregarCuentaAhorro(CuentaAhorro cuentaAhorro) {
-		if(BuscarCuentaAhorro(cuentaAhorro.get_numeroCuenta()) == null) {//Si el usuario no esta agregado
-			listaCuentaAhorro.add(cuentaAhorro);
+	public boolean agregarCuentaAhorro(CuentaAhorro cuentaAhorro) {
+		if(buscarCuentaAhorro(cuentaAhorro.get_numeroCuenta()) == null) {//Si el usuario no esta agregado
+			_listaCuentaAhorro.add(cuentaAhorro);
 			return true;
 		}else {
 			return false;
@@ -67,11 +72,11 @@ public class GestionCuentaAhorro {
 	 * @param numCuenta
 	 * @return false - SI NO SE ENCONTRO LA CUENTA_AHORRO, CASO CONTRARIO return true.
 	 */
-	public boolean EliminarCuentaAhorro(CuentaAhorro CuentaAhorro) {
-		if(BuscarCuentaAhorro(CuentaAhorro.get_numeroCuenta()) == null) {//CUENTA_AHORRO NO ENCONTRADO
+	public boolean eliminarCuentaAhorro(CuentaAhorro CuentaAhorro) {
+		if(buscarCuentaAhorro(CuentaAhorro.get_numeroCuenta()) == null) {//CUENTA_AHORRO NO ENCONTRADO
 			return false;
 		}else {
-			listaCuentaAhorro.remove(CuentaAhorro);//ELIMINA CUENTA_AHORRO ENCONTRADO
+			_listaCuentaAhorro.remove(CuentaAhorro);//ELIMINA CUENTA_AHORRO ENCONTRADO
 			return true;
 		}
 	}
@@ -82,14 +87,14 @@ public class GestionCuentaAhorro {
 	 * @param posicion
 	 * @return false - SI NO LO ENCUENTRA EN LA COLECCION, CASO CONTRARIO return true (CUENTA_AHORRO MODIFICADO)
 	 */
-	public boolean ModificarCuentaAhorro(CuentaAhorro CuentaAhorroModificado, int posicion) {
+	public boolean modificarCuentaAhorro(CuentaAhorro CuentaAhorroModificado, int posicion) {
 		
-		if(posicion<0 || posicion>listaCuentaAhorro.size()) {
+		if(posicion<0 || posicion>_listaCuentaAhorro.size()) {
 			return false;
 		}else {
 			
-			if(BuscarCuentaAhorro(CuentaAhorroModificado.get_numeroCuenta()) != null) {
-				listaCuentaAhorro.set(posicion, CuentaAhorroModificado);
+			if(buscarCuentaAhorro(CuentaAhorroModificado.get_numeroCuenta()) != null) {
+				_listaCuentaAhorro.set(posicion, CuentaAhorroModificado);
 				return true;
 			}else {
 				return false;
@@ -103,15 +108,15 @@ public class GestionCuentaAhorro {
 	 * @return POSICIÓN O INDICE DE LA COLECIÓN
 	 */
 	public CuentaAhorro getPosicion(int posicion) {
-		return listaCuentaAhorro.get(posicion);
+		return _listaCuentaAhorro.get(posicion);
 	}
 	
 	/**
 	 * MÉTODO PARA IMPRIMIR TODA LA COLECCIÓN
 	 */
 	public void imprimirTodos() {
-		for(int i=0;i<listaCuentaAhorro.size();i++) {
-			System.out.println(listaCuentaAhorro.get(i));
+		for(int i=0;i<_listaCuentaAhorro.size();i++) {
+			System.out.println(_listaCuentaAhorro.get(i));
 		}
 	}
 	
