@@ -42,7 +42,7 @@ public class implimentacion {
 		GestionTransferenciasInternacionales gestionTI = new GestionTransferenciasInternacionales();
 		
 		//COMPORTAMIENTO POLIMORFICO
-		LinkedList<Persona> _listaClasePersona = new LinkedList<>();
+		LinkedList<Persona> _listaPersona = new LinkedList<>();
 		LinkedList<CuentaBancaria> _listaCuentasBancarias = new LinkedList<>();
 		LinkedList<Transferencias> _listaTransferencias = new  LinkedList<>();
 		LinkedList<Pagos> _listaPagos = new LinkedList<>();
@@ -57,14 +57,17 @@ public class implimentacion {
 		CuentaCheques Cuentacheques = new CuentaCheques(titular, AdminFechas.getFechaActual(),"CUENTA DE Cheques", 202067890, 1000000 + gestionCuentaCheques.interesRemunerados(1000000), gestionCuentaCheques.interesRemunerados(1000000));
 		
 
-		_listaClasePersona.add(titular);
-		_listaClasePersona.add(ref1);
+		_listaPersona.add(titular);
+		_listaPersona.add(ref1);
+		_listaCuentasBancarias.add(CuentaAhorros);
+		_listaCuentasBancarias.add(Cuentacheques);
 		gestionCuentaBancaria.AgregarTipoCuenta(CuentaAhorros);		
 		gestionCuentaBancaria.AgregarTipoCuenta(Cuentacheques);
 		gestionCuentaAhorro.AgregarCuentaAhorro(CuentaAhorros);
 		gestionCuentaCheques.AgregarCuentaCheques(Cuentacheques);
 		gestionUsuario.AgregarUsuario(titular);
-		
+		//System.out.println((int)Math.random()+2);
+		System.out.println(gestionCuentaBancaria.generaNumeroCuenta());
 		/*-----------------------------------------------------------------------------------------------------------*/
 		/*-------------------------------------------------INICIO---------------------------------------------------*/
 		/*---------------------------------------------------------------------------------------------------------*/
@@ -76,7 +79,7 @@ public class implimentacion {
 			System.out.println("3. ELIMINAR TIPO DE CUENTA.");
 			System.out.println("4. ELIMINAR USUARIO.");
 			System.out.println("5. MODIFICAR USUARIO.");
-			System.out.println("6. INFORMACIÓN PERSONAL."); // POLIMORFISMOS
+			System.out.println("6. INFORMACIÓN PERSONAL Y TRANSACCIONES."); // POLIMORFISMOS
 			System.out.println("7. RECUPERAR NOMBRE DE USUARIO Y CONTRASEÑA");
 			System.out.println("8. SALIR.");
 			opcionprincipal = scnum.nextByte();
@@ -118,7 +121,7 @@ public class implimentacion {
 								correoElectronico = sc.nextLine();
 							
 								//NOMBRE DE USUARIO Y CONSTRASEÑA
-								boolean centinelaUsuario = true, centinelaContraseña = true;
+								boolean centinelaUsuario = true, centinelaContrasena = true;
 							
 								//CREAR NOMBRE DE USUARIO
 								System.out.println("\nCREE NOMBRE DE USUARIO Y CONTRASEÑA.\n");
@@ -139,19 +142,19 @@ public class implimentacion {
 							
 								//CREAR CONTRASEÑA
 								System.out.println("\nCree una contraseña. \n");
-								while(centinelaContraseña) {
-								System.out.print("Contraseña: ");
-								constrasena = sc.nextLine();
+								while(centinelaContrasena) {
+									System.out.print("Contraseña: ");
+									constrasena = sc.nextLine();
 								
-								System.out.print("Confirmar contraseña: ");
-								constrasenaconfirm = sc.nextLine();
-								
-								if(gestionUsuario.confirmar(constrasena, constrasenaconfirm)) {
-									System.out.println("Contraseña creada con exito\n");
-									centinelaContraseña = false;
-								}else {
-									System.out.println("Las constraseñas no coinciden.\n");
-								}
+									System.out.print("Confirmar contraseña: ");
+									constrasenaconfirm = sc.nextLine();
+									
+									if(gestionUsuario.confirmar(constrasena, constrasenaconfirm)) {
+										System.out.println("Contraseña creada con exito\n");
+										centinelaContrasena = false;
+									}else {
+										System.out.println("Las constraseñas no coinciden.\n");
+									}
 								}//FIN DE CODIGO PARA CREAR CONTRASEÑA
 							
 								Titular1.set_codigoUsuario(CodUsuario);
@@ -200,7 +203,7 @@ public class implimentacion {
 								
 								if(gestionRefencia.AgregarReferencia(referencia1)) {
 									Titular1.set_referencia(referencia1);
-									_listaClasePersona.add(Titular1);
+									_listaPersona.add(Titular1);
 									System.out.println("REFERENCIA AGREGADA CON EXITO.\n");
 									//System.out.println(referencia1);
 								}else {
@@ -241,7 +244,8 @@ public class implimentacion {
 												
 												if(gestionCuentaAhorro.AgregarCuentaAhorro(cuentaAhorro1) && gestionCuentaBancaria.AgregarTipoCuenta(cuentaAhorro1)) {
 													System.out.println("CUENTA DE AHORRO CREADA EXITOSAMENTE.\n");
-													System.out.println(cuentaAhorro1);
+													//System.out.println(cuentaAhorro1);
+													_listaCuentasBancarias.add(cuentaAhorro1);
 													
 												 }else {
 													System.out.println("ERROR AL CREAR CUENTA DE AHORRO.\n");
@@ -271,7 +275,8 @@ public class implimentacion {
 												
 												if(gestionCuentaCheques.AgregarCuentaCheques(cuentachques1) && gestionCuentaBancaria.AgregarTipoCuenta(cuentachques1)) {
 														System.out.println("CUENTA DE CHEQUES CREADA EXITOSAMENTE.\n");
-														System.out.println(cuentachques1);
+														//System.out.println(cuentachques1);
+														_listaCuentasBancarias.add(cuentachques1);
 													}else {
 														System.out.println("ERROR AL CREAR CUENTA DE CHEQUES.\n");
 														break;
@@ -300,7 +305,8 @@ public class implimentacion {
 												
 												if(gestionCuenCorrienteper.AgregarCuentaCorrientePersonal(cuentaCorrientepers1) && gestionCuentaBancaria.AgregarTipoCuenta(cuentaCorrientepers1)) {
 														System.out.println("CUENTA CORRIENTE PERSONAL CREADA EXITOSAMENTE.\n");
-														System.out.println(cuentaCorrientepers1);
+														//System.out.println(cuentaCorrientepers1);
+														_listaCuentasBancarias.add(cuentaCorrientepers1);
 													}else {
 														System.out.println("ERROR AL CREAR CUENTA CORRIENTE PERSONAL.\n");
 														break;
@@ -329,7 +335,8 @@ public class implimentacion {
 												
 												if(gestionCuentaNomina.AgregarCuentaNomina(cuentaNomina1) && gestionCuentaBancaria.AgregarTipoCuenta(cuentaNomina1)) {
 														System.out.println("CUENTA DE NOMINA CREADA EXITOSAMENTE.\n");
-														System.out.println(cuentaNomina1);
+														//System.out.println(cuentaNomina1);
+														_listaCuentasBancarias.add(cuentaNomina1);
 													}else {
 														System.out.println("ERROR AL CREAR CUENTA DE NOMINA.\n");
 														break;
@@ -362,6 +369,7 @@ public class implimentacion {
 							break;
 						}
 				}//fin de registro Usuario
+				
 				/*
 				if(gestionUsuario.AgregarUsuario(usuario1)) {
 					System.out.println("ERROR AL REGISTRAR USUARIO\n");
@@ -370,7 +378,7 @@ public class implimentacion {
 				}*/
 				
 				//gestionUsuario.imprimirTodos();
-				System.out.println(Titular1);
+				//System.out.println(Titular1);
 				
 				break;
 			case 2: //INICIAR SESIÓN
@@ -767,7 +775,8 @@ public class implimentacion {
 											
 											if(gestionTACH.agregarTACH(trasnferenciasACH)) {
 												System.out.println("Transferencias realizada con exito.");
-												System.out.println(trasnferenciasACH);
+												//System.out.println(trasnferenciasACH);
+												_listaTransferencias.add(trasnferenciasACH);
 											}else {
 												System.out.println("Error al realizar transferencia.");
 											}
@@ -833,7 +842,8 @@ public class implimentacion {
 											
 											if(gestionTECP.agregarTrasEntreCuentas(trasnPropias)) {
 												System.out.println("Transferencias realizada con exito.");
-												System.out.println(trasnPropias);
+												//System.out.println(trasnPropias);
+												_listaTransferencias.add(trasnPropias);
 											}else {
 												System.out.println("Error al realizar transferencia.");
 											}
@@ -897,7 +907,8 @@ public class implimentacion {
 											
 											if(gestionTT.agregarTT(trasnTerceros)) {
 												System.out.println("Transferencias realizada con exito.\n");
-												System.out.println(trasnTerceros);
+												//System.out.println(trasnTerceros);
+												_listaTransferencias.add(trasnTerceros);
 											}else {
 												System.out.println("Error al realizar transferencia.\n");
 											}
@@ -964,7 +975,8 @@ public class implimentacion {
 											
 											if(gestionTI.agregarTI(trasnferenciasInternacionales1)) {
 												System.out.println("Transferencias realizada con exito.\n");
-												System.out.println(trasnferenciasInternacionales1);
+												//System.out.println(trasnferenciasInternacionales1);
+												_listaTransferencias.add(trasnferenciasInternacionales1);
 											}else {
 												System.out.println("Error al realizar transferencia.\n");
 											}
@@ -979,9 +991,14 @@ public class implimentacion {
 										break;
 									case 5: //PAGO DE SERVICIOS
 										
+										System.out.println("PAGO DE SERVICIOS");
 										/*
 										 * 
-										 * 	FALTA ESTA MADRE
+										 * 
+										 * 
+										 * 	FALTA
+										 * 
+										 *  
 										 * 
 										 */
 										
@@ -1028,6 +1045,8 @@ public class implimentacion {
 				break;//FIN DE CODIGO PARA TRANSFERENCIAS
 			
 			case 3: //ELIMINAR TIPO DE CUENTA.
+				
+				System.out.println("ELIMINAR TIPO DE CUENTA");
 				
 				/*
 				 * 
@@ -1376,20 +1395,22 @@ public class implimentacion {
 						while(centinelamenuinfo) {
 							
 							System.out.println("MENU DE INFORMACION PERSONAL");
-							System.out.println("1. Datos personales.");
-							System.out.println("2. Cuentas bancarias.");
-							System.out.println("3. Referencia");
-							System.out.println("4. Beneficiarios.");
-							System.out.println("5. Salir.");
+							System.out.println("1. DATOS PERSONALES");//YA
+							System.out.println("2. INFORMACION DE CUENTAS BANCARIAS");//YA
+							System.out.println("3. INFORMACION REFERENCIA");//YA
+							System.out.println("4. INFORMACION BENEFICIARIO");
+							System.out.println("5. INFORMACION DE TRANSFERENCIAS");
+							System.out.println("6. INFORMACION DE PAGOS");
+							System.out.println("7. SALIR");
 							opcmenupersonal = scnum.nextByte();
 							
 							switch(opcmenupersonal) {
-							case 1: //  Datos personales
+							case 1: //  DATOS PERSONALES
 								
 								System.out.println("Datos personales:");
 								
-								for(Persona personaactual: _listaClasePersona) {
-									if (personaactual instanceof Usuario) {
+								for(Persona personaactual: _listaPersona) {
+									if (personaactual instanceof Persona) {
 										
 										String _infousuario = String.format("Codigo del Usuario: %s\n"
 																		  + "Fecha de registro: %s\n"
@@ -1402,30 +1423,125 @@ public class implimentacion {
 																		  usuarioBuscado.get_nombre() +" "+ usuarioBuscado.get_apellido(), usuarioBuscado.get_rtn(), usuarioBuscado.get_fechaNacimiento(),
 																		  usuarioBuscado.get_direccion(),usuarioBuscado.get_telefono(),usuarioBuscado.get_correoelectronico());
 										System.out.println(_infousuario);
+										break;
 									}
 								}
 							
 								
-								break;// fin de datos personales
+								break;// fin de DATOS PERSONALES
 								
-							case 2: // Cuentas bancarias
+							case 2: // INFORMACION DE CUENTAS BANCARIAS
+								byte opcinfobancaria;
 								
 								System.out.println("Información de cuentas bancarias");
+								System.out.println("1. CUENTA DE AHORRO.");
+								System.out.println("2. CUENTA DE CHEQUES.");
+								System.out.println("3. CUENTA CORRIENTE PERSONAL.");
+								System.out.println("4. CUENTA DE NOMINA.");
+								System.out.println("5. SALIR");
+								opcinfobancaria = scnum.nextByte();
+							
 								
-								for(CuentaBancaria CuentaActual: _listaCuentasBancarias) {
-									if(CuentaActual instanceof CuentaBancaria) {
-										
+								switch(opcinfobancaria) {
+								
+								case 1: //CUENTA DE AHORRO. 
+									
+									System.out.println("INFORMACION DE CUENTA DE AHORRO");
+									
+									for(CuentaBancaria CuentaActual: _listaCuentasBancarias) {
+										if(CuentaActual instanceof CuentaAhorro) {
+											System.out.println(CuentaActual.getClass().getName());
+											String _infoCuentaBancaria = String.format("Nombre del titular: %s\n"
+													                                 + "Fecha de apertura: %s\n"
+													                                 + "Tipo cuenta: %s\n"
+													                                 + "Numero de Cuenta: %d\n"
+													                                 + "Saldo: %f\n", tipoCuentaBuscada.get_titular().get_nombre()+" "+tipoCuentaBuscada.get_titular().get_apellido()
+													                                 				, tipoCuentaBuscada.get_fechaDeApertura(), tipoCuentaBuscada.get_nombreTipoCuenta()
+													                                 				, tipoCuentaBuscada.get_numeroCuenta(), tipoCuentaBuscada.consultarSaldo());
+											
+											System.out.println(_infoCuentaBancaria);
+											break;
+										}
 									}
+									
+									break;//FIN CUENTA DE AHORRO.
+									
+								case 2: //CUENTA DE CHEQUES.
+									
+									for(CuentaBancaria CuentaActual: _listaCuentasBancarias) {
+										if(CuentaActual instanceof CuentaCheques) {
+											System.out.println(CuentaActual.getClass().getName());
+											String _infoCuentaBancaria = String.format("Nombre del titular: %s\n"
+													                                 + "Fecha de apertura: %s\n"
+													                                 + "Tipo cuenta: %s\n"
+													                                 + "Numero de Cuenta: %d\n"
+													                                 + "Saldo: %f\n", tipoCuentaBuscada.get_titular().get_nombre()+" "+tipoCuentaBuscada.get_titular().get_apellido()
+													                                 				, tipoCuentaBuscada.get_fechaDeApertura(), tipoCuentaBuscada.get_nombreTipoCuenta()
+													                                 				, tipoCuentaBuscada.get_numeroCuenta(), tipoCuentaBuscada.consultarSaldo());
+											
+											System.out.println(_infoCuentaBancaria);
+											break;
+										}
+									}
+									
+									break;//FIN CUENTA DE CHEQUES.
+									
+								case 3: //CUENTA CORRIENTE PERSONAL
+									
+									for(CuentaBancaria CuentaActual: _listaCuentasBancarias) {
+										if(CuentaActual instanceof CuentaCorrientePersonal) {
+											
+											System.out.println(CuentaActual.getClass().getName());
+											String _infoCuentaBancaria = String.format("Nombre del titular: %s\n"
+													                                 + "Fecha de apertura: %s\n"
+													                                 + "Tipo cuenta: %s\n"
+													                                 + "Numero de Cuenta: %d\n"
+													                                 + "Saldo: %f\n", tipoCuentaBuscada.get_titular().get_nombre()+" "+tipoCuentaBuscada.get_titular().get_apellido()
+													                                 				, tipoCuentaBuscada.get_fechaDeApertura(), tipoCuentaBuscada.get_nombreTipoCuenta()
+													                                 				, tipoCuentaBuscada.get_numeroCuenta(), tipoCuentaBuscada.consultarSaldo());
+											
+											System.out.println(_infoCuentaBancaria);
+											break;
+										}
+									}
+									
+									break; //FIN CUENTA CORRIENTE PERSONAL
+									
+								case 4: //CUENTA DE NOMINA
+									
+									for(CuentaBancaria CuentaActual: _listaCuentasBancarias) {
+										
+										if(CuentaActual instanceof CuentaNomina) {
+											System.out.println(CuentaActual.getClass().getName());
+											String _infoCuentaBancaria = String.format("Nombre del titular: %s\n"
+													                                 + "Fecha de apertura: %s\n"
+													                                 + "Tipo cuenta: %s\n"
+													                                 + "Numero de Cuenta: %d\n"
+													                                 + "Saldo: %f\n", tipoCuentaBuscada.get_titular().get_nombre()+" "+tipoCuentaBuscada.get_titular().get_apellido()
+													                                 				, tipoCuentaBuscada.get_fechaDeApertura(), tipoCuentaBuscada.get_nombreTipoCuenta()
+													                                 				, tipoCuentaBuscada.get_numeroCuenta(), tipoCuentaBuscada.consultarSaldo());
+											
+											System.out.println(_infoCuentaBancaria);
+											break;
+										}
+									}
+									
+									break;//FIN CUENTA DE NOMINA
+									
+								case 5: //SALIR
+									break;//FIN DE SALIR
+									default:
+										System.out.println("Opción no valida.");
+										break;
 								}
-								
-								
+																
 								break;//FIN DE INFORMACION DE CUENTAS BANCARIAS
 								
 							case 3: //INFORMACION DE REFERENCIA
 								
 								System.out.println("Información de referencia.");
 								
-								for(Persona personaactual: _listaClasePersona) {
+								for(Persona personaactual: _listaPersona) {
 									if (personaactual instanceof Usuario) {
 										
 										String _infousuario = String.format("Codigo del referencia: %s\n"
@@ -1444,27 +1560,205 @@ public class implimentacion {
 								break;//FIN DE INFORMACION DE REFERENCIA
 								
 							case 4:// INFORMACION DE BENEFICIARIO
-								
+								/*
+								 * 
+								 * 
+								 * falta
+								 * 
+								 */
 								
 								
 								break; // FIN DE INFORMACION DE BENEFICIARIO
 								
-							case 5: //salir
+							case 5: //INFORMACION DE TRANSFERENCIAS
+								byte opcinfoTransferencias;
+								
+								System.out.println("MENU INFORMACION DE TRANSFERENCIAS");
+								System.out.println("1. INFORMACION TRANSFERENCIAS ACH");
+								System.out.println("2. INFORMACION TRANSFERENCIAS ENTRE CUENTAS PROPIAS");
+								System.out.println("3. INFORMACION TRANSFERENCIAS A TERCEROS");
+								System.out.println("4. INFORMACION TRANSFERENCIAS INTERNACIONALES");
+								System.out.println("5. SALIR");
+								opcinfoTransferencias = scnum.nextByte();
+								
+								switch(opcinfoTransferencias) {
+								
+								case 1: //INFORMACION TRANSFERENCIAS ACH
+									for(Transferencias transferenciaActual: _listaTransferencias) {
+										if(transferenciaActual instanceof TransferenciasACH) {
+											System.out.println(transferenciaActual.getClass().getName());
+										}
+										
+									}
+									
+									break; //FIN INFORMACION TRANSFERENCIAS ACH
+									
+								case 2: //INFORMACION TRANSFERENCIAS ENTRE CUENTAS PROPIAS
+									
+									for(Transferencias transferenciaActual: _listaTransferencias) {
+										if(transferenciaActual instanceof TransferenciasCuentasPropias) {
+											System.out.println(transferenciaActual.getClass().getName());
+											
+										}
+										
+									}
+									
+									break; //FIN INFORMACION TRANSFERENCIAS ENTRE CUENTAS PROPIAS
+									
+								case 3: //INFORMACION TRANSFERENCIAS A TERCEROS
+									
+									for(Transferencias transferenciaActual: _listaTransferencias) {
+										if(transferenciaActual instanceof TransferenciasTerceros) {
+											System.out.println(transferenciaActual.getClass().getName());
+											
+										}
+										
+									}
+									
+									
+									break; //FIN INFORMACION TRANSFERENCIAS A TERCEROS
+									
+								case 4: //INFORMACION TRANSFERENCIAS INTERNACIONALES
+									
+									for(Transferencias transferenciaActual: _listaTransferencias) {
+										if(transferenciaActual instanceof TransferenciasInternacionales) {
+											System.out.println(transferenciaActual.getClass().getName());
+											
+										}
+										
+									}
+									
+									
+									break;//FIN INFORMACION TRANSFERENCIAS INTERNACIONALES
+									
+								case 5: //SALIR
+									break;
+									
+									default:
+										break;
+								
+								} // FIN DE INFORMACION DE TRANSFERENCIAS
+								
+								break; //FIN INFORMACION DE TRANSFERENCIAS
+								
+							case 6://INFORMACION DE PAGOS
+								byte opcinfopagos;
+								
+								System.out.println("MENU INFORMACION DE PAGOS");						
+								System.out.println("1. INFORMACION DE PAGOS DE TAJETAS DE CREDITO");
+								System.out.println("2. INFORMACION DE PAGOS PRESTAMOS");
+								System.out.println("3. INFORMACION DE PAGOS DE SERVICIOS");
+								System.out.println("4. INFORMACION DE PAGOS DE SEGUROS");
+								System.out.println("5. SALIR");
+								opcinfopagos = scnum.nextByte();
+								
+								switch(opcinfopagos) {
+								
+									case 1: //INFORMACION DE PAGOS DE TAJETAS DE CREDITO
+									
+										System.out.println("INFORMACION DE PAGOS DE TAJETAS DE CREDITO");
+									
+										for(Pagos PagosActual: _listaPagos) {
+											if(PagosActual instanceof TarjetaCredito) {
+												System.out.println(PagosActual.getClass().getName());
+											
+											}
+										}
+									
+									
+										break; //FIN INFORMACION DE PAGOS DE TAJETAS DE CREDITO
+									
+									case 2: //INFORMACION DE PAGOS PRESTAMOS
+									
+										System.out.println("INFORMACION DE PAGOS PRESTAMOS");
+									
+									
+									
+										for(Pagos PagosActual: _listaPagos) {
+											if(PagosActual instanceof Prestamos) {
+												System.out.println(PagosActual.getClass().getName());
+											
+											}
+										}
+									
+										break; //FIN INFORMACION DE PAGOS PRESTAMOS
+									
+									case 3: //INFORMACION DE PAGOS DE SERVICIOS
+										System.out.println("INFORMACION DE PAGOS DE SERVICIOS");
+									
+										for(Pagos PagosActual: _listaPagos) {
+											if(PagosActual instanceof Servicios) {
+												System.out.println(PagosActual.getClass().getName());
+											
+											}
+										}
+									
+										break; //FIN INFORMACION DE PAGOS DE SERVICIOS
+									
+									case 4: //INFORMACION DE PAGOS DE SEGUROS
+										byte opcinfoSeguros;
+									
+										System.out.println("INFORMACION DE PAGOS DE SEGUROS");
+										System.out.println("1. SEGURO DE MEDICO");
+										System.out.println("2. SEGURO DE AUTO");
+									
+										opcinfoSeguros = scnum.nextByte();
+									
+										switch(opcinfoSeguros) {
+									
+											case 1:
+												System.out.println("SEGURO DE MEDICO");
+										
+												for(Pagos PagosActual: _listaPagos) {
+													if(PagosActual instanceof SeguroMedico) {
+														System.out.println(PagosActual.getClass().getName());
+												
+													}
+												}
+												break;
+										
+											case 2:
+												System.out.println("2. SEGURO DE AUTO");
+										
+												for(Pagos PagosActual: _listaPagos) {
+													if(PagosActual instanceof SeguroAuto) {
+														System.out.println(PagosActual.getClass().getName());
+												
+													}
+												}
+										
+												break;
+										}
+									
+										break; //FIN INFORMACION DE PAGOS DE SEGUROS
+									
+									case 5: //SALIR
+									
+										break;
+									
+										default:
+											System.out.println("Opción no valida.");
+											break;
+								}
+								
+								break; //FIN DE INFORMACION DE PAGOS
+								
+							case 7: //SALIR
+								
 								break;
 								
 								default:
 									System.out.println("Opción no valida.");
 									break;
-							}
-							
-							
+							} //FIN MENU INFORMACION DE PAGOS
+														
 							System.out.println("¿Desea obtener otro dato personal?\n1. SI\n2. N0");
 							opcCentinela2 = scnum.nextByte();
 							if(opcCentinela2 == 2) {
 								centinelamenuinfo = false;
 							}
 						}
-																	
+						
 					}
 					
 				}else {
@@ -1493,5 +1787,4 @@ public class implimentacion {
 		/*--------------------------------------------------FIN-----------------------------------------------------*/
 		/*---------------------------------------------------------------------------------------------------------*/
 	}
-
 }

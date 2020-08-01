@@ -126,11 +126,11 @@ public class GestionCuentaBancaria {
 	
 	
 	public int generaNumeroCuenta() {
-		int [] Cuenta1 = {10,20,30,40,50,60,70,80,90,00};
+		int [] Cuenta1 = {10,20,30,40,50,60,70,80,90};
 		
-		int numCuenta = 2020 + (int)(Math.random() * Cuenta1.length) + (int)(Math.random() * Cuenta1.length) 
-				                  + (int)(Math.random() * Cuenta1.length)+(int)(Math.random() * Cuenta1.length)
-				                  + (int)(Math.random() * Cuenta1.length);
+		int numCuenta = 2020000000 + (int)(Math.random() + Cuenta1.length) * (int)(Math.random() + Cuenta1.length)
+				                  * (int)(Math.random() + Cuenta1.length) * (int)(Math.random() + Cuenta1.length)
+				                  * (int)(Math.random() + Cuenta1.length) * (int)(Math.random() + Cuenta1.length);
 		return numCuenta;
 	}
 }

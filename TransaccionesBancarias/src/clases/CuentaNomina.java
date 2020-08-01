@@ -12,8 +12,8 @@ import java.util.Date;
 public class CuentaNomina extends CuentaBancaria{
 	
 	//ATRIBUTOS
-	private double _saldo;
-	private String _empresaDepositante;
+	protected double _saldo;
+	protected String _empresaDepositante;
 	
 	//CONSTRUCTOR POR DEFECTO
 	public CuentaNomina() {

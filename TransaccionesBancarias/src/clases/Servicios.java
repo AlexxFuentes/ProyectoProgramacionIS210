@@ -14,10 +14,10 @@ import java.util.Date;
 
 public class Servicios extends Pagos{
    //ATRIBUTOS DE LA CLASE SERVICIOS
-	private String _codigoServicios;
-	private double _tasaSeguridad;
-	private String _nombreEmpresa;
-	private String _tipoServicio;
+	protected String _codigoServicios;
+	protected double _tasaSeguridad;
+	protected String _nombreEmpresa;
+	protected String _tipoServicio;
 	
 	//CONSTRUCTOR POR DEFECTO
 	public Servicios() {

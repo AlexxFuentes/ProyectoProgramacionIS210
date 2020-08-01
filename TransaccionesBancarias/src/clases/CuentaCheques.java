@@ -5,8 +5,8 @@ import java.util.Date;
 public class CuentaCheques extends CuentaBancaria {
 	
 	//ATRIBUTOS
-	private double _saldo;
-	private double _interesremunerado;
+	protected double _saldo;
+	protected double _interesremunerado;
 		
 	//CONSTRUCTOR POR DEFECTO
 	public CuentaCheques() {

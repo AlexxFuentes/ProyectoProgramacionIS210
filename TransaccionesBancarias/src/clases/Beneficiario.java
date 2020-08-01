@@ -3,8 +3,8 @@ package clases;
 import java.util.Date;
 
 public class Beneficiario extends Persona{
-	private String _codigoBeneficario;
-	private double _porcentajeBeneficiario;
+	protected String _codigoBeneficario;
+	protected double _porcentajeBeneficiario;
 	
 	public Beneficiario() {
 		super();

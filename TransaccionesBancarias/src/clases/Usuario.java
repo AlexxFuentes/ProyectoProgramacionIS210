@@ -13,11 +13,11 @@ import java.util.Date;
 public class Usuario extends Persona{
 	
 	//ATRIBUTOS
-	private String _codigoUsuario;
-	private Date _fechaRegistro;
-	private String _nombreUsuario;
-	private String _contrasena;
-	private Referencia _referencia;
+	protected String _codigoUsuario;
+	protected Date _fechaRegistro;
+	protected String _nombreUsuario;
+	protected String _contrasena;
+	protected Referencia _referencia;
 	//private LinkedList<CuentaBancaria> _listaCuentasBancarias = new LinkedList<>();
 	
 	public Usuario() {

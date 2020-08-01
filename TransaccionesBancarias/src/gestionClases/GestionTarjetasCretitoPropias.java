@@ -2,7 +2,7 @@ package gestionClases;
 
 import java.util.LinkedList;
 
-import clases.TarjetaCreditoPropias;
+import clases.TarjetaCredito;
 
 /**
  * CLASE: TARJETASCREDITOPROPIAS
@@ -13,7 +13,7 @@ import clases.TarjetaCreditoPropias;
 
 public class GestionTarjetasCretitoPropias {
 	//ATRIBUTO GESTION TARJETAS CREDITPO PROPIAS
-	private LinkedList<TarjetaCreditoPropias> listaTCP=new LinkedList<>();
+	private LinkedList<TarjetaCredito> listaTCP=new LinkedList<>();
 	
 	//CONSTRUCTOR POR DEFECTO
 	public GestionTarjetasCretitoPropias() {
@@ -21,7 +21,7 @@ public class GestionTarjetasCretitoPropias {
 	}
 	
     //CONSTRUCTOR CON SUS ATRIBUTOS
-	public GestionTarjetasCretitoPropias(LinkedList<TarjetaCreditoPropias> listaTCP) {
+	public GestionTarjetasCretitoPropias(LinkedList<TarjetaCredito> listaTCP) {
 		super();
 		this.listaTCP = listaTCP;
 	}
@@ -33,7 +33,7 @@ public class GestionTarjetasCretitoPropias {
      * return tcp
      */
 	
-	public TarjetaCreditoPropias BuscarTarjetaTCP(TarjetaCreditoPropias tcp) {
+	public TarjetaCredito BuscarTarjetaTCP(TarjetaCredito tcp) {
 		tcp = null;
 		
 		for(int i = 0; i < listaTCP.size(); i++) {
@@ -49,7 +49,7 @@ public class GestionTarjetasCretitoPropias {
 	 * @param tarjetaTCP
 	 * @return true - SI SE AGREGA CORRECTAMENTE, CASO CONTRARIO return false
 	 */
-	public boolean AgregarTarjetaTCP(TarjetaCreditoPropias tarjetaTCP) {
+	public boolean AgregarTarjetaTCP(TarjetaCredito tarjetaTCP) {
 		
 		if(BuscarTarjetaTCP(tarjetaTCP) == null) {//Si la tarjeta no esta agregada
 			
@@ -67,7 +67,7 @@ public class GestionTarjetasCretitoPropias {
 	 * @param posicion
 	 * @return true - SI SE MODIFICA CORRECTAMENTE, CASO CONTRARIO return false
 	 */
-	public boolean ModificarTarjetaTCP(TarjetaCreditoPropias tarjetaTCPModificar, int posicion) {
+	public boolean ModificarTarjetaTCP(TarjetaCredito tarjetaTCPModificar, int posicion) {
 		if(posicion<0 || posicion>listaTCP.size()) {
 			return false;
 		}else {
@@ -88,7 +88,7 @@ public class GestionTarjetasCretitoPropias {
 	 * @return true - SI TODOS SE REALIZO CORRECTAMENTE , CASO CONTRARIO RETORNA FALSE
 	 */
 	
-	public boolean EliminarTarjetaTCP(TarjetaCreditoPropias tarjetaTCPEliminar) {
+	public boolean EliminarTarjetaTCP(TarjetaCredito tarjetaTCPEliminar) {
 		
 		if(BuscarTarjetaTCP(tarjetaTCPEliminar) == null) {
 			return false;
@@ -103,7 +103,7 @@ public class GestionTarjetasCretitoPropias {
 	 * @param posicion
 	 * @return POSICIÓN O INDICE DE LA COLECIÓN
 	 */
-	public TarjetaCreditoPropias getPosicion(int posicion) {
+	public TarjetaCredito getPosicion(int posicion) {
 		return listaTCP.get(posicion);
 	}
 	

@@ -13,7 +13,7 @@ import java.util.Date;
 public class CuentaCorrientePersonal extends CuentaBancaria{
 	
 	//ATRIBUTOS
-	private double _saldo;
+	protected double _saldo;
 	
 	public CuentaCorrientePersonal() {
 		super();

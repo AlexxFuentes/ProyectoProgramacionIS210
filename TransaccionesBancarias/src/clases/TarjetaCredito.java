@@ -4,14 +4,14 @@ import java.util.Date;
 
 //Gleny
 
-public class TarjetaCreditoPropias extends Pagos{
+public class TarjetaCredito extends Pagos{
     //ATRIBUTOS DE LA CLASE TARJETA CREDITO PROPIAS
 	protected String _codigoTCP;
 	protected String _tarjetaPagar;
 	protected String _tipoMoneda;
 	
 	//CONSTRUCTOR POR SUS ATRIBUTOS
-	public TarjetaCreditoPropias(String _codigoTCP, String _tarjetaPagar, String _tipoMoneda) {
+	public TarjetaCredito(String _codigoTCP, String _tarjetaPagar, String _tipoMoneda) {
 		super();
 		this._codigoTCP = _codigoTCP;
 		this._tarjetaPagar = _tarjetaPagar;
@@ -19,12 +19,12 @@ public class TarjetaCreditoPropias extends Pagos{
 	}
 
 	//CONSTRUCTOR POR DEFECTO
-	public TarjetaCreditoPropias() {
+	public TarjetaCredito() {
 		super();
 	}
 
 	//CONSTRUCTOR SUPERCLASE
-	public TarjetaCreditoPropias(double _montoaPagar, String _CuentaaDebitar, String _concepto,
+	public TarjetaCredito(double _montoaPagar, String _CuentaaDebitar, String _concepto,
 			String _enviarConfirmacion, Date _fechaPago, String _codigoTCP, String _tarjetaPagar, String _tipoMoneda) {
 		super(_montoaPagar, _CuentaaDebitar, _concepto, _enviarConfirmacion, _fechaPago);
 		this._codigoTCP = _codigoTCP;

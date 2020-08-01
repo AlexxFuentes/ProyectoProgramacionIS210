@@ -14,7 +14,7 @@ import java.util.Date;
 public class Referencia extends Persona{
 	
 	//ATRIBUTOS
-	private String _codigoReferencia;
+	protected String _codigoReferencia;
 	
 	//CONSTRUCTOR POR DEFECTO
 	public Referencia() {

@@ -10,7 +10,8 @@ package clases;
  * */
 
 public class TransferenciasCuentasPropias extends Transferencias {
-	private String _codigoTransferencia;//TECP_xxxxxx
+	
+	protected String _codigoTransferencia;//TECP_xxxxxx
 
 	public TransferenciasCuentasPropias() {
 		super();

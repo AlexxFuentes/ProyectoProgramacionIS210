@@ -11,8 +11,8 @@ package clases;
 
 public class TransferenciasInternacionales extends Transferencias{
 	//ATRIBUTOS
-	private String _codigotransferencias;
-	private String _bancoDestino;
+	protected String _codigotransferencias;
+	protected String _bancoDestino;
 	
 	public TransferenciasInternacionales() {
 		super();

@@ -2,8 +2,8 @@ package clases;
 
 public class TransferenciasTerceros extends Transferencias{
 	//ATRIBUTOS
-	private String _codigoTransferencia; //TT_xxxxxxx
-	public TransferenciasTerceros() {
+	protected String _codigoTransferencia; //TT_xxxxxxx
+	protected TransferenciasTerceros() {
 		super();
 	}
 	/*

@@ -3,9 +3,9 @@ package clases;
 public class TransferenciasACH extends Transferencias{
 	
 	//ATRIBUTOS
-	private String _codigoTransferencias;//TACH_xxxxx
-	private String _bancoDestino;
-	public TransferenciasACH() {
+	protected String _codigoTransferencias;//TACH_xxxxx
+	protected String _bancoDestino;
+	protected TransferenciasACH() {
 		super();
 	}
 	/*
