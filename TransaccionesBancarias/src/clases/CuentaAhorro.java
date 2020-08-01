@@ -9,7 +9,7 @@ import java.util.Date;
  *FECHA: 12/07/20
  */
 
-public class CuentaAhorro extends CuentaBancaria{
+public class CuentaAhorro extends CuentaBancaria {
 	
 	//ATRIBUTOS
 	protected double _saldo;
@@ -77,5 +77,5 @@ public class CuentaAhorro extends CuentaBancaria{
 	public double consultarSaldo() {
 		return this._saldo;
 	}
-	
+
 }

@@ -41,11 +41,15 @@ public class implimentacion {
 		GestionTransferenciasTerceros gestionTT = new GestionTransferenciasTerceros();
 		GestionTransferenciasInternacionales gestionTI = new GestionTransferenciasInternacionales();
 		
+		//GESTION DE SEGUROS
+		GestionSeguroMedico gestionSeguroMedico = new GestionSeguroMedico();
+		
 		//COMPORTAMIENTO POLIMORFICO
 		LinkedList<Persona> _listaPersona = new LinkedList<>();
 		LinkedList<CuentaBancaria> _listaCuentasBancarias = new LinkedList<>();
 		LinkedList<Transferencias> _listaTransferencias = new  LinkedList<>();
 		LinkedList<Pagos> _listaPagos = new LinkedList<>();
+		//LinkedList<ObtencionDatos> _listaDatosBancarios = new LinkedList<>();
 		
 		
 		//INSTANCIA PARA REALIZAR IMPLEMETACION
@@ -54,20 +58,22 @@ public class implimentacion {
 				                      AdminFechas.stringToDate("25-11-1999"),"TGU","98123412", "1702199900192","aaf@unah.hn","AAFM","1234", ref1);
 		
 		CuentaAhorro CuentaAhorros = new CuentaAhorro(titular, AdminFechas.getFechaActual(),"CUENTA DE AHORROS", 202012345, 20000 + gestionCuentaAhorro.interesRemunerados(20000) ,gestionCuentaAhorro.interesRemunerados(20000));
-		CuentaCheques Cuentacheques = new CuentaCheques(titular, AdminFechas.getFechaActual(),"CUENTA DE Cheques", 202067890, 1000000 + gestionCuentaCheques.interesRemunerados(1000000), gestionCuentaCheques.interesRemunerados(1000000));
+		CuentaCheques Cuentacheques = new CuentaCheques(titular, AdminFechas.getFechaActual(),"CUENTA DE CHEQUES", 202067890, 1000000 + gestionCuentaCheques.interesRemunerados(1000000), gestionCuentaCheques.interesRemunerados(1000000));
 		
-
+		
 		_listaPersona.add(titular);
 		_listaPersona.add(ref1);
+		
 		_listaCuentasBancarias.add(CuentaAhorros);
 		_listaCuentasBancarias.add(Cuentacheques);
-		gestionCuentaBancaria.AgregarTipoCuenta(CuentaAhorros);		
-		gestionCuentaBancaria.AgregarTipoCuenta(Cuentacheques);
+		
+		gestionCuentaBancaria.agregarTipoCuenta(CuentaAhorros);
+		gestionCuentaBancaria.agregarTipoCuenta(Cuentacheques);
+		
 		gestionCuentaAhorro.agregarCuentaAhorro(CuentaAhorros);
 		gestionCuentaCheques.agregarCuentaCheques(Cuentacheques);
 		gestionUsuario.agregarUsuario(titular);
-		//System.out.println((int)Math.random()+2);
-		//System.out.println(gestionCuentaBancaria.generaNumeroCuenta());
+
 		/*-----------------------------------------------------------------------------------------------------------*/
 		/*-------------------------------------------------INICIO---------------------------------------------------*/
 		/*---------------------------------------------------------------------------------------------------------*/
@@ -242,7 +248,7 @@ public class implimentacion {
 												CuentaAhorro cuentaAhorro1 = new CuentaAhorro(Titular1, AdminFechas.getFechaActual(),"CUENTA DE AHORRO", NumCuenta,
 														montoInicial + interesRemunerado, interesRemunerado);
 												
-												if(gestionCuentaAhorro.agregarCuentaAhorro(cuentaAhorro1) && gestionCuentaBancaria.AgregarTipoCuenta(cuentaAhorro1)) {
+												if(gestionCuentaAhorro.agregarCuentaAhorro(cuentaAhorro1) && gestionCuentaBancaria.agregarTipoCuenta(cuentaAhorro1)) {
 													System.out.println("CUENTA DE AHORRO CREADA EXITOSAMENTE.\n");
 													//System.out.println(cuentaAhorro1);
 													_listaCuentasBancarias.add(cuentaAhorro1);
@@ -273,7 +279,7 @@ public class implimentacion {
 												CuentaCheques cuentachques1 = new CuentaCheques(Titular1, AdminFechas.getFechaActual(),"CUENTA DE CHEQUES", 
 														NumCuenta, montoInicial + interesRemunerado, interesRemunerado);
 												
-												if(gestionCuentaCheques.agregarCuentaCheques(cuentachques1) && gestionCuentaBancaria.AgregarTipoCuenta(cuentachques1)) {
+												if(gestionCuentaCheques.agregarCuentaCheques(cuentachques1) && gestionCuentaBancaria.agregarTipoCuenta(cuentachques1)) {
 														System.out.println("CUENTA DE CHEQUES CREADA EXITOSAMENTE.\n");
 														//System.out.println(cuentachques1);
 														_listaCuentasBancarias.add(cuentachques1);
@@ -303,7 +309,7 @@ public class implimentacion {
 												CuentaCorrientePersonal cuentaCorrientepers1 = new CuentaCorrientePersonal(Titular1, AdminFechas.getFechaActual(),
 														"CUENTA CORRIENTE PERSONALA", NumCuenta, montoInicial);
 												
-												if(gestionCuenCorrienteper.AgregarCuentaCorrientePersonal(cuentaCorrientepers1) && gestionCuentaBancaria.AgregarTipoCuenta(cuentaCorrientepers1)) {
+												if(gestionCuenCorrienteper.AgregarCuentaCorrientePersonal(cuentaCorrientepers1) && gestionCuentaBancaria.agregarTipoCuenta(cuentaCorrientepers1)) {
 														System.out.println("CUENTA CORRIENTE PERSONAL CREADA EXITOSAMENTE.\n");
 														//System.out.println(cuentaCorrientepers1);
 														_listaCuentasBancarias.add(cuentaCorrientepers1);
@@ -333,7 +339,7 @@ public class implimentacion {
 												CuentaNomina cuentaNomina1 = new CuentaNomina(Titular1, AdminFechas.getFechaActual(), "CUENTA DE NOMINA", 
 														NumCuenta, 0, empresa);
 												
-												if(gestionCuentaNomina.agregarCuentaNomina(cuentaNomina1) && gestionCuentaBancaria.AgregarTipoCuenta(cuentaNomina1)) {
+												if(gestionCuentaNomina.agregarCuentaNomina(cuentaNomina1) && gestionCuentaBancaria.agregarTipoCuenta(cuentaNomina1)) {
 														System.out.println("CUENTA DE NOMINA CREADA EXITOSAMENTE.\n");
 														//System.out.println(cuentaNomina1);
 														_listaCuentasBancarias.add(cuentaNomina1);
@@ -1368,7 +1374,7 @@ public class implimentacion {
 					rtn = sc.nextLine();
 					
 					Usuario usuarioBuscado = gestionUsuario.buscarUsuario(rtn);
-					CuentaBancaria tipoCuentaBuscada = gestionCuentaBancaria.bucarTipoCuenta(rtn);
+					//CuentaBancaria tipoCuentaBuscada = gestionCuentaBancaria.bucarTipoCuenta(rtn);
 					
 					if (usuarioBuscado == null) {
 						System.out.println("Usuario no encontrado.\n");
@@ -1378,7 +1384,7 @@ public class implimentacion {
 						Byte opcmenupersonal, opcCentinela2;
 						while(centinelamenuinfo) {
 							
-							System.out.println("MENU DE INFORMACION PERSONAL");
+							System.out.println("\nMENU DE INFORMACION PERSONAL");
 							System.out.println("1. DATOS PERSONALES");//YA
 							System.out.println("2. INFORMACION DE CUENTAS BANCARIAS");//YA
 							System.out.println("3. INFORMACION REFERENCIA");//YA
@@ -1395,19 +1401,10 @@ public class implimentacion {
 								
 								for(Persona personaactual: _listaPersona) {
 									if (personaactual instanceof Persona) {
-										
-										String _infousuario = String.format("Codigo del Usuario: %s\n"
-																		  + "Fecha de registro: %s\n"
-																		  + "Nombre Completo: %s\n"
-												                          + "RTN: %s\n"
-												                          + "Fecha Nacimiento: %s\n"
-												                          + "Dirección:"
-												                          + "Telefono: %s \n"																		  
-																		  + "Correo Electronico: %s \n", usuarioBuscado.get_codigoUsuario(), usuarioBuscado.get_fechaRegistro(),
-																		  usuarioBuscado.get_nombre() +" "+ usuarioBuscado.get_apellido(), usuarioBuscado.get_rtn(), usuarioBuscado.get_fechaNacimiento(),
-																		  usuarioBuscado.get_direccion(),usuarioBuscado.get_telefono(),usuarioBuscado.get_correoelectronico());
-										System.out.println(_infousuario);
-										break;
+										System.out.println(personaactual.getClass().getName());
+										if(personaactual.equals(usuarioBuscado)) {
+											System.out.println(personaactual.toString());
+										}										
 									}
 								}
 							
@@ -1417,11 +1414,11 @@ public class implimentacion {
 							case 2: // INFORMACION DE CUENTAS BANCARIAS
 								byte opcinfobancaria;
 								
-								System.out.println("Información de cuentas bancarias");
-								System.out.println("1. CUENTA DE AHORRO.");
-								System.out.println("2. CUENTA DE CHEQUES.");
-								System.out.println("3. CUENTA CORRIENTE PERSONAL.");
-								System.out.println("4. CUENTA DE NOMINA.");
+								System.out.println("\nInformación de cuentas bancarias");
+								System.out.println("1. CUENTA DE AHORRO.");//ya
+								System.out.println("2. CUENTA DE CHEQUES.");//ya
+								System.out.println("3. CUENTA CORRIENTE PERSONAL.");//ya
+								System.out.println("4. CUENTA DE NOMINA.");//ya
 								System.out.println("5. SALIR");
 								opcinfobancaria = scnum.nextByte();
 							
@@ -1429,40 +1426,30 @@ public class implimentacion {
 								switch(opcinfobancaria) {
 								
 								case 1: //CUENTA DE AHORRO. 
-									
+									CuentaBancaria tipoCuentaBuscada = gestionCuentaBancaria.bucarTipoCuenta(rtn, "CUENTA DE AHORROS");
 									System.out.println("INFORMACION DE CUENTA DE AHORRO");
 									
 									for(CuentaBancaria CuentaActual: _listaCuentasBancarias) {
 										if(CuentaActual instanceof CuentaAhorro) {
-											System.out.println(CuentaActual.getClass().getName());
-											String _infoCuentaBancaria = String.format("Nombre del titular: %s\n"
-													                                 + "Fecha de apertura: %s\n"
-													                                 + "Tipo cuenta: %s\n"
-													                                 + "Numero de Cuenta: %d\n"
-													                                 + "Saldo: %f\n", tipoCuentaBuscada.get_titular().get_nombre()+" "+tipoCuentaBuscada.get_titular().get_apellido()
-													                                 				, tipoCuentaBuscada.get_fechaDeApertura(), tipoCuentaBuscada.get_nombreTipoCuenta()
-													                                 				, tipoCuentaBuscada.get_numeroCuenta(), tipoCuentaBuscada.consultarSaldo());
 											
-											System.out.println(_infoCuentaBancaria);
-											break;
+											System.out.println(CuentaActual.getClass().getName());
+											if(CuentaActual.equals(tipoCuentaBuscada)) {
+												System.out.println(CuentaActual.toString());
+											}											
 										}
 									}
 									
 									break;//FIN CUENTA DE AHORRO.
 									
 								case 2: //CUENTA DE CHEQUES.
+									CuentaBancaria tipoCuentaBuscada1 = gestionCuentaBancaria.bucarTipoCuenta(rtn, "CUENTA DE CHEQUES");
 									
 									for(CuentaBancaria CuentaActual: _listaCuentasBancarias) {
 										if(CuentaActual instanceof CuentaCheques) {
-											System.out.println(CuentaActual.getClass().getName());
-											String _infoCuentaBancaria = String.format("Nombre del titular: %s\n"
-													                                 + "Fecha de apertura: %s\n"
-													                                 + "Tipo cuenta: %s\n"
-													                                 + "Numero de Cuenta: %d\n"
-													                                 + "Saldo: %f\n", tipoCuentaBuscada.get_titular().get_nombre()+" "+tipoCuentaBuscada.get_titular().get_apellido()
-													                                 				, tipoCuentaBuscada.get_fechaDeApertura(), tipoCuentaBuscada.get_nombreTipoCuenta()
-													                                 				, tipoCuentaBuscada.get_numeroCuenta(), tipoCuentaBuscada.consultarSaldo());
 											
+											System.out.println(CuentaActual.getClass().getName());
+											String _infoCuentaBancaria = tipoCuentaBuscada1.toString();
+																			
 											System.out.println(_infoCuentaBancaria);
 											break;
 										}
@@ -1471,18 +1458,12 @@ public class implimentacion {
 									break;//FIN CUENTA DE CHEQUES.
 									
 								case 3: //CUENTA CORRIENTE PERSONAL
-									
+									CuentaBancaria tipoCuentaBuscada2 = gestionCuentaBancaria.bucarTipoCuenta(rtn, "CUENTA CORRIENTE PERSONAL");
 									for(CuentaBancaria CuentaActual: _listaCuentasBancarias) {
 										if(CuentaActual instanceof CuentaCorrientePersonal) {
 											
 											System.out.println(CuentaActual.getClass().getName());
-											String _infoCuentaBancaria = String.format("Nombre del titular: %s\n"
-													                                 + "Fecha de apertura: %s\n"
-													                                 + "Tipo cuenta: %s\n"
-													                                 + "Numero de Cuenta: %d\n"
-													                                 + "Saldo: %f\n", tipoCuentaBuscada.get_titular().get_nombre()+" "+tipoCuentaBuscada.get_titular().get_apellido()
-													                                 				, tipoCuentaBuscada.get_fechaDeApertura(), tipoCuentaBuscada.get_nombreTipoCuenta()
-													                                 				, tipoCuentaBuscada.get_numeroCuenta(), tipoCuentaBuscada.consultarSaldo());
+											String _infoCuentaBancaria = tipoCuentaBuscada2.toString();
 											
 											System.out.println(_infoCuentaBancaria);
 											break;
@@ -1492,18 +1473,12 @@ public class implimentacion {
 									break; //FIN CUENTA CORRIENTE PERSONAL
 									
 								case 4: //CUENTA DE NOMINA
-									
+									CuentaBancaria tipoCuentaBuscada3 = gestionCuentaBancaria.bucarTipoCuenta(rtn, "CUENTA DE NOMINA");
 									for(CuentaBancaria CuentaActual: _listaCuentasBancarias) {
 										
 										if(CuentaActual instanceof CuentaNomina) {
 											System.out.println(CuentaActual.getClass().getName());
-											String _infoCuentaBancaria = String.format("Nombre del titular: %s\n"
-													                                 + "Fecha de apertura: %s\n"
-													                                 + "Tipo cuenta: %s\n"
-													                                 + "Numero de Cuenta: %d\n"
-													                                 + "Saldo: %f\n", tipoCuentaBuscada.get_titular().get_nombre()+" "+tipoCuentaBuscada.get_titular().get_apellido()
-													                                 				, tipoCuentaBuscada.get_fechaDeApertura(), tipoCuentaBuscada.get_nombreTipoCuenta()
-													                                 				, tipoCuentaBuscada.get_numeroCuenta(), tipoCuentaBuscada.consultarSaldo());
+											String _infoCuentaBancaria = tipoCuentaBuscada3.toString();
 											
 											System.out.println(_infoCuentaBancaria);
 											break;
@@ -1526,17 +1501,9 @@ public class implimentacion {
 								System.out.println("Información de referencia.");
 								
 								for(Persona personaactual: _listaPersona) {
-									if (personaactual instanceof Usuario) {
+									if (personaactual instanceof Referencia) {
 										System.out.println(personaactual.getClass().getName());
-										String _infousuario = String.format("Codigo del referencia: %s\n"
-																		  + "Fecha de nacimiento: %s\n"
-																		  + "Nombre Completo: %s\n"
-												                          + "RTN: %s\n"												                          
-												                          + "Dirección:"
-												                          + "Telefono: %s \n"																		  
-																		  + "Correo Electronico: %s \n", usuarioBuscado.get_referencia().get_codigoReferencia(), usuarioBuscado.get_referencia().get_fechaNacimiento(),
-																		  usuarioBuscado.get_referencia().get_nombre() +" "+ usuarioBuscado.get_referencia().get_apellido(), usuarioBuscado.get_referencia().get_rtn(), 																		
-																		  usuarioBuscado.get_referencia().get_direccion(),usuarioBuscado.get_referencia().get_telefono(),usuarioBuscado.get_referencia().get_correoelectronico());
+										String _infousuario = usuarioBuscado.get_referencia().toString();
 										System.out.println(_infousuario);
 									}
 								}
@@ -1545,18 +1512,17 @@ public class implimentacion {
 								
 							case 4:// INFORMACION DE BENEFICIARIO
 								
-								System.out.println("Información de referencia.");
+								System.out.println("INFORMACION DE BENEFICIARIO");
+								
+								System.out.print("Ingrese RTN Beneficiario: ");
+								rtn = sc.nextLine();
+								
+								SeguroMedico SeguroBuscado = gestionSeguroMedico.buscarSeguroMedico(rtn);
 								
 								for(Persona personaactual: _listaPersona) {
 									if (personaactual instanceof Beneficiario) {
 										
-										String _infousuario = String.format("Codigo del beneficiario: %s\n"
-																		  + "Fecha de nacimiento: %s\n"
-																		  + "Nombre Completo: %s\n"
-												                          + "RTN: %s\n"												                          
-												                          + "Dirección:"
-												                          + "Telefono: %s \n"																		  
-																		  + "Correo Electronico: %s \n",((Beneficiario) personaactual).get_codigoBeneficario() );
+										String _infousuario = SeguroBuscado.get_beneficiario().toString();
 										System.out.println(_infousuario);
 									}
 								}
@@ -1592,7 +1558,7 @@ public class implimentacion {
 									for(Transferencias transferenciaActual: _listaTransferencias) {
 										if(transferenciaActual instanceof TransferenciasCuentasPropias) {
 											System.out.println(transferenciaActual.getClass().getName());
-											
+											//transferenciaActual.equals()
 										}
 										
 									}

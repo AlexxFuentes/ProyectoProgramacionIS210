@@ -23,16 +23,26 @@ public class GestionSeguroMedico {
      */ 
 	
 	public SeguroMedico buscarSeguroMedico(SeguroMedico seguroMBuscado) {
-		seguroMBuscado = null;
+		SeguroMedico seguroMBuscado1 = null;
 		for(int i=0; i<_listaSM.size();i++) {
 			if(_listaSM.get(i).equals(seguroMBuscado)) {
+				
+				seguroMBuscado1 = _listaSM.get(i);
+			}
+		}
+		return seguroMBuscado1;
+	}
+	
+	public SeguroMedico buscarSeguroMedico(String RTNBeneficiario) {
+		SeguroMedico seguroMBuscado = null;
+		for(int i=0; i<_listaSM.size();i++) {
+			if(_listaSM.get(i).get_beneficiario().get_rtn().equals(RTNBeneficiario)) {
 				
 				seguroMBuscado = _listaSM.get(i);
 			}
 		}
 		return seguroMBuscado;
 	}
-
 	/**
      * METODO PARA AGREGAR SEGURO MEDICO
      * @param agregarSeguro

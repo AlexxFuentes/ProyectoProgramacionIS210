@@ -15,16 +15,6 @@ public class GestionCuentaCheques {
 	//ATRIBUTOS (COLECCIÓN)
 	private LinkedList<CuentaCheques> listaCuentaCheques = new LinkedList<>();
 
-	//CONSTRUCTOR POR DEFECTO
-	public GestionCuentaCheques() {
-		super();
-	}
-
-	//CONSTRUCTOR CON TODOS LOS CAMPOS
-	public GestionCuentaCheques(LinkedList<CuentaCheques> listaCuentaCheques) {
-		super();
-		this.listaCuentaCheques = listaCuentaCheques;
-	}
 	
 	/**
 	 * MÉTODO QUE OBTIENE UN CUENTA CHEQUES DE LA COLECCIÓN

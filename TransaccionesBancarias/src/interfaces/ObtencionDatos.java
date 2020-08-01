@@ -1,7 +1,12 @@
 package interfaces;
 
+import utileria.AdminFechas;
+
 public interface ObtencionDatos {
 	
-	double getsaldo();
+	public String _fecha = AdminFechas.getFechaActualString();
+	
+	//double getdepositos();
+	//double getRetiro();
 
 }

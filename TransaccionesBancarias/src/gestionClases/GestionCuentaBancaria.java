@@ -39,10 +39,19 @@ public class GestionCuentaBancaria {
 		return cuentaBuscada;
 	}
 	
+	public CuentaBancaria bucarTipoCuenta(String RTN, String nombreTipoCUenta) {
+		CuentaBancaria cuentaBuscada = null;
+		for(int i = 0; i < listaTipoCuenta.size(); i++) {
+			if(listaTipoCuenta.get(i).get_titular().get_rtn().equals(RTN) && listaTipoCuenta.get(i).get_nombreTipoCuenta().equals(nombreTipoCUenta)) {
+				cuentaBuscada = listaTipoCuenta.get(i);
+			}
+		}
+		return cuentaBuscada;
+	}
 	public CuentaBancaria bucarTipoCuenta(String RTN) {
 		CuentaBancaria cuentaBuscada = null;
 		for(int i = 0; i < listaTipoCuenta.size(); i++) {
-			if( listaTipoCuenta.get(i).get_titular().get_rtn().equals(RTN)) {
+			if(listaTipoCuenta.get(i).get_titular().get_rtn().equals(RTN)) {
 				cuentaBuscada = listaTipoCuenta.get(i);
 			}
 		}
@@ -54,7 +63,7 @@ public class GestionCuentaBancaria {
 	 * @param tipocuenta
 	 * @return true - SI SE AGREGA CORRECTAMENTE, CASO CONTRARIO return false
 	 */
-	public boolean AgregarTipoCuenta(CuentaBancaria tipocuenta) {
+	public boolean agregarTipoCuenta(CuentaBancaria tipocuenta) {
 		if(bucarTipoCuenta(tipocuenta.get_numeroCuenta()) == null) {//Si la cuenta no esta agregada
 			listaTipoCuenta.add(tipocuenta);
 			return true;
@@ -70,7 +79,7 @@ public class GestionCuentaBancaria {
 	 * @return true - SI SE MODIFICA CORRECTAMENTE, CASO CONTRARIO return false
 	 */
 	
-	public boolean ModificarTipoCuenta(CuentaBancaria tipoCuentaModificar, int posicion) {
+	public boolean modificarTipoCuenta(CuentaBancaria tipoCuentaModificar, int posicion) {
 		if(posicion<0 || posicion>listaTipoCuenta.size()) {
 			return false;
 		}else {

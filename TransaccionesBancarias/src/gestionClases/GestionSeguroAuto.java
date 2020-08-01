@@ -20,10 +20,10 @@ public class GestionSeguroAuto {
      * return seguroABuscado
      */ 
 	
-	public SeguroAuto buscarSeguroAuto(SeguroAuto seguroABuscado) {
-		seguroABuscado = null;
+	public SeguroAuto buscarSeguroAuto(SeguroAuto seguroAuto) {
+		SeguroAuto seguroABuscado = null;
 		for(int i=0; i<_listaSA.size();i++) {
-			if(_listaSA.get(i).equals(seguroABuscado)) {
+			if(_listaSA.get(i).equals(seguroAuto)) {
 				
 				seguroABuscado = _listaSA.get(i);
 			}

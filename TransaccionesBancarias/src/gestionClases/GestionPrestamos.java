@@ -27,14 +27,14 @@ public class GestionPrestamos {
      */
 	
 	public Pagos buscarPrestamo(Prestamos prestamo) {
-		prestamo = null;
+		Pagos prestamoBuscado = null;
 		
 		for(int i = 0; i < _listaPrestamo.size(); i++) {
 			if( _listaPrestamo.get(i).equals(prestamo)) {
-				prestamo = _listaPrestamo.get(i);
+				prestamoBuscado = _listaPrestamo.get(i);
 			}
 		}
-		return prestamo;
+		return prestamoBuscado;
 	}
 	
 	/**

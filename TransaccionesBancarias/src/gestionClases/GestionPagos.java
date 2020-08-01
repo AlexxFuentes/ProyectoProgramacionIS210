@@ -25,14 +25,14 @@ public class GestionPagos {
      */
 	
 	public Pagos buscarPago(Pagos pago) {
-		pago = null;
+		Pagos pagobuscado = null;
 		
 		for(int i = 0; i < _lstPagoServicios.size(); i++) {
 			if( _lstPagoServicios.get(i).equals(pago)) {
-				pago = _lstPagoServicios.get(i);
+				pagobuscado = _lstPagoServicios.get(i);
 			}
 		}
-		return pago;
+		return pagobuscado;
 	}
 	
 	/**

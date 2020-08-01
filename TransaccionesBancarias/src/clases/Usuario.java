@@ -90,7 +90,7 @@ public class Usuario extends Persona{
 				                          + "Nombre de Usuario: %s\n"
 				                          + "Contraseña: %s\n"
 				                          + "Referencia: %s\n", this._codigoUsuario, this._fechaRegistro.toString(),
-				                          this._nombreUsuario, this._contrasena, this._referencia.toString());
+				                          this._nombreUsuario, this._contrasena, this._referencia.get_nombre() +" "+this._referencia.get_apellido());
 		
 		return _infoUsuario ;
 	}
