@@ -49,6 +49,7 @@ public class implimentacion {
 		LinkedList<CuentaBancaria> _listaCuentasBancarias = new LinkedList<>();
 		LinkedList<Transferencias> _listaTransferencias = new  LinkedList<>();
 		LinkedList<Pagos> _listaPagos = new LinkedList<>();
+		
 		//LinkedList<ObtencionDatos> _listaDatosBancarios = new LinkedList<>();
 		
 		
@@ -86,8 +87,7 @@ public class implimentacion {
 			System.out.println("4. ELIMINAR USUARIO.");
 			System.out.println("5. MODIFICAR USUARIO.");
 			System.out.println("6. INFORMACIÓN PERSONAL Y TRANSACCIONES."); // POLIMORFISMOS
-			System.out.println("7. RECUPERAR NOMBRE DE USUARIO Y CONTRASEÑA");
-			System.out.println("8. SALIR.");
+			System.out.println("7. SALIR.");
 			opcionprincipal = scnum.nextByte();
 			
 			switch(opcionprincipal) {
@@ -780,7 +780,7 @@ public class implimentacion {
 													cuentaDebitar, cuentaCreditar, montoTransferir, bancodestino, concepto, enviarConfirmacion);
 											
 											if(gestionTACH.agregarTACH(trasnferenciasACH)) {
-												System.out.println("Transferencias realizada con exito.");
+												System.out.println("Transferencias realizada con exito.");												
 												//System.out.println(trasnferenciasACH);
 												_listaTransferencias.add(trasnferenciasACH);
 											}else {
@@ -1547,6 +1547,7 @@ public class implimentacion {
 									for(Transferencias transferenciaActual: _listaTransferencias) {
 										if(transferenciaActual instanceof TransferenciasACH) {
 											System.out.println(transferenciaActual.getClass().getName());
+											System.out.println(transferenciaActual.toString());
 										}
 										
 									}
@@ -1570,7 +1571,7 @@ public class implimentacion {
 									for(Transferencias transferenciaActual: _listaTransferencias) {
 										if(transferenciaActual instanceof TransferenciasTerceros) {
 											System.out.println(transferenciaActual.getClass().getName());
-											
+											System.out.println(transferenciaActual.toString());
 										}
 										
 									}
@@ -1583,7 +1584,7 @@ public class implimentacion {
 									for(Transferencias transferenciaActual: _listaTransferencias) {
 										if(transferenciaActual instanceof TransferenciasInternacionales) {
 											System.out.println(transferenciaActual.getClass().getName());
-											
+											System.out.println(transferenciaActual.toString());
 										}
 										
 									}
@@ -1621,7 +1622,7 @@ public class implimentacion {
 										for(Pagos PagosActual: _listaPagos) {
 											if(PagosActual instanceof TarjetaCredito) {
 												System.out.println(PagosActual.getClass().getName());
-											
+												System.out.println(PagosActual.toString());
 											}
 										}
 									
@@ -1637,7 +1638,7 @@ public class implimentacion {
 										for(Pagos PagosActual: _listaPagos) {
 											if(PagosActual instanceof Prestamos) {
 												System.out.println(PagosActual.getClass().getName());
-											
+												System.out.println(PagosActual.toString());
 											}
 										}
 									
@@ -1649,7 +1650,7 @@ public class implimentacion {
 										for(Pagos PagosActual: _listaPagos) {
 											if(PagosActual instanceof Servicios) {
 												System.out.println(PagosActual.getClass().getName());
-											
+												System.out.println(PagosActual.toString());
 											}
 										}
 									
@@ -1672,7 +1673,7 @@ public class implimentacion {
 												for(Pagos PagosActual: _listaPagos) {
 													if(PagosActual instanceof SeguroMedico) {
 														System.out.println(PagosActual.getClass().getName());
-												
+														System.out.println(PagosActual.toString());
 													}
 												}
 												break;
@@ -1683,7 +1684,7 @@ public class implimentacion {
 												for(Pagos PagosActual: _listaPagos) {
 													if(PagosActual instanceof SeguroAuto) {
 														System.out.println(PagosActual.getClass().getName());
-												
+														System.out.println(PagosActual.toString());
 													}
 												}
 										
@@ -1727,13 +1728,8 @@ public class implimentacion {
 				}
 
 				break; //FIN DE INFORMACION PERSONAL
-				
-			case 7://RECUPERAR NOMBRE DE USUARIO Y CONTRASEÑA
-				
-				
-				break; // FIN RECUPERAR NOMBRE DE USUARIO Y CONTRASEÑA
-				
-			case 8: //SALIR
+					
+			case 7: //SALIR
 				centinelaPrincipal = false;
 				break;
 				default: 
