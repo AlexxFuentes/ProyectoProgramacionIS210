@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import clases.*;
 import gestionClases.*;
+import interfaces.CalculoTasaSeguridad;
 import utileria.AdminFechas;
 import java.util.Date;
 import java.util.LinkedList;
@@ -22,11 +23,14 @@ public class implimentacion {
 		direccionreferencia, telefonoreferencia, rtnreferencia, correorefencia;
 		byte opcionprincipal;
 		
-		boolean centinelaPrincipal = true;
+		boolean centinelaPrincipal = true, centinelaServicio = true;
 		
 		//GESTIONES QUE HEREDAN DE PERSONA
 		GestionUsuario gestionUsuario = new GestionUsuario();
 		GestionReferencia gestionRefencia = new GestionReferencia();
+		
+		//GESTIONES DE PAGO
+		GestionServicios gestionServicio = new GestionServicios();
 		
 		//GESTIONES DE CUENTAS BANCARIAS
 		GestionCuentaBancaria gestionCuentaBancaria = new GestionCuentaBancaria();
@@ -384,7 +388,7 @@ public class implimentacion {
 			case 2: //INICIAR SESIÓN
 				byte opcion3, opcionmenuIS;
 				boolean centinelaIniciosecion = true;
-				System.out.println("MENU INICIAR SESECIÓN");
+				System.out.println("MENU INICIAR SECIÓN");
 				
 				while(centinelaIniciosecion) {
 					System.out.println("1. INGRESAR USUARIO Y CONSTRASEÑA.");
@@ -990,7 +994,158 @@ public class implimentacion {
 										
 										break;
 									case 5: //PAGO DE SERVICIOS
+										byte opcionServicio;
+										double tasaSeguridad, montoPagar;
+										String codigoServicio;
+										String agua, energia, telefonia, internet, nombreEmpresa, tipoServicio;
 										
+										
+										System.out.println("Menu de Pagos.");
+										System.out.println("1. Pago de Servicios Públicos.");
+										System.out.println("2. Pago de Tarjetas de Crédito.");
+										System.out.println("3. Pago de Prestamos.");
+										System.out.println("4. Pago de Seguros.");
+										System.out.println("5. Salir.");
+										System.out.print("Seleccione una de las opciones:");
+										opcion = scnum.nextByte();
+										
+										switch(opcion) {
+										case 1://PAGO DE SERVICIOS PUBLICOS
+											int opcionEmpresa;
+											codigoServicio = gestionServicio.getCodigoServicio();
+											System.out.println("Codigo del Servicio: " + codigoServicio);
+											tasaSeguridad = CalculoTasaSeguridad.tasaSeguridad;
+											System.out.println("Tasa de Seguridad: " + tasaSeguridad);
+											
+											//System.out.println("Nombre de la Empresa: ");
+											//nombreEmpresa = sc.nextLine();
+											//System.out.println("Tipo de Servicio: ");
+											//tipoServicio = sc.nextLine();
+											
+											System.out.println("Selecciones el Servicio a pagar");
+											System.out.println("1. Agua Potable. ");
+											System.out.println("2. Energia Electrica. ");
+											System.out.println("3. Telefonia. ");
+											System.out.println("4. Internet y Cable. ");
+											//System.out.println("5. Salir. ");
+											//System.out.println("Seleccione el Servicio que desea pagar.");
+											opcionServicio = scnum.nextByte();
+											
+											switch(opcionServicio) {
+											case 1://AGUA POTABLE
+												tipoServicio = "Agua Potable";
+												nombreEmpresa = "SANAA";
+												
+												System.out.println("Tipo de Servicio: " + tipoServicio);
+												System.out.println("Nombre de la Empresa: " + nombreEmpresa);
+												//MONTO
+												System.out.println("Monto a pagar:");
+												montoPagar = scnum.nextDouble();
+												//CREAR UNA iNSTANCIA DE SERVICIO Y AGREGARLO 
+												//Servicios servicio1 = new Servicios();
+												
+											break;
+											
+											case 2://ENERGIA ELECTRICA
+												tipoServicio = "Energia Electrica";
+												nombreEmpresa = "EEH";
+												//Servicios tipoServicioN=new Servicios;
+												System.out.println("Tipo de Servicio: " + tipoServicio);
+												System.out.println("Nombre de la Empresa: " + nombreEmpresa);
+												
+												System.out.println("Moto a Pagar:");
+												montoPagar = scnum.nextDouble();
+												
+												//Servicios tipoServicioN=gestionServicio.buscarServicio(servicios);
+												//Date fechaNombramientoDate=AdminFechas.stringToDate(fechaNombramiento);
+												//Servicios servicio2=gestionServicio.agregarServicios(tipoServicio);
+												break;
+												
+											case 3://TELEFONIA
+												//double montoPagarHondutel = 150.00;
+												tipoServicio = "Telefonia";
+												nombreEmpresa = "Hondutel"
+														+ "Tigo"
+														+ "Claro";
+												
+												System.out.println("Tipo de Servicio: " + tipoServicio);
+												System.out.println("Nombre de la Empresa: " );
+												System.out.println("1. Hondutel. " );
+												System.out.println("2. Tigo. " );
+												System.out.println("3. Claro. " );
+												System.out.println("4. Salir. " );
+												System.out.println("Seleccione el nombre de la empresa " );
+												opcionEmpresa=scnum.nextInt();
+												
+												switch(opcionEmpresa) {
+												case 1://HONDUTEL
+													System.out.println("La empresa que usted selecciono es Hondutel.");
+													//System.out.println("El Monto a Pagar es: " + montoPagarHondutel);
+													break;
+													
+												case 2://TIGO
+													
+													break;
+													
+												case 3://CLARO
+													break;
+													
+												case 4://SALIR
+													break;
+												}
+												System.out.println("Monto a Pagar:");
+												montoPagar = scnum.nextDouble();
+												
+												//Servicios servicio3=gestionServicio.agregarServicios(tipoServicio);
+												break;
+												
+											case 4://INTERNET Y CABLE
+												tipoServicio = "Internet y Cable";
+												nombreEmpresa = "Hondutel\n"
+														+ "Tigo\n"
+														+ "Claro\n"
+														+ "Cable Color\n";
+												
+												System.out.println("Tipo de Servicio: " + tipoServicio);
+												System.out.println("Nombre de la Empresa: ");
+												System.out.println("1. Hondutel. ");
+												System.out.println("2. Tigo. ");
+												System.out.println("3. Claro. ");
+												System.out.println("4. Cable Color. ");
+												System.out.println("Seleccione el nombre de la Empresa ");
+												opcionEmpresa=scnum.nextInt();
+												
+												switch(opcionEmpresa) {
+												case 1:
+													break;
+													
+												case 2:
+													break;
+													
+												case 3:
+													break;
+													
+												case 4:
+													break;
+												}
+												
+												
+												System.out.println("Moto a Pagar:");
+												montoPagar = scnum.nextDouble();
+												
+												//Servicios servicio4=gestionServicio.agregarServicios(tipoServicio);
+												break;
+												
+											case 5://SALIR
+												centinelaServicio = false;
+												break;
+												
+												default:
+													System.out.println("Opción no valida.");
+													break;
+											}
+												
+										}
 									
 						
 										break;
@@ -1012,7 +1167,10 @@ public class implimentacion {
 								
 							}//FIN DEL WHILE INICIO Y SESION
 							
+							
 							break;
+				
+			
 						case 2://SALIR MENU DE INICIO DE SESIÓN
 							centinelaIniciosecion = false;
 							

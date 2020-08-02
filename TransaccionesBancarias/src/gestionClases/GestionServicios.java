@@ -27,6 +27,16 @@ public class GestionServicios {
       * @param 
       * return 
       */
+	public int buscarServicioPosicion(String servicios) {
+		int posicion = -1;
+		for(int i = 0; i < _listaServicios.size();) {
+			if( _listaServicios.get(i).get_tipoServicio().equals(servicios)) {
+				posicion = i;
+				break;
+			}
+		}
+		return posicion;
+	}
 	
 	public Servicios buscarServicio(Servicios servicios) {
 		servicios = null;
@@ -44,9 +54,9 @@ public class GestionServicios {
 	 * @param servicioPagar
 	 * @return true - SI SE AGREGA CORRECTAMENTE, CASO CONTRARIO return false
 	 */
-	public boolean agregarServiciosPublicos(Servicios servicioPagar) {
+	public boolean agregarServicios(Servicios servicioPagar) {
 		
-		if(buscarServicio(servicioPagar) == null) {//Si la cuenta no esta agregada
+		if(buscarServicioPosicion(servicioPagar.get_tipoServicio()) == -1) {//Si la cuenta no esta agregada
 			
 			_listaServicios.add(servicioPagar);
 			
@@ -110,4 +120,8 @@ public class GestionServicios {
 			System.out.println(_listaServicios.get(i));
 		}
 	} 
+	public String getCodigoServicio() {
+		String _codigoServicio = "SERVICIO_"+_listaServicios.size();
+		return _codigoServicio;
+	}
 }
