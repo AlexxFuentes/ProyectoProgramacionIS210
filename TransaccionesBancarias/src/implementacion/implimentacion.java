@@ -815,6 +815,7 @@ public class implimentacion {
 													break;
 											}
 											
+											
 											System.out.print("Ingrese el número de cuenta a debitar: ");
 											cuentaDebitar = scnum.nextInt();
 													
@@ -1001,7 +1002,7 @@ public class implimentacion {
 										byte opcionServicio;
 										double tasaSeguridad, montoPagar;
 										String codigoServicio;
-										String agua, energia, telefonia, internet, nombreEmpresa, tipoServicio;
+										String nombreEmpresa, tipoServicio;
 										
 										
 										System.out.println("Menu de Pagos.");
