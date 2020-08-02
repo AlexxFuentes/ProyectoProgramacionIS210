@@ -25,13 +25,13 @@ public class GestionTransferenciasCuentasPropias {
       */
 
 	public TransferenciasCuentasPropias buscarTrasnEntreCuentas(TransferenciasCuentasPropias trasn_entre_cuentas) {
-		trasn_entre_cuentas = null;
+		TransferenciasCuentasPropias transferenciaBuscada = null;
 		for(int j=0; j<_listaTransCuentas.size();j++) {
 			if( _listaTransCuentas.get(j).equals(trasn_entre_cuentas) ) {
-				trasn_entre_cuentas = _listaTransCuentas.get(j);
+				transferenciaBuscada = _listaTransCuentas.get(j);
 			}
 		}
-		return trasn_entre_cuentas;
+		return transferenciaBuscada;
 	}
 	
 	/**

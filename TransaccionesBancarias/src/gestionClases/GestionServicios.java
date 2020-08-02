@@ -39,14 +39,14 @@ public class GestionServicios {
 	}
 	
 	public Servicios buscarServicio(Servicios servicios) {
-		servicios = null;
+		Servicios servicioBuscado = null;
 		
 		for(int i = 0; i < _listaServicios.size(); i++) {
 			if( _listaServicios.get(i).equals(servicios)) {
-				servicios = _listaServicios.get(i);
+				servicioBuscado = _listaServicios.get(i);
 			}
 		}
-		return servicios;
+		return servicioBuscado;
 	}
 	
 	/**

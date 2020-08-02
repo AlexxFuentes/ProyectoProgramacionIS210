@@ -27,49 +27,33 @@ public abstract class CuentaBancaria {
 		return _titular;
 	}
 
-
-
 	public void set_titular(Usuario _titular) {
 		this._titular = _titular;
 	}
-
-
 
 	public Date get_fechaDeApertura() {
 		return _fechaDeApertura;
 	}
 
-
-
 	public void set_fechaDeApertura(Date _fechaDeApertura) {
 		this._fechaDeApertura = _fechaDeApertura;
 	}
-
-
 
 	public String get_nombreTipoCuenta() {
 		return _nombreTipoCuenta;
 	}
 
-
-
 	public void set_nombreTipoCuenta(String _nombreTipoCuenta) {
 		this._nombreTipoCuenta = _nombreTipoCuenta;
 	}
-
-
 
 	public int get_numeroCuenta() {
 		return _numeroCuenta;
 	}
 
-
-
-	public void set_numeroCuenta(int _numeroCuenta) {
+	void set_numeroCuenta(int _numeroCuenta) {
 		this._numeroCuenta = _numeroCuenta;
 	}
-
-
 
 	@Override
 	public String toString() {
@@ -81,7 +65,7 @@ public abstract class CuentaBancaria {
 				 + "Titular: %s\n"
 			     + "Tipo de Cuenta: %s\n"
 			     + "Fecha de apertura: %s\n"
-			     + "Número de cuenta: %d\n", this._titular.toString(),this._nombreTipoCuenta,
+			     + "Número de cuenta: %d\n", this._titular.get_nombre()+" "+this._titular.get_apellido(),this._nombreTipoCuenta,
 			     this._fechaDeApertura.toString(), this._numeroCuenta);
 		return _infoCuentaBancaria;
 	}
