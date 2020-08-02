@@ -21,6 +21,7 @@ public class implimentacion {
 		String codigoReferencia, nombreReferencia, apellidoreferencia, fechaNacimiento, 
 		direccionreferencia, telefonoreferencia, rtnreferencia, correorefencia;
 		byte opcionprincipal;
+		int numCuenta;
 		
 		boolean centinelaPrincipal = true;
 		
@@ -68,8 +69,6 @@ public class implimentacion {
 		_listaCuentasBancarias.add(CuentaAhorros);
 		_listaCuentasBancarias.add(Cuentacheques);
 		
-		gestionCuentaBancaria.agregarTipoCuenta(CuentaAhorros);
-		gestionCuentaBancaria.agregarTipoCuenta(Cuentacheques);
 		
 		gestionCuentaAhorro.agregarCuentaAhorro(CuentaAhorros);
 		gestionCuentaCheques.agregarCuentaCheques(Cuentacheques);
@@ -81,7 +80,7 @@ public class implimentacion {
 		
 		while(centinelaPrincipal) {
 			System.out.println("MENU PRINCIPAL");
-			System.out.println("1. REGISTRARSE.");
+			System.out.println("1. REGISTRARSE O CREE NUEVA CUENTA BANCARIA.");
 			System.out.println("2. INICIAR SESIÓN.");
 			System.out.println("3. ELIMINAR TIPO DE CUENTA.");
 			System.out.println("4. ELIMINAR USUARIO.");
@@ -248,7 +247,7 @@ public class implimentacion {
 												CuentaAhorro cuentaAhorro1 = new CuentaAhorro(Titular1, AdminFechas.getFechaActual(),"CUENTA DE AHORRO", NumCuenta,
 														montoInicial + interesRemunerado, interesRemunerado);
 												
-												if(gestionCuentaAhorro.agregarCuentaAhorro(cuentaAhorro1) && gestionCuentaBancaria.agregarTipoCuenta(cuentaAhorro1)) {
+												if(gestionCuentaAhorro.agregarCuentaAhorro(cuentaAhorro1)) {
 													System.out.println("CUENTA DE AHORRO CREADA EXITOSAMENTE.\n");
 													//System.out.println(cuentaAhorro1);
 													_listaCuentasBancarias.add(cuentaAhorro1);
@@ -279,7 +278,7 @@ public class implimentacion {
 												CuentaCheques cuentachques1 = new CuentaCheques(Titular1, AdminFechas.getFechaActual(),"CUENTA DE CHEQUES", 
 														NumCuenta, montoInicial + interesRemunerado, interesRemunerado);
 												
-												if(gestionCuentaCheques.agregarCuentaCheques(cuentachques1) && gestionCuentaBancaria.agregarTipoCuenta(cuentachques1)) {
+												if(gestionCuentaCheques.agregarCuentaCheques(cuentachques1)) {
 														System.out.println("CUENTA DE CHEQUES CREADA EXITOSAMENTE.\n");
 														//System.out.println(cuentachques1);
 														_listaCuentasBancarias.add(cuentachques1);
@@ -309,7 +308,7 @@ public class implimentacion {
 												CuentaCorrientePersonal cuentaCorrientepers1 = new CuentaCorrientePersonal(Titular1, AdminFechas.getFechaActual(),
 														"CUENTA CORRIENTE PERSONALA", NumCuenta, montoInicial);
 												
-												if(gestionCuenCorrienteper.AgregarCuentaCorrientePersonal(cuentaCorrientepers1) && gestionCuentaBancaria.agregarTipoCuenta(cuentaCorrientepers1)) {
+												if(gestionCuenCorrienteper.AgregarCuentaCorrientePersonal(cuentaCorrientepers1) ) {
 														System.out.println("CUENTA CORRIENTE PERSONAL CREADA EXITOSAMENTE.\n");
 														//System.out.println(cuentaCorrientepers1);
 														_listaCuentasBancarias.add(cuentaCorrientepers1);
@@ -339,7 +338,7 @@ public class implimentacion {
 												CuentaNomina cuentaNomina1 = new CuentaNomina(Titular1, AdminFechas.getFechaActual(), "CUENTA DE NOMINA", 
 														NumCuenta, 0, empresa);
 												
-												if(gestionCuentaNomina.agregarCuentaNomina(cuentaNomina1) && gestionCuentaBancaria.agregarTipoCuenta(cuentaNomina1)) {
+												if(gestionCuentaNomina.agregarCuentaNomina(cuentaNomina1)) {
 														System.out.println("CUENTA DE NOMINA CREADA EXITOSAMENTE.\n");
 														//System.out.println(cuentaNomina1);
 														_listaCuentasBancarias.add(cuentaNomina1);
@@ -418,8 +417,7 @@ public class implimentacion {
 								
 								byte opcionTransferencias, opcionmenuTrans;
 								boolean centinenlamenutrasn = true;
-								double monto, interesRemunerado;
-								int numCuenta;
+								double monto, interesRemunerado;								
 								byte opcion;
 								
 								while(centinenlamenutrasn) {
@@ -1045,8 +1043,65 @@ public class implimentacion {
 				
 				System.out.println("ELIMINAR TIPO DE CUENTA");
 				
+				System.out.print("Ingrese su nombre de usuario: ");
+				usuario = sc.nextLine();
+				System.out.print("Ingrese su contraseña: ");
+				constrasena = sc.nextLine();
 				
-				
+				if(gestionUsuario.buscarNombreUsuario(usuario) && gestionUsuario.buscarcontrasena(constrasena)) {
+					byte opceliminarCuenta;
+										
+					System.out.println("SELECCIONE LA CUENTA A ELIMINAR.");
+					System.out.println("1. CUENTA DE AHORROS");
+					System.out.println("2. CUENTA DE CHEQUES.");
+					System.out.println("3. CUENTA CORRIENTE PERSONAL.");
+					System.out.println("4. CUENTA DE NOMINA.");
+					opceliminarCuenta = scnum.nextByte();
+					
+					switch(opceliminarCuenta) {
+					
+					case 1: //ELIMIAR CUENTA DE AHORROS
+						System.out.print("Ingrese numero de cuenta: ");
+						numCuenta = scnum.nextInt();
+						
+						CuentaAhorro cuentaahorrobuscada = gestionCuentaAhorro.buscarCuentaAhorro(numCuenta);
+						if(cuentaahorrobuscada != null) {							
+							if(gestionCuentaAhorro.eliminarCuentaAhorro(cuentaahorrobuscada)) {
+								System.out.println("CUENTA DE AHORRO ELIMINADA CON EXITO.");
+							}else {
+								System.out.println("ERROR AL ELIMINAR CUENTA DE AHORRO.");
+							}							
+						}else {
+							System.out.println("CUENTA DE AHORRO NO ENCONTRADA.");
+						}
+																	
+						break; //FIN DE ELIMINAR CUENTA DE AHORROS
+						
+					case 2: //ELIMINAR CUENTA DE CHEQUES
+						break;
+						
+						
+						
+					case 3: //ELIMINAR CUENTA CORRIENTE PERSONAL
+						break;
+						
+					case 4: //ELIMINAR CUENTA DE NOMINA
+						
+						
+						break;
+						
+					case 5: //SALIR
+						break;
+						
+						default:
+							System.out.println("opción no valida.");
+							break;
+					}
+					
+				}else {
+					System.out.println("Usuario y contraseña incorrecto o Usuario no registrado.");
+					break;
+				}//FIN DE COMPROBACION DE USUARIO Y CONTRASEÑA
 				
 				break;
 			case 4: //ELIMINAR USUARIO.
